@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Geekbrains;
 
-namespace Geekbrains
+
+namespace DddShooter
 {
     public sealed class PlayerPropertyController : BaseController, IInitialization
     {

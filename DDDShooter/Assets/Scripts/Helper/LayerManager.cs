@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     public sealed class LayerManager
     {

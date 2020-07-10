@@ -1,4 +1,4 @@
-﻿namespace Geekbrains
+﻿namespace DddShooter
 {
     public interface ITakerDamage
     {

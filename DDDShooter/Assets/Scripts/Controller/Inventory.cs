@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using Geekbrains;
 
-namespace Geekbrains
+
+namespace DddShooter
 {
     public sealed class Inventory : IInitialization
     {

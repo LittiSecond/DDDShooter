@@ -1,8 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     public sealed class TrainingTargetModel : BaseObjectScene, ITakerDamage
     {

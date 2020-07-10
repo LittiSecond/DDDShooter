@@ -2,7 +2,7 @@
 using System;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     [RequireComponent(typeof(Rigidbody))]
     public sealed class EnemyPartDamagTranslator : MonoBehaviour, ITakerDamage

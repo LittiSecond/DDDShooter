@@ -1,9 +1,8 @@
-﻿using System;
-//using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     public sealed class EnemyHealth : BaseObjectScene
     {

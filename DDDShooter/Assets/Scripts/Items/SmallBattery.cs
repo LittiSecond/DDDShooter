@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     [Serializable]
     public sealed class SmallBattery
