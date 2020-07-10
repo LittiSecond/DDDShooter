@@ -11,6 +11,7 @@ namespace DddShooter
         [SerializeField] private Ammunition _ammunitionPrefab;
         [SerializeField] private float _force = 99.95f;
 
+
         #endregion
 
 
@@ -23,10 +24,29 @@ namespace DddShooter
                 return;
             }
 
-            var ammunition = Instantiate(_ammunitionPrefab, _barrel.position, _barrel.rotation);
-            ammunition.AddForce(_barrel.forward * _force);
-            _isRedy = false;
-            _timeRemaining.AddTimeRemaining();
+            if (_clip != null)
+            {
+                if (_clip.Extract())
+                {
+                    var ammunition = CreateAmmunition();
+                    ammunition.AddForce(_barrel.forward * _force);
+                    _isRedy = false;
+                    _timeRemaining.AddTimeRemaining();
+                }
+            }
+
+            if (_isRedy)
+            {
+                _uiClipInfo.ShowClipEmptyMessage();
+            }
+
+        }
+
+ 
+
+        private Ammunition CreateAmmunition()
+        {
+            return Instantiate(_ammunitionPrefab, _barrel.position, _barrel.rotation);
         }
 
         #endregion

@@ -48,7 +48,7 @@ namespace DddShooter
             }
             if (Input.GetKeyDown(_reloadClip))
             {
-                ServiceLocator.Resolve<FlashLightController>().ReplaceBattery();
+                ServiceLocator.Resolve<PlayerPropertyController>().Reload();
             }
             if (Input.GetMouseButton(_mouseButton))
             {

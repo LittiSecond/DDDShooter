@@ -43,6 +43,32 @@ namespace DddShooter
             }
         }
 
+        public SmallBattery GetSmallBattery()
+        {
+            // временно - батарейки в инвентаре бесконечны.
+            return new SmallBattery();
+        }
+
+        public Clip GetClip(AmmunitionType ammunitionType)
+        {
+            // временно - запас обойм в инвентаре бесконечный.
+            int quantity = 1;
+            switch (ammunitionType)
+            {
+                case AmmunitionType.Bullet:
+                    quantity = 30;
+                    break;
+                case AmmunitionType.Shell:
+                    quantity = 3;
+                    break;
+                default:
+                break;
+            }
+
+            return new Clip(ammunitionType, quantity);
+        }
+
+
         #endregion
     }
 }

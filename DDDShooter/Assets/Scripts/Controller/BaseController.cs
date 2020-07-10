@@ -1,4 +1,7 @@
-﻿namespace Geekbrains
+﻿using DddShooter;
+
+
+namespace Geekbrains
 {
     public abstract class BaseController
     {

@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
-using DddShooter;
+using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     public sealed class UiInterface
     {
         private FlashLightUiText _flashLightUiText;
-        private PauseMessageUiText _pauseMessageUiText;      // <---added
-        private MessageUiText _messageUiText;                // <---added
+        private PauseMessageUiText _pauseMessageUiText;
+        private MessageUiText _messageUiText;
+        private UiClipInfo _uiClipInfo;
 
         public FlashLightUiText LightUiText
         {
@@ -20,8 +21,6 @@ namespace Geekbrains
             }
         }
 
-        #region added
-        //------------------------------------------------ added
         public PauseMessageUiText PauseUiText
         {
             get
@@ -46,6 +45,15 @@ namespace Geekbrains
             }
         }
 
-        #endregion
+        public UiClipInfo UiClipInfoPanel
+        {
+            get
+            {
+                if (!_uiClipInfo)
+                    _uiClipInfo = Object.FindObjectOfType<UiClipInfo>();
+                return _uiClipInfo;
+            }
+        }
+
     }
 }

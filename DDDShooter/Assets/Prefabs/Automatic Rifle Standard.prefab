@@ -96,6 +96,7 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
   _barrel: {fileID: 4411343595964416}
+  _type: 1
   _rechargeTime: 0.2
   _ammunitionPrefab: {fileID: 7309381547164742855, guid: 209976f5ec69fe645a0c6f3f764104ef,
     type: 3}
