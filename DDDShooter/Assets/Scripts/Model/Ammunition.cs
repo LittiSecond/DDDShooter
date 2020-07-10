@@ -32,7 +32,7 @@ namespace Geekbrains
         {
             if (Rigidbody)
             {
-                Rigidbody.AddForce(dir);
+                Rigidbody.AddForce(dir, ForceMode.VelocityChange);
             }
         }
 

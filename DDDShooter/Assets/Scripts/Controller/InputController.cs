@@ -10,11 +10,11 @@ namespace Geekbrains
         private KeyCode _pause = KeyCode.Tab;
         private KeyCode _interact = KeyCode.E;
         private KeyCode _hideWeapon = KeyCode.Alpha0;
-        private KeyCode _weapon1 = KeyCode.Alpha1;
-        private KeyCode _weapon2 = KeyCode.Alpha2;
-        private KeyCode _weapon3 = KeyCode.Alpha3;
-        private KeyCode _weapon4 = KeyCode.Alpha4;
-        private KeyCode _weapon5 = KeyCode.Alpha5;
+        //private KeyCode _weapon1 = KeyCode.Alpha1;
+        //private KeyCode _weapon2 = KeyCode.Alpha2;
+        //private KeyCode _weapon3 = KeyCode.Alpha3;
+        //private KeyCode _weapon4 = KeyCode.Alpha4;
+        //private KeyCode _weapon5 = KeyCode.Alpha5;
         private KeyCode _lastWeapon = KeyCode.Alpha5;
         private int _mouseButton = (int)MouseButton.LeftButton;
         private FlashLightModel _flashLightModel;

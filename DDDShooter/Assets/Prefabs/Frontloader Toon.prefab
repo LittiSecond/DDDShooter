@@ -99,7 +99,7 @@ MonoBehaviour:
   _rechargeTime: 2
   _ammunitionPrefab: {fileID: 7731816159511173536, guid: 6729a55be0aeed7439f139628f17e7c3,
     type: 3}
-  _force: 8.5
+  _force: 10
 --- !u!1 &2497763322872765393
 GameObject:
   m_ObjectHideFlags: 0
