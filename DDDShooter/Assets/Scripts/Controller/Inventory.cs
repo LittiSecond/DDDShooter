@@ -8,9 +8,9 @@ namespace DddShooter
     {
         #region Fields
 
-        public const int WEAPON_CAPACITY = 5;
+        public const int WEAPON_SLOTS_QUANTITY = 5;
 
-        private Weapon[] _weapons = new Weapon[WEAPON_CAPACITY];
+        private Weapon[] _weapons = new Weapon[WEAPON_SLOTS_QUANTITY];
 
         #endregion
 

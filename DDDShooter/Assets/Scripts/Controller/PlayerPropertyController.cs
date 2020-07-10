@@ -39,17 +39,36 @@ namespace DddShooter
             if (weaponIndex != _selectedWeapon)
             {
                 _weaponController.Off();
-                _selectedWeapon = -1;
+                _selectedWeapon = weaponIndex;
                 if (weaponIndex >= 0)
                 {
                     Weapon weapon = _inventory.GetWeapon(weaponIndex);
                     if (weapon != null)
                     {
                         _weaponController.On(weapon);
-                        _selectedWeapon = weaponIndex;
                     }                    
                 }
             }
+        }
+
+        public void SelectNextWeapon()
+        {
+            int nextWeapon = _selectedWeapon + 1;
+            if (nextWeapon >= Inventory.WEAPON_SLOTS_QUANTITY)
+            {
+                nextWeapon = 0;
+            }
+            SelectWeapon(nextWeapon);
+        }
+
+        public void SelectPreviousWeapon()
+        {
+            int nextWeapon = _selectedWeapon - 1;
+            if (nextWeapon < 0)
+            {
+                nextWeapon = Inventory.WEAPON_SLOTS_QUANTITY - 1;
+            }
+            SelectWeapon(nextWeapon);
         }
 
         #endregion

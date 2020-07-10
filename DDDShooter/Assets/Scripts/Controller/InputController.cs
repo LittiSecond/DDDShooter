@@ -20,7 +20,10 @@ namespace DddShooter
         private KeyCode _lastWeapon = KeyCode.Alpha5;
         private int _mouseButton = (int)MouseButton.LeftButton;
         private FlashLightModel _flashLightModel;
-        
+
+        private readonly string _mouseScrollWhellAxesName = "Mouse ScrollWheel";
+        private readonly float _mouseScrollDeadZone = 0.01f;
+
         public InputController()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -50,7 +53,7 @@ namespace DddShooter
             if (Input.GetMouseButton(_mouseButton))
             {
                 ServiceLocator.Resolve<WeaponController>().Fire();
-            }
+            }            
 
             CheckSwitchWeapon();
 
@@ -68,19 +71,31 @@ namespace DddShooter
 
         private void CheckSwitchWeapon()
         {
-            int index = -1;
-            KeyCode keyCode = _hideWeapon;
-            while (keyCode <= _lastWeapon && index == -1)
+            float input = Input.GetAxis(_mouseScrollWhellAxesName);
+            if (input > _mouseScrollDeadZone)
             {
-                if (Input.GetKeyDown(keyCode))
-                {
-                    index = keyCode - _hideWeapon;
-                }
-                keyCode++;
+                ServiceLocator.Resolve<PlayerPropertyController>().SelectNextWeapon();
             }
-            if (index >= 0 )
+            else if (input < -_mouseScrollDeadZone)
             {
-                ServiceLocator.Resolve<PlayerPropertyController>().SelectWeapon(index - 1);
+                ServiceLocator.Resolve<PlayerPropertyController>().SelectPreviousWeapon();
+            }
+            else
+            {
+                int index = -1;
+                KeyCode keyCode = _hideWeapon;
+                while (keyCode <= _lastWeapon && index == -1)
+                {
+                    if (Input.GetKeyDown(keyCode))
+                    {
+                        index = keyCode - _hideWeapon;
+                    }
+                    keyCode++;
+                }
+                if (index >= 0)
+                {
+                    ServiceLocator.Resolve<PlayerPropertyController>().SelectWeapon(index - 1);
+                }
             }
         }
 
