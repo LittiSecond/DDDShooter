@@ -11,6 +11,7 @@ namespace DddShooter
         [SerializeField] protected float _timeToDestruct = 12.0f;
         [SerializeField] protected float _baseDamage = 10.0f;
 
+        protected float _startTime;
         private ITimeRemaining _timeRemaining;
 
         #endregion
@@ -22,6 +23,7 @@ namespace DddShooter
         {
             _timeRemaining = new TimeRemaining(DestroyItself, _timeToDestruct);
             _timeRemaining.AddTimeRemaining();
+            _startTime = Time.time;
         }
 
         #endregion

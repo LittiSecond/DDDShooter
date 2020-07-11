@@ -80,7 +80,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.09091568
+        value: 0.20411775
         inSlope: -0.09584154
         outSlope: -0.09584154
         tangentMode: 0
@@ -265,3 +265,4 @@ MonoBehaviour:
   Transform: {fileID: 0}
   _timeToDestruct: 8
   _baseDamage: 50
+  _damagLosingPerSecond: 3

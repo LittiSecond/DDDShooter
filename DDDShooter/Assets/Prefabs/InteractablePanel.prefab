@@ -217,4 +217,4 @@ MonoBehaviour:
   Transform: {fileID: 0}
   _messageIfTarget: InteractablePanel
   _normalColor: {r: 0, g: 0, b: 0, a: 0}
-  _highlightingColor: {r: 0.5960751, g: 0.8962264, b: 0.70755994, a: 1}
+  _highlightingColor: {r: 0.69882524, g: 0.9811321, b: 0.8014822, a: 1}
