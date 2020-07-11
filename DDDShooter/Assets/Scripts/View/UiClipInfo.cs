@@ -22,7 +22,7 @@ namespace DddShooter
 
         #region UnityMethods
 
-        private void Start()
+        private void Awake()
         {
             _timeRemaining = new TimeRemaining(HideClipEmptyMessage, _delay);
             Hide();
