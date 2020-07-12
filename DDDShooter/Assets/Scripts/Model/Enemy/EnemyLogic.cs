@@ -10,6 +10,7 @@ namespace DddShooter
 
         [SerializeField] private Transform _target;
 
+        private EnemyHealth _enemyHealth;
         private UnityEngine.AI.NavMeshAgent _agent;
         private ITimeRemaining _timeRemaining;
 
@@ -28,6 +29,13 @@ namespace DddShooter
             {
                 _timeRemaining.AddTimeRemaining();
             }
+            _enemyHealth = GetComponent<EnemyHealth>();
+                {
+                if (_enemyHealth)
+                {
+                    _enemyHealth.OnDeathEvent += StopLogic;
+                }
+            }
         }
 
         #endregion
@@ -38,6 +46,16 @@ namespace DddShooter
         private void UpdateDestination()
         {
             _agent.SetDestination(_target.position);
+        }
+
+        private void StopLogic()
+        {
+            _agent.ResetPath();
+            _timeRemaining.RemoveTimeRemaining();
+            if (_enemyHealth)
+            {
+                _enemyHealth.OnDeathEvent -= StopLogic;
+            }
         }
 
         #endregion
