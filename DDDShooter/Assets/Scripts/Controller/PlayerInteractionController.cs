@@ -8,7 +8,7 @@ namespace DddShooter
     {
         #region Fields
 
-        private MessageUiText _messageUiText;
+        private UiInteractMessageText _messageUiText;
         private Transform _head;
         private Collider _hittedCollider;
         private IInteractable _hittedTarget;
@@ -37,7 +37,7 @@ namespace DddShooter
         public override void On()
         {
             base.On();
-            _messageUiText = UiInterface.MessageText;
+            _messageUiText = UiInterface.InteractMessageText;
             SendMessageToUi(null);
         }
 

@@ -11,13 +11,14 @@ namespace Geekbrains
         [SerializeField] protected AmmunitionType _type;
         [SerializeField] protected float _rechargeTime = 1.0f;
 
-        protected Clip _clip;   // плохо спроектировал, не хочу давать этому классу
+        [SerializeField] protected Clip _clip;   // плохо спроектировал, не хочу давать этому классу
                                 // Clip, так как энергетическому оружию
                                 // Clip будет не нужен, ему будет нужна батарейка,
                                 // а огнемёту вместо Clip будет нужена канистра.
                                 //      потом подумаю, как перепроектировать.
 
         protected UiClipInfo _uiClipInfo;
+        protected UiWarningMessageText _warningMessageText;
         protected ITimeRemaining _timeRemaining;
         protected bool _isRedy = true;
 
@@ -50,6 +51,7 @@ namespace Geekbrains
         {
             _timeRemaining = new TimeRemaining(ReadyShoot, _rechargeTime);
             _uiClipInfo = ServiceLocatorMonoBehaviour.GetService<UiClipInfo>();
+            _warningMessageText = ServiceLocatorMonoBehaviour.GetService<UiWarningMessageText>();
         }
 
         #endregion

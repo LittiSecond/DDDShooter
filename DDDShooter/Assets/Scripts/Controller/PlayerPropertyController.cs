@@ -15,6 +15,8 @@ namespace DddShooter
 
         private int _selectedWeaponIndex = -1;
 
+        //private bool _isClipLoaded = true;
+
         #endregion
 
 
@@ -98,9 +100,18 @@ namespace DddShooter
         {
             if (_weaponController.IsActive)
             {
-                AmmunitionType type = _weaponController.Type;
-                Clip newClip = _inventory.GetClip(type);
-                _weaponController.ReloadClip(newClip);
+                //if (_isClipLoaded)
+                //{
+                //    _weaponController.ReloadClip(null);
+                //    _isClipLoaded = false;
+                //}
+                //else
+                //{
+                //    _isClipLoaded = true;
+                    AmmunitionType type = _weaponController.Type;
+                    Clip newClip = _inventory.GetClip(type);
+                    _weaponController.ReloadClip(newClip);
+                //}
             }
             //if (_selectedWeaponIndex >= 0)
             //{
