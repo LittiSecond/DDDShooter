@@ -9,14 +9,19 @@ namespace DddShooter
         #region Fields
 
         private UiInteractMessageText _messageUiText;
+        private UiWarningMessageText _warningMessageText;
         private Transform _head;
+        private Inventory _inventory;
+        private PlayerPropertyController _propertyController;
         private Collider _hittedCollider;
         private IInteractable _hittedTarget;
 
         private LayerMask _mask; 
         private float _lookRange = 20.0f;
 
-        private readonly string _message = "Look at: ";
+        //private readonly string _message = "Look at: ";
+        private const int LOOK_AT_TEXT_ID = 1;
+        private const int CANNOT_PICK_UP_WEAPON_TEXT_ID = 6;
 
         #endregion
 
@@ -34,18 +39,39 @@ namespace DddShooter
 
         #region Methods
 
-        public override void On()
-        {
-            base.On();
-            _messageUiText = UiInterface.InteractMessageText;
-            SendMessageToUi(null);
-        }
+        //public override void On()
+        //{
+        //    base.On();
+        //}
 
         public void Interact()
         {
             if (_hittedTarget != null)
             {
-                _hittedTarget.Interact();
+                switch (_hittedTarget.InteractType)
+                {
+                    case InteractType.ExternalUse:
+                    _hittedTarget.Interact();
+                        break;
+                    case InteractType.PickUpTool:
+                        Weapon weapon = _hittedTarget as Weapon;
+                        if (weapon != null)
+                        {
+                            int slotIdex = _inventory.PickUpWeapon(weapon);
+                            if (slotIdex >= 0)
+                            {
+                                _propertyController.SelectWeapon(slotIdex);
+                            }
+                            else
+                            {
+                                _warningMessageText.Show(CANNOT_PICK_UP_WEAPON_TEXT_ID);
+                            }
+                        }
+                        break;
+                    default:
+                        CustumDebug.Log("PlayerInteractionController->Interact: not realized interaction.");
+                        break;
+                }
             }
         }
 
@@ -99,7 +125,7 @@ namespace DddShooter
                     }
                     else
                     {
-                        SendMessageToUi(_message + collider.gameObject.name);
+                        SendMessageToUi(TextConstants.GetText(LOOK_AT_TEXT_ID) + collider.gameObject.name);
                     }
                 }
             }
@@ -126,8 +152,13 @@ namespace DddShooter
 
         public void Initialization()
         {
-            _head = Camera.main.transform;
             On();
+            _head = Camera.main.transform;
+            _inventory = ServiceLocator.Resolve<Inventory>();
+            _propertyController = ServiceLocator.Resolve<PlayerPropertyController>();
+            _messageUiText = UiInterface.InteractMessageText;
+            _warningMessageText = UiInterface.WarningMessageText;
+            SendMessageToUi(null);
         }
 
         #endregion

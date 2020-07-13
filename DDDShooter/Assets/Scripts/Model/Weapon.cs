@@ -3,7 +3,7 @@ using DddShooter;
 
 namespace Geekbrains
 {
-    public abstract class Weapon : BaseObjectScene
+    public abstract class Weapon : BaseObjectScene, IInteractable, IPickUpTool
     {
         #region Fields
 
@@ -12,15 +12,21 @@ namespace Geekbrains
         [SerializeField] protected float _rechargeTime = 1.0f;
 
         [SerializeField] protected Clip _clip;   // плохо спроектировал, не хочу давать этому классу
-                                // Clip, так как энергетическому оружию
-                                // Clip будет не нужен, ему будет нужна батарейка,
-                                // а огнемёту вместо Clip будет нужена канистра.
-                                //      потом подумаю, как перепроектировать.
+                                                 // Clip, так как энергетическому оружию
+                                                 // Clip будет не нужен, ему будет нужна батарейка,
+                                                 // а огнемёту вместо Clip будет нужена канистра.
+                                                 //      потом подумаю, как перепроектировать.
+        [Header("смещение когда у игрока")]
+        [SerializeField] protected Vector3 _offSet = Vector3.zero;
+        [SerializeField] protected Vector3 _rotationOffSet = Vector3.zero;
 
         protected UiClipInfo _uiClipInfo;
         protected UiWarningMessageText _warningMessageText;
         protected ITimeRemaining _timeRemaining;
+        private Collider _collider;
         protected bool _isRedy = true;
+
+        private const int PICK_UP_TEXT_ID = 7;
 
         #endregion
 
@@ -46,6 +52,13 @@ namespace Geekbrains
 
 
         #region UnityMethods
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _collider = GetComponent<Collider>();
+        }
+
 
         private void Start()
         {
@@ -87,6 +100,55 @@ namespace Geekbrains
             Clip oldClip = _clip;
             _clip = newClip;
             return oldClip;
+        }
+
+        public void JoinTo(Transform transformToJoin)
+        {
+            if (transformToJoin)
+            {
+                Transform.SetParent(transformToJoin);
+                Transform.localPosition = _offSet;
+                Transform.localRotation = Quaternion.identity;
+                Transform.Rotate(_rotationOffSet);
+
+            }
+        }
+
+        #endregion
+
+                                // реализацию этих интерфейсов надо убрать в другой класс...
+        #region IInteractable    
+
+        public bool IsTarget { set { } } // тут надо включать/выключать подсветку модели оружия, но 
+                                         // эта подсветка пока не сделана
+
+        public InteractType InteractType => InteractType.PickUpTool;
+
+        public void Interact()
+        {
+            // nothing to do
+        }
+
+        public string GetMessageIfTarget()
+        {
+            return TextConstants.GetText(PICK_UP_TEXT_ID);
+        }
+
+        #endregion
+
+
+        #region IPickUpTool
+
+        public void DisablePhysics()
+        {
+            Rigidbody.isKinematic = true;
+            _collider.enabled = false;
+        }
+
+        public void EnablePhysics()
+        {
+            Rigidbody.isKinematic = false;
+            _collider.enabled = true;
         }
 
         #endregion

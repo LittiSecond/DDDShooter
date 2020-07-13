@@ -38,6 +38,11 @@ namespace DddShooter
             }
         }
 
+        private void OnDisable()
+        {
+            StopLogic();
+        }
+
         #endregion
 
 
@@ -50,7 +55,10 @@ namespace DddShooter
 
         private void StopLogic()
         {
-            _agent.ResetPath();
+            if (_agent.isActiveAndEnabled)
+            {
+                _agent.ResetPath();
+            }
             _timeRemaining.RemoveTimeRemaining();
             if (_enemyHealth)
             {

@@ -11,7 +11,7 @@ namespace DddShooter
         [SerializeField] private Ammunition _ammunitionPrefab;
         [SerializeField] private float _force = 99.95f;
 
-        private const int CLIP_IS_EMTY_MESSAGE_ID = 4;
+        private const int CLIP_IS_EMTY_TEXT_ID = 4;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace DddShooter
 
             if (_isRedy)
             {
-                _warningMessageText.Show(CLIP_IS_EMTY_MESSAGE_ID);
+                _warningMessageText.Show(CLIP_IS_EMTY_TEXT_ID);
             }
 
         }
