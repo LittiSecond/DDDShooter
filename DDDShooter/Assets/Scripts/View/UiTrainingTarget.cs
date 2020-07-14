@@ -10,7 +10,7 @@ namespace DddShooter
 
         [SerializeField] private Text _fullDamageDisplay;
         [SerializeField] private Text _lastDamageDisplay;
-
+        
         private bool _isDataError;
 
         #endregion

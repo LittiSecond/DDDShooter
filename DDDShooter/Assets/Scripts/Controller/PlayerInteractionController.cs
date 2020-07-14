@@ -9,18 +9,21 @@ namespace DddShooter
         #region Fields
 
         private UiInteractMessageText _messageUiText;
-        //private UiWarningMessageText _warningMessageText;
+        private UiWarningMessageText _warningMessageText;
         private Transform _head;
         private Inventory _inventory;
         private PlayerPropertyController _propertyController;
         private Collider _hittedCollider;
-        private IInteractable _hittedTarget;
+        private IInteractable _interactableObject;
 
         private LayerMask _mask; 
         private float _lookRange = 20.0f;
+        private float _interactRange = 3.0f;
+        private float _distanceToTarget;
 
         //private readonly string _message = "Look at: ";
         private const int LOOK_AT_TEXT_ID = 1;
+        private const int TOO_FAR_TEXT_ID = 8;
 
         #endregion
 
@@ -45,19 +48,28 @@ namespace DddShooter
 
         public void Interact()
         {
-            if (_hittedTarget != null)
+            //CustumDebug.Log("PlayerInteractionController->Interact: _distanceToTarget = " + 
+            //    _distanceToTarget.ToString());
+            if (_interactableObject != null)
             {
-                switch (_hittedTarget.InteractType)
+                if (_distanceToTarget <= _interactRange)
                 {
-                    case InteractType.ExternalUse:
-                        _hittedTarget.Interact();
-                        break;
-                    case InteractType.PickUpTool:
-                        _propertyController.PickUpWeapon(_hittedTarget as Weapon);
-                        break;
-                    default:
-                        CustumDebug.Log("PlayerInteractionController->Interact: not realized interaction.");
-                        break;
+                    switch (_interactableObject.InteractType)
+                    {
+                        case InteractType.ExternalUse:
+                            _interactableObject.Interact();
+                            break;
+                        case InteractType.PickUpTool:
+                            _propertyController.PickUpWeapon(_interactableObject as Weapon);
+                            break;
+                        default:
+                            CustumDebug.Log("PlayerInteractionController->Interact: not realized interaction.");
+                            break;
+                    }
+                }
+                else
+                {
+                    _warningMessageText.Show(TOO_FAR_TEXT_ID);
                 }
             }
         }
@@ -96,32 +108,35 @@ namespace DddShooter
                 Collider collider = hit.collider;
                 if ( collider != _hittedCollider)
                 {
-                    if (_hittedTarget != null)
+                    if (_interactableObject != null)
                     {
-                        _hittedTarget.IsTarget = false;
-                        _hittedTarget = null;
+                        _interactableObject.IsTarget = false;
+                        _interactableObject = null;
                     }
 
                     _hittedCollider = collider;
                     IInteractable target = collider.GetComponent<IInteractable>();
                     if (target != null)
                     {
-                        _hittedTarget = target;
-                        _hittedTarget.IsTarget = true;
-                        SendMessageToUi(_hittedTarget.GetMessageIfTarget());
+                        _interactableObject = target;
+                        _interactableObject.IsTarget = true;
+                        SendMessageToUi(_interactableObject.GetMessageIfTarget());
                     }
                     else
                     {
                         SendMessageToUi(TextConstants.GetText(LOOK_AT_TEXT_ID) + collider.gameObject.name);
                     }
+
+                    _distanceToTarget = hit.distance;
+                    //Vector3 v = hit.point;
                 }
             }
             else
             {
-                if (_hittedTarget != null)
+                if (_interactableObject != null)
                 {
-                    _hittedTarget.IsTarget = false;
-                    _hittedTarget = null;
+                    _interactableObject.IsTarget = false;
+                    _interactableObject = null;
                 }
 
                 if (_hittedCollider)
@@ -144,7 +159,7 @@ namespace DddShooter
             _inventory = ServiceLocator.Resolve<Inventory>();
             _propertyController = ServiceLocator.Resolve<PlayerPropertyController>();
             _messageUiText = UiInterface.InteractMessageText;
-            //_warningMessageText = UiInterface.WarningMessageText;
+            _warningMessageText = UiInterface.WarningMessageText;
             SendMessageToUi(null);
         }
 

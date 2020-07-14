@@ -541,7 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 121613280}
   - component: {fileID: 121613279}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4405,7 +4405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.62880087}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.26999664, y: -0.5}
+  m_AnchoredPosition: {x: 0.27000427, y: -0.5}
   m_SizeDelta: {x: -0.55000305, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1378674717
