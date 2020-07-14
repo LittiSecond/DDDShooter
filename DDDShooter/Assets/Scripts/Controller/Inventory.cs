@@ -7,9 +7,9 @@ namespace DddShooter
     public sealed class Inventory : IInitialization
     {
         #region Fields
-
+ 
         public const int WEAPON_SLOTS_QUANTITY = 5;
-        
+
         private Weapon[] _weapons = new Weapon[WEAPON_SLOTS_QUANTITY];
         private Transform _head;
 
@@ -102,6 +102,21 @@ namespace DddShooter
                 }
             }
             return index;
+        }
+
+        public void DropWeapon(int slotIndex)
+        {
+            if (slotIndex >= 0 && slotIndex < _weapons.Length)
+            {
+                Weapon weapon = _weapons[slotIndex];
+                if ( weapon != null)
+                {
+                    _weapons[slotIndex] = null;
+                    weapon.JoinTo(null);
+                    weapon.IsVisible = true;
+                    weapon.EnablePhysics();
+                }
+            }
         }
 
         #endregion

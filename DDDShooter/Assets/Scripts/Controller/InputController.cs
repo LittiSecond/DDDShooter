@@ -18,6 +18,7 @@ namespace DddShooter
         //private KeyCode _weapon4 = KeyCode.Alpha4;
         //private KeyCode _weapon5 = KeyCode.Alpha5;
         private KeyCode _lastWeapon = KeyCode.Alpha5;
+        private KeyCode _dropItem = KeyCode.H;
         private int _mouseButton = (int)MouseButton.LeftButton;
         private FlashLightModel _flashLightModel;
 
@@ -49,6 +50,10 @@ namespace DddShooter
             if (Input.GetKeyDown(_reloadClip))
             {
                 ServiceLocator.Resolve<PlayerPropertyController>().Reload();
+            }
+            if (Input.GetKeyDown(_dropItem))
+            {
+                ServiceLocator.Resolve<PlayerPropertyController>().DropItem();
             }
             if (Input.GetMouseButton(_mouseButton))
             {

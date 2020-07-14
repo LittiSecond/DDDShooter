@@ -9,7 +9,7 @@ namespace DddShooter
         #region Fields
 
         private UiInteractMessageText _messageUiText;
-        private UiWarningMessageText _warningMessageText;
+        //private UiWarningMessageText _warningMessageText;
         private Transform _head;
         private Inventory _inventory;
         private PlayerPropertyController _propertyController;
@@ -21,7 +21,6 @@ namespace DddShooter
 
         //private readonly string _message = "Look at: ";
         private const int LOOK_AT_TEXT_ID = 1;
-        private const int CANNOT_PICK_UP_WEAPON_TEXT_ID = 6;
 
         #endregion
 
@@ -51,22 +50,10 @@ namespace DddShooter
                 switch (_hittedTarget.InteractType)
                 {
                     case InteractType.ExternalUse:
-                    _hittedTarget.Interact();
+                        _hittedTarget.Interact();
                         break;
                     case InteractType.PickUpTool:
-                        Weapon weapon = _hittedTarget as Weapon;
-                        if (weapon != null)
-                        {
-                            int slotIdex = _inventory.PickUpWeapon(weapon);
-                            if (slotIdex >= 0)
-                            {
-                                _propertyController.SelectWeapon(slotIdex);
-                            }
-                            else
-                            {
-                                _warningMessageText.Show(CANNOT_PICK_UP_WEAPON_TEXT_ID);
-                            }
-                        }
+                        _propertyController.PickUpWeapon(_hittedTarget as Weapon);
                         break;
                     default:
                         CustumDebug.Log("PlayerInteractionController->Interact: not realized interaction.");
@@ -157,7 +144,7 @@ namespace DddShooter
             _inventory = ServiceLocator.Resolve<Inventory>();
             _propertyController = ServiceLocator.Resolve<PlayerPropertyController>();
             _messageUiText = UiInterface.InteractMessageText;
-            _warningMessageText = UiInterface.WarningMessageText;
+            //_warningMessageText = UiInterface.WarningMessageText;
             SendMessageToUi(null);
         }
 

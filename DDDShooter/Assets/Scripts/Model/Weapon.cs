@@ -16,7 +16,7 @@ namespace Geekbrains
                                                  // Clip будет не нужен, ему будет нужна батарейка,
                                                  // а огнемёту вместо Clip будет нужена канистра.
                                                  //      потом подумаю, как перепроектировать.
-        [Header("смещение когда у игрока")]
+        [Header("смещение от точки крепления к игроку")]
         [SerializeField] protected Vector3 _offSet = Vector3.zero;
         [SerializeField] protected Vector3 _rotationOffSet = Vector3.zero;
 
@@ -110,13 +110,16 @@ namespace Geekbrains
                 Transform.localPosition = _offSet;
                 Transform.localRotation = Quaternion.identity;
                 Transform.Rotate(_rotationOffSet);
-
+            }
+            else
+            {
+                Transform.SetParent(null);
             }
         }
 
         #endregion
 
-                                // реализацию этих интерфейсов надо убрать в другой класс...
+        // реализацию этих интерфейсов и JoinTo()  надо убрать в другой класс...
         #region IInteractable    
 
         public bool IsTarget { set { } } // тут надо включать/выключать подсветку модели оружия, но 
