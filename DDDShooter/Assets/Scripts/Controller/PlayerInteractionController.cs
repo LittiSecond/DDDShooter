@@ -126,10 +126,8 @@ namespace DddShooter
                     {
                         SendMessageToUi(TextConstants.GetText(LOOK_AT_TEXT_ID) + collider.gameObject.name);
                     }
-
-                    _distanceToTarget = hit.distance;
-                    //Vector3 v = hit.point;
                 }
+                _distanceToTarget = hit.distance;
             }
             else
             {
