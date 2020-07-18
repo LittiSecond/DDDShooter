@@ -18,6 +18,7 @@ namespace DddShooter
         private EnemyMovementPursue _movementPursue;
         private EnemyMovementPatrol _movementPatrol;
         private EnemyVision _enemyVision;
+        private EnemyRangeAttack _rangeAttack;
 
         private float _changeStateDelay;
         private float _timeCounter;
@@ -41,6 +42,10 @@ namespace DddShooter
                 {
                     _changeStateDelay = _settings.ChangeStateDelay;
                 }
+                else
+                {
+                    _settings = new NpcSettings();
+                }
 
                 _health = new EnemyHealth(_settings);
                 _body.SubscribeOnDamagedEvent(_health.TakeDamage);
@@ -55,11 +60,17 @@ namespace DddShooter
 
                     _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
                     _movementPatrol.SetPath(body.GetPath());
-                    _movementPatrol.On();
+                    //_movementPatrol.On();
                 }
 
                 _enemyVision = new EnemyVision(this, body, _settings);
                 _enemyVision.Target = _playerTransform;
+
+                if (_settings.HaveRangeAttack)
+                {
+                    _rangeAttack = new EnemyRangeAttack(_body, _settings);
+                    _rangeAttack.Target = _playerTransform;
+                }
 
                 SwithState(NpcState.Patrol);
                 On();
@@ -164,6 +175,7 @@ namespace DddShooter
                     case NpcState.Pursue:
                         _movementPursue?.Execute();
                         _enemyVision?.Execute();
+                        _rangeAttack?.Execute();
                         break;
                     case NpcState.Died:
                         break;

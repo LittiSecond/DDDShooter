@@ -10,7 +10,7 @@ namespace DddShooter
         
         private Transform _target;
         private float _stopDistance;
-        private bool _haveTerget;
+        private bool _haveTarget;
 
         #endregion
 
@@ -24,15 +24,15 @@ namespace DddShooter
                 _target = value;
                 if (_target == null)
                 {
-                    if (_haveTerget)
+                    if (_haveTarget)
                     {
                         StopPursure();
-                        _haveTerget = false;
+                        _haveTarget = false;
                     }
                 }
                 else
                 {
-                    _haveTerget = true;
+                    _haveTarget = true;
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace DddShooter
         public override void On()
         {
             base.On();
-            if (_haveTerget)
+            if (_haveTarget)
             {
                 _agent.stoppingDistance = _stopDistance;
             }
@@ -79,7 +79,7 @@ namespace DddShooter
 
         public override void Execute()
         {
-            if (_isEnabled && _haveTerget)
+            if (_isEnabled && _haveTarget)
             {
                 _agent.SetDestination(_target.position);
             }

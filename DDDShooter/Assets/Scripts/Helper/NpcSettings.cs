@@ -15,6 +15,8 @@ namespace DddShooter
         [SerializeField] private float _changeStateDelay = 3.0f;
         [SerializeField] private float _visionRange = 20.0f;
         [SerializeField] private float _visionAngle = 80.0f;
+        [SerializeField] private bool _haveRangeAttack = true;
+        [SerializeField] private float _rangeAttackDistance = 50.0f;
 
         #endregion
 
@@ -32,6 +34,10 @@ namespace DddShooter
         public float VisionRange { get => _visionRange; }
 
         public float VisionAngle { get => _visionAngle; }
+
+        public bool HaveRangeAttack { get => _haveRangeAttack; }
+
+        public float RangeAttackDistance { get => _rangeAttackDistance; }
 
         #endregion
     }

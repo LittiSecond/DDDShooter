@@ -13,6 +13,7 @@ namespace DddShooter
 
         [SerializeField] private PatrolPath _patrolPath;
         [SerializeField] private Transform _visionPoint;
+        [SerializeField] private Transform _weaponJoinPoint;
 
         [SerializeField] private NpcSettings _npcSettings = new NpcSettings();
 
@@ -24,6 +25,7 @@ namespace DddShooter
         #region Properties
 
         public NpcSettings Settings { get => _npcSettings; }
+        public Transform WeaponJoinPoint { get => _weaponJoinPoint; }
 
         #endregion
 
