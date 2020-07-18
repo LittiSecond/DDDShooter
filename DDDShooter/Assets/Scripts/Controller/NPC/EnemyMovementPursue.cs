@@ -1,8 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-
-using Geekbrains;
 
 
 namespace DddShooter
@@ -12,7 +9,7 @@ namespace DddShooter
         #region Fields
         
         private Transform _target;
-        private float _stopDistanse;
+        private float _stopDistance;
         private bool _haveTerget;
 
         #endregion
@@ -49,7 +46,7 @@ namespace DddShooter
         {
          if (settings != null)
             {
-                _stopDistanse = settings.PursueStopDistance;
+                _stopDistance = settings.PursueStopDistance;
             }
         }
 
@@ -57,7 +54,16 @@ namespace DddShooter
 
 
         #region Methods
-               
+
+        public override void On()
+        {
+            base.On();
+            if (_haveTerget)
+            {
+                _agent.stoppingDistance = _stopDistance;
+            }
+        }
+
         private void StopPursure()
         {
             if (_agent.isActiveAndEnabled)
@@ -73,7 +79,7 @@ namespace DddShooter
 
         public override void Execute()
         {
-            if (_haveTerget)
+            if (_isEnabled && _haveTerget)
             {
                 _agent.SetDestination(_target.position);
             }

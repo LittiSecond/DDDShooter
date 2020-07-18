@@ -12,6 +12,8 @@ namespace DddShooter
         #region Fields
 
         protected NavMeshAgent _agent;
+        protected bool _isEnabled;
+
 
         #endregion
 
@@ -24,7 +26,26 @@ namespace DddShooter
         }
 
         #endregion
-               
+
+
+        #region Methods
+
+        public virtual void On()  // в BaseController есть ненужный здесь функционал, поэтому не наследую
+        {
+            _isEnabled = true;
+        }
+
+        public virtual void Off()
+        {
+            _isEnabled = false;
+            if (_agent.isActiveAndEnabled)
+            {
+                _agent.ResetPath();
+            }
+        }
+
+        #endregion
+        
 
         #region IExecute
 

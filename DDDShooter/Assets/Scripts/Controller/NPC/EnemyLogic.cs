@@ -19,7 +19,7 @@ namespace DddShooter
         private EnemyMovementPatrol _movementPatrol;
         private EnemyVision _enemyVision;
 
-        private float _changeStateDelay = 3.0f;
+        private float _changeStateDelay;
         private float _timeCounter;
         private NpcState _state;
 
@@ -37,6 +37,10 @@ namespace DddShooter
                 _body = body;
                 _agent = body.gameObject.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
                 _settings = body.Settings;
+                if (_settings != null)
+                {
+                    _changeStateDelay = _settings.ChangeStateDelay;
+                }
 
                 _health = new EnemyHealth(_settings);
                 _body.SubscribeOnDamagedEvent(_health.TakeDamage);
@@ -57,7 +61,7 @@ namespace DddShooter
                 _enemyVision = new EnemyVision(this, body, _settings);
                 _enemyVision.Target = _playerTransform;
 
-                _state = NpcState.Patrol;
+                SwithState(NpcState.Patrol);
                 On();
             }
         }
@@ -72,7 +76,7 @@ namespace DddShooter
             CustumDebug.Log("EnemyLogic->PlayerDetected:");
             if (_state == NpcState.Patrol || _state == NpcState.Inspection)
             {
-                _state = NpcState.Pursue;
+                SwithState(NpcState.Pursue);
             }
         }
 
@@ -82,14 +86,14 @@ namespace DddShooter
             if (_state == NpcState.Pursue)
             {
                 _timeCounter = 0.0f;
-                _state = NpcState.Inspection;
+                SwithState(NpcState.Inspection);
             }
         }
 
         private void DestroyItSelf()
         {
             StopLogic();
-            _state = NpcState.Died;
+            SwithState(NpcState.Died);
             _body.Die();
             Off();
             OnDestroyEventHandler?.Invoke(this);
@@ -118,8 +122,26 @@ namespace DddShooter
             _timeCounter += Time.deltaTime;
             if (_timeCounter >= _changeStateDelay)
             {
-                _state = NpcState.Patrol;
+                SwithState(NpcState.Patrol);
             }
+        }
+        
+        private void SwithState(NpcState newState )
+        {
+            switch (newState)
+            {
+                case NpcState.Patrol:
+                    _movementPursue?.Off();
+                    _movementPatrol?.On();
+                    break;
+                case NpcState.Pursue:
+                    _movementPatrol?.Off();
+                    _movementPursue?.On();
+                    break;
+                default:
+                    break;
+            }
+            _state = newState;
         }
 
         #endregion

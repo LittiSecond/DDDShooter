@@ -18,7 +18,6 @@ namespace DddShooter
         private float _timeCounter;
         private int _pathPointIndex = -1;
         private bool _isPhaseMove;
-        private bool _isEnabled;
 
         #endregion
 
@@ -50,6 +49,32 @@ namespace DddShooter
             ResetPath();
         }
 
+        public override void On()  // в BaseController есть ненужный здесь функционал, поэтому не наследую
+        {
+            if (_patrolPath != null)
+                if (_patrolPath.Count > 0)
+                {
+                    _isEnabled = true;
+                    _agent.stoppingDistance = 0.0f;
+                }
+        }
+
+        private void ResetPath()
+        {
+            _pathPointIndex = -1;
+            if (_isEnabled)
+            {
+                if (_patrolPath == null)
+                {
+                    _isEnabled = false;
+                }
+                else if (_patrolPath.Count == 0)
+                {
+                    _isEnabled = false;
+                }
+            }
+
+        }
 
         #endregion
 
@@ -87,40 +112,6 @@ namespace DddShooter
             }
         }
 
-        public void On()  // в BaseController есть ненужный здесь функционал, поэтому не наследую
-        {
-            if (_patrolPath != null)
-                if (_patrolPath.Count > 0)
-                {
-                    _isEnabled = true;
-                    _agent.stoppingDistance = 0.0f;
-                }
-        }
-
-        public void Off()
-        {
-            _isEnabled = false;
-            _agent.ResetPath();
-        }
-
-        private void ResetPath()
-        {
-            _pathPointIndex = -1;
-            if (_isEnabled)
-            {
-                if (_patrolPath == null)
-                {
-                    _isEnabled = false;
-                }
-                else if (_patrolPath.Count == 0)
-                {
-                    _isEnabled = false;
-                }
-            }
-            
-        }
         #endregion
-
-
     }
 }
