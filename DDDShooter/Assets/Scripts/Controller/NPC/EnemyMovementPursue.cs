@@ -12,6 +12,7 @@ namespace DddShooter
         #region Fields
         
         private Transform _target;
+        private float _stopDistanse;
         private bool _haveTerget;
 
         #endregion
@@ -44,9 +45,12 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyMovementPursue(NavMeshAgent agent) : base(agent)
+        public EnemyMovementPursue(NavMeshAgent agent, NpcSettings settings) : base(agent)
         {
-         
+         if (settings != null)
+            {
+                _stopDistanse = settings.PursueStopDistance;
+            }
         }
 
         #endregion

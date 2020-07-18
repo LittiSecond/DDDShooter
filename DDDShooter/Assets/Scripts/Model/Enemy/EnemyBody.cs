@@ -14,12 +14,16 @@ namespace DddShooter
         [SerializeField] private PatrolPath _patrolPath;
         [SerializeField] private Transform _visionPoint;
 
+        [SerializeField] private NpcSettings _npcSettings = new NpcSettings();
+
         private EnemyPartDamagTranslator[] _damagTranslators;
 
         #endregion
 
 
         #region Properties
+
+        public NpcSettings Settings { get => _npcSettings; }
 
         #endregion
 

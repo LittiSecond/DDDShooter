@@ -5,28 +5,25 @@ namespace DddShooter
     public sealed class EnemyHealth
     {
         #region Fields
-        
-        private float _heath = 200.0f;
+
+        private float _maxHealth;
+        private float _heath;
         
         #endregion
         
 
         public event Action OnDeathEventHandler;
-        
+
 
         #region ClassLifeCycles
 
-        //public EnemyHealth(GameObject root)
-        //{
-        //    _damagTranslators = root.GetComponentsInChildren<EnemyPartDamagTranslator>();
-        //    if (_damagTranslators != null)
-        //    {
-        //        foreach (var t in _damagTranslators)
-        //        {
-        //            t.OnDamagedEvent += TakeDamage;
-        //        }
-        //    }
-        //}
+        public EnemyHealth(NpcSettings settings)
+        {
+            if (settings != null)
+            {
+                _heath = _maxHealth = settings.MaxHealth;
+            }
+        }
 
         #endregion
 

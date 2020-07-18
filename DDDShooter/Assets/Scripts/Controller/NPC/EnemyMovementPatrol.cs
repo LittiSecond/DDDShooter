@@ -12,9 +12,9 @@ namespace DddShooter
     {
         #region Fields
 
-        private List<Vector3> _patrolPath;
+        private List<Vector3> _patrolPath;        
 
-        private float _stopDuration = 3.0f;
+        private float _stopDuration;
         private float _timeCounter;
         private int _pathPointIndex = -1;
         private bool _isPhaseMove;
@@ -30,9 +30,13 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyMovementPatrol(NavMeshAgent agent) : base(agent)
+        public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings) : base(agent)
         {
             _isPhaseMove = false;
+            if (settings != null)
+            {
+                _stopDuration = settings.PatrolStopDuration;
+            }      
         }
 
         #endregion

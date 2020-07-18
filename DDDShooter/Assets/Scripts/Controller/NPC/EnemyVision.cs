@@ -13,8 +13,8 @@ namespace DddShooter
         private Transform _playerTransform;
         private EnemyLogic _enemyLogic;
 
-        private float _visionRange = 10.0f;
-        private float _visionAngle = 80.0f;
+        private float _visionRange;
+        private float _visionAngle;
 
         private bool _haveTerget;
         private bool _isPlayerVisible;
@@ -39,10 +39,15 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyVision(EnemyLogic logic, EnemyBody body)
+        public EnemyVision(EnemyLogic logic, EnemyBody body, NpcSettings settings)
         {
             _enemyLogic = logic;
             _visionTransform = body.GetVisionPoint();
+            if (settings != null)
+            {
+                _visionRange = settings.VisionRange;
+                _visionAngle = settings.VisionAngle;
+            }
         }
 
         #endregion

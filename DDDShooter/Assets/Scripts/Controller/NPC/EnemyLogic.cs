@@ -13,6 +13,7 @@ namespace DddShooter
         private UnityEngine.AI.NavMeshAgent _agent;
         private Transform _playerTransform;
 
+        private NpcSettings _settings;
         private EnemyHealth _health;
         private EnemyMovementPursue _movementPursue;
         private EnemyMovementPatrol _movementPatrol;
@@ -35,8 +36,9 @@ namespace DddShooter
             {
                 _body = body;
                 _agent = body.gameObject.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+                _settings = body.Settings;
 
-                _health = new EnemyHealth();
+                _health = new EnemyHealth(_settings);
                 _body.SubscribeOnDamagedEvent(_health.TakeDamage);
                 _health.OnDeathEventHandler += DestroyItSelf;
 
@@ -44,15 +46,15 @@ namespace DddShooter
 
                 if (_agent)
                 {
-                    _movementPursue = new EnemyMovementPursue(_agent);
+                    _movementPursue = new EnemyMovementPursue(_agent, _settings);
                     _movementPursue.Target = _playerTransform;
 
-                    _movementPatrol = new EnemyMovementPatrol(_agent);
+                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
                     _movementPatrol.SetPath(body.GetPath());
                     _movementPatrol.On();
                 }
 
-                _enemyVision = new EnemyVision(this, body);
+                _enemyVision = new EnemyVision(this, body, _settings);
                 _enemyVision.Target = _playerTransform;
 
                 _state = NpcState.Patrol;
