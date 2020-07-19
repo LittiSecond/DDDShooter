@@ -6,11 +6,11 @@ namespace DddShooter
 {
     public sealed class UiInterface
     {
-        private FlashLightUiText _flashLightUiText;
-        private PauseMessageUiText _pauseMessageUiText;
-        private UiInteractMessageText _messageUiText;
-        private UiClipInfo _uiClipInfo;
-        private UiWarningMessageText _warningMessageText;
+        private static FlashLightUiText _flashLightUiText;
+        private static PauseMessageUiText _pauseMessageUiText;
+        private static UiInteractMessageText _messageUiText;
+        private static UiClipInfo _uiClipInfo;
+        private static UiWarningMessageText _warningMessageText;
 
         public FlashLightUiText LightUiText
         {

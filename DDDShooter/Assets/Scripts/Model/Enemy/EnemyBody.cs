@@ -18,6 +18,7 @@ namespace DddShooter
         [SerializeField] private NpcSettings _npcSettings = new NpcSettings();
 
         private EnemyPartDamagTranslator[] _damagTranslators;
+        private Weapon _weapon;
 
         #endregion
 
@@ -36,7 +37,7 @@ namespace DddShooter
         {
             base.Awake();
             _damagTranslators = GetComponentsInChildren<EnemyPartDamagTranslator>();
-
+            _weapon = GetComponentInChildren<Weapon>();
         }
 
         #endregion
@@ -52,6 +53,11 @@ namespace DddShooter
                 {
                     t.Die();
                 }
+            }
+            if (_weapon)
+            {
+                _weapon.JoinTo(null);
+                _weapon.EnablePhysics();
             }
         }
 

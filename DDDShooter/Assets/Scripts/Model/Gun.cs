@@ -11,18 +11,16 @@ namespace DddShooter
         [SerializeField] private Ammunition _ammunitionPrefab;
         [SerializeField] private float _force = 99.95f;
 
-        private const int CLIP_IS_EMTY_TEXT_ID = 4;
-
         #endregion
 
 
         #region Methods
 
-        public override void Fire()
+        public override ShotResult Fire()
         {
             if (!_isRedy)
             {
-                return;
+                return ShotResult.NotReady;
             }
 
             if (_clip != null)
@@ -38,9 +36,9 @@ namespace DddShooter
 
             if (_isRedy)
             {
-                _warningMessageText.Show(CLIP_IS_EMTY_TEXT_ID);
+                return ShotResult.NoAmmo;
             }
-
+            return ShotResult.Done;
         }
 
  

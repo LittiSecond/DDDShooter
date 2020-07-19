@@ -9,6 +9,8 @@ namespace Geekbrains
 
         private Weapon _weapon;
 
+        private const int CLIP_IS_EMTY_TEXT_ID = 4;
+
         #endregion
 
 
@@ -60,7 +62,11 @@ namespace Geekbrains
         {
             if (IsActive)
             {
-                _weapon.Fire();
+                ShotResult result = _weapon.Fire();
+                if (result == ShotResult.NoAmmo)
+                {
+                    UiInterface.WarningMessageText.Show(CLIP_IS_EMTY_TEXT_ID);
+                }
                 UpdateUi();
             }
         }
