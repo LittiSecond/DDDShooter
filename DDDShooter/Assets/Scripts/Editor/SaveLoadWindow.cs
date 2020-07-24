@@ -67,7 +67,8 @@ namespace DddShooter.Editor
                         _txtSaveLoadManager.Save(sgo);
                         break;
                     case 1:
-
+                        CreateXmlSaveLoadManager();
+                        _xmlSaveLoadManager.Save(sgo);
                         break;
                     case 2:
                         CreateJsonSaveLoadManager();
@@ -93,7 +94,7 @@ namespace DddShooter.Editor
         {
             if (_xmlSaveLoadManager == null)
             {
-                //_xmlSaveLoadManager = new SaveLoadManager(new XmlSaveLoader());
+                _xmlSaveLoadManager = new SaveLoadManager(new XmlSaveLoader());
             }
         }
 
