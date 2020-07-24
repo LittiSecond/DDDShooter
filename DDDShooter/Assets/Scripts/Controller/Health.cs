@@ -13,6 +13,7 @@ namespace DddShooter
 
         #endregion
 
+        public event Action OnDeathEventHandler;
 
         #region Properties
 
@@ -37,7 +38,26 @@ namespace DddShooter
 
         public void TakeDamage(float damag)
         {
-            throw new NotImplementedException();
+            if (damag > 0 || _health > 0)
+            {
+                _health -= damag;
+                if (_health <= 0)
+                {
+                    DestroyItself();
+                }
+            }
+        }
+
+        private void DestroyItself()
+        {
+            //if (_damagTranslators != null)
+            //{
+            //    foreach (var t in _damagTranslators)
+            //    {
+            //        t.Die();
+            //    }
+                OnDeathEventHandler?.Invoke();
+            //}
         }
 
         #endregion

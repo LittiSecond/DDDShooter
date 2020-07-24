@@ -22,8 +22,10 @@ namespace Geekbrains
             ServiceLocator.SetService(new WeaponController());
             ServiceLocator.SetService(new Inventory());
             ServiceLocator.SetService(new PlayerPropertyController());
+            ServiceLocator.SetService(new NpcCommander());
 
-            _executeControllers = new IExecute[5];
+
+            _executeControllers = new IExecute[6];
 
             _executeControllers[0] = ServiceLocator.Resolve<TimeRemainingController>();
             
@@ -34,6 +36,8 @@ namespace Geekbrains
             _executeControllers[3] = ServiceLocator.Resolve<InputController>();
 
             _executeControllers[4] = ServiceLocator.Resolve<PlayerInteractionController>();
+
+            _executeControllers[5] = ServiceLocator.Resolve<NpcCommander>();
         }
         
         public IExecute this[int index] => _executeControllers[index];
@@ -53,6 +57,7 @@ namespace Geekbrains
             ServiceLocator.Resolve<PauseController>().On();
             ServiceLocator.Resolve<Inventory>().Initialization();
             ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
+            ServiceLocator.Resolve<NpcCommander>().On();
 
         }
     }

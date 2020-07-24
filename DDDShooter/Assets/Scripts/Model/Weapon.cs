@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using DddShooter;
 
+
 namespace Geekbrains
 {
     public abstract class Weapon : BaseObjectScene, IInteractable, IPickUpTool
@@ -21,7 +22,6 @@ namespace Geekbrains
         [SerializeField] protected Vector3 _rotationOffSet = Vector3.zero;
 
         protected UiClipInfo _uiClipInfo;
-        protected UiWarningMessageText _warningMessageText;
         protected ITimeRemaining _timeRemaining;
         private Collider _collider;
         protected bool _isRedy = true;
@@ -64,7 +64,6 @@ namespace Geekbrains
         {
             _timeRemaining = new TimeRemaining(ReadyShoot, _rechargeTime);
             _uiClipInfo = ServiceLocatorMonoBehaviour.GetService<UiClipInfo>();
-            _warningMessageText = ServiceLocatorMonoBehaviour.GetService<UiWarningMessageText>();
         }
 
         #endregion
@@ -72,7 +71,7 @@ namespace Geekbrains
 
         #region Methods
 
-        public abstract void Fire();
+        public abstract ShotResult Fire();
 
         protected void ReadyShoot()
         {
@@ -145,12 +144,14 @@ namespace Geekbrains
         public void DisablePhysics()
         {
             Rigidbody.isKinematic = true;
+            Rigidbody.useGravity = false;
             _collider.enabled = false;
         }
 
         public void EnablePhysics()
         {
             Rigidbody.isKinematic = false;
+            Rigidbody.useGravity = true;
             _collider.enabled = true;
         }
 
