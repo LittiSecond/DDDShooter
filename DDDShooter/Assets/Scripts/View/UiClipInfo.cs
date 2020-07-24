@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Geekbrains;
 
 
 namespace DddShooter
@@ -10,12 +9,7 @@ namespace DddShooter
         #region Fields
 
         [SerializeField] private Text _caption;
-        [SerializeField] private Text _clipEmptyMessage;
         [SerializeField] private Text _ammoInfo;
-
-        [SerializeField] private float _delay = 4.0f;
-
-        private ITimeRemaining _timeRemaining;
 
         #endregion
 
@@ -24,9 +18,7 @@ namespace DddShooter
 
         private void Awake()
         {
-            _timeRemaining = new TimeRemaining(HideClipEmptyMessage, _delay);
             Hide();
-            HideClipEmptyMessage();
         }
 
         #endregion
@@ -49,17 +41,6 @@ namespace DddShooter
         public void ShowData(int currentQuantity, int clipCapasity)
         {
             _ammoInfo.text = $"{currentQuantity} / {clipCapasity}";
-        }
-
-        public void ShowClipEmptyMessage()
-        {
-            _clipEmptyMessage.enabled = true;
-            _timeRemaining.AddTimeRemaining();
-        }
-
-        public void HideClipEmptyMessage()
-        {
-            _clipEmptyMessage.enabled = false;
         }
 
         #endregion

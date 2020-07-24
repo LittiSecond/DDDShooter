@@ -109,6 +109,8 @@ namespace DddShooter
             }
         }
 
+        public InteractType InteractType => InteractType.ExternalUse;
+
         #endregion
     }
 }

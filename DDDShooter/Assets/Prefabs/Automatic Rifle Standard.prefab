@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
+  - component: {fileID: 4309854972882661969}
+  - component: {fileID: 2306323837042457540}
   - component: {fileID: 6864545130631679132}
   m_Layer: 0
   m_Name: Automatic Rifle Standard
@@ -81,6 +83,35 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4309854972882661969
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2265208, y: 0.6589861, z: 0.11634569}
+  m_Center: {x: 0.3785934, y: -0.007736951, z: 0.00000024028128}
+--- !u!54 &2306323837042457540
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  serializedVersion: 2
+  m_Mass: 7
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &6864545130631679132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +129,12 @@ MonoBehaviour:
   _barrel: {fileID: 4411343595964416}
   _type: 1
   _rechargeTime: 0.2
+  _clip:
+    _type: 1
+    _capacity: 25
+    _quantity: 24
+  _offSet: {x: 0.24, y: -0.45, z: 0.27}
+  _rotationOffSet: {x: 0, y: -90, z: 0}
   _ammunitionPrefab: {fileID: 7309381547164742855, guid: 209976f5ec69fe645a0c6f3f764104ef,
     type: 3}
   _force: 15

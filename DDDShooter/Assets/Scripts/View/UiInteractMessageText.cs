@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DddShooter
 {
-    public sealed class MessageUiText : MonoBehaviour
+    public sealed class UiInteractMessageText : MonoBehaviour
     {
         private Text _text;
 

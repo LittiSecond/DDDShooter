@@ -5,5 +5,6 @@
         void Interact();
         string GetMessageIfTarget();
         bool IsTarget { set; }
+        InteractType InteractType { get; }
     }
 }

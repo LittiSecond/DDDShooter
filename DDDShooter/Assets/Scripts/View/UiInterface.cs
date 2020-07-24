@@ -8,8 +8,9 @@ namespace DddShooter
     {
         private FlashLightUiText _flashLightUiText;
         private PauseMessageUiText _pauseMessageUiText;
-        private MessageUiText _messageUiText;
+        private UiInteractMessageText _messageUiText;
         private UiClipInfo _uiClipInfo;
+        private UiWarningMessageText _warningMessageText;
 
         public FlashLightUiText LightUiText
         {
@@ -33,13 +34,13 @@ namespace DddShooter
             }
         }
         
-        public MessageUiText MessageText
+        public UiInteractMessageText InteractMessageText
         {
             get
             {
                 if (!_messageUiText)
                 {
-                    _messageUiText = Object.FindObjectOfType<MessageUiText>();
+                    _messageUiText = Object.FindObjectOfType<UiInteractMessageText>();
                 }
                 return _messageUiText;
             }
@@ -54,6 +55,17 @@ namespace DddShooter
                 return _uiClipInfo;
             }
         }
+
+        public UiWarningMessageText WarningMessageText
+        {
+            get
+            {
+                if (!_warningMessageText)
+                    _warningMessageText = Object.FindObjectOfType<UiWarningMessageText>();
+                return _warningMessageText;
+            }
+        }
+
 
     }
 }

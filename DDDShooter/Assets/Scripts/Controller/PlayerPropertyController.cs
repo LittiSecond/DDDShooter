@@ -6,14 +6,19 @@ namespace DddShooter
 {
     public sealed class PlayerPropertyController : BaseController, IInitialization
     {
-        // Управляет имуществом персонажа игрока. ... наверно правильнее назвать  PlayerPropertyManager ?
+        // Управляет имуществом персонажа игрока. 
 
         #region Fields
 
+        private UiWarningMessageText _warningMessageText;
         private WeaponController _weaponController;
         private Inventory _inventory;
 
         private int _selectedWeaponIndex = -1;
+
+        //private bool _isClipLoaded = true;
+
+        private const int CANNOT_PICK_UP_WEAPON_TEXT_ID = 6;
 
         #endregion
 
@@ -27,6 +32,8 @@ namespace DddShooter
 
         public void Initialization()
         {
+            On();
+            _warningMessageText = UiInterface.WarningMessageText;
             _weaponController = ServiceLocator.Resolve<WeaponController>();
             _inventory = ServiceLocator.Resolve<Inventory>();            
             SelectWeapon(0);
@@ -98,9 +105,18 @@ namespace DddShooter
         {
             if (_weaponController.IsActive)
             {
-                AmmunitionType type = _weaponController.Type;
-                Clip newClip = _inventory.GetClip(type);
-                _weaponController.ReloadClip(newClip);
+                //if (_isClipLoaded)
+                //{
+                //    _weaponController.ReloadClip(null);
+                //    _isClipLoaded = false;
+                //}
+                //else
+                //{
+                //    _isClipLoaded = true;
+                    AmmunitionType type = _weaponController.Type;
+                    Clip newClip = _inventory.GetClip(type);
+                    _weaponController.ReloadClip(newClip);
+                //}
             }
             //if (_selectedWeaponIndex >= 0)
             //{
@@ -120,6 +136,32 @@ namespace DddShooter
 
             //    }
             //}
+        }
+
+        public void DropItem()
+        {
+            if (_weaponController.IsActive)
+            {
+                _weaponController.Off();
+                _inventory.DropWeapon(_selectedWeaponIndex);
+                _selectedWeaponIndex = -1;
+            }
+        }
+
+        public void PickUpWeapon(Weapon weapon)
+        {
+            if (weapon != null)
+            {
+                int index = _inventory.PickUpWeapon(weapon);
+                if (index >= 0)
+                {
+                    SelectWeapon(index);
+                }
+                else
+                {
+                    _warningMessageText.Show(CANNOT_PICK_UP_WEAPON_TEXT_ID);
+                }
+            }
         }
 
         #endregion

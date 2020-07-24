@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Geekbrains;
-
+using System;
 
 namespace DddShooter
 {
@@ -11,6 +11,8 @@ namespace DddShooter
         [SerializeField] private float _heath = 200.0f;
 
         private EnemyPartDamagTranslator[] _damagTranslators;
+
+        public event Action OnDeathEvent;
 
         #endregion
 
@@ -54,6 +56,7 @@ namespace DddShooter
                 {
                     t.Die();
                 }
+                OnDeathEvent?.Invoke();
             }
         }
 

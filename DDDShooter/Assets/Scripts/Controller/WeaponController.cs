@@ -99,10 +99,10 @@ namespace Geekbrains
             UiInterface.UiClipInfoPanel.Hide();
         }
 
-        private void ShowUiClipEmptyInfo()
-        {
-            UiInterface.UiClipInfoPanel.ShowClipEmptyMessage();
-        }
+        //private void ShowUiClipEmptyInfo()
+        //{
+        //    UiInterface.UiClipInfoPanel.ShowClipEmptyMessage();
+        //}
 
         #endregion
     }
