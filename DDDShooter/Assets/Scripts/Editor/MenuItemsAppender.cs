@@ -24,6 +24,20 @@ namespace DddShooter.Editor
             Debug.Log("MenuItemsAppender->UselesItem2: ");
         }
 
+        [MenuItem("DddTools/Бесполезне пункты/Узнать пути")]
+        public static void Paths()
+        {
+            string dataPath = Application.dataPath;             // Содержит путь к папке игровых данных
+            string persistentDataPath = Application.persistentDataPath;   // Путь к постоянной директории данных
+            string streamingAssetsPath = Application.streamingAssetsPath;  // Путь к папке StreamingAssets
+            string temporaryCachePath = Application.temporaryCachePath;   // Путь к временным данным/директории кэша
+
+            Debug.Log("MenuItemsAppender->Paths: dataPath = " + dataPath);
+            Debug.Log("MenuItemsAppender->Paths: persistentDataPath = " + persistentDataPath);
+            Debug.Log("MenuItemsAppender->Paths: streamingAssetsPath = " + streamingAssetsPath);
+            Debug.Log("MenuItemsAppender->Paths: temporaryCachePath = " + temporaryCachePath);
+        }
+
         [MenuItem("CONTEXT/EnemyBody/пункт")]
         public static void EnemyBodyContext()
         {
