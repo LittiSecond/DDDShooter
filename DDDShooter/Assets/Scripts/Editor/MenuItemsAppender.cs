@@ -24,5 +24,11 @@ namespace DddShooter.Editor
             Debug.Log("MenuItemsAppender->UselesItem2: ");
         }
 
+        [MenuItem("CONTEXT/EnemyBody/пункт")]
+        public static void EnemyBodyContext()
+        {
+            Debug.Log("MenuItemsAppender->EnemyBodyContext: ");
+        }
+
     }
 }
