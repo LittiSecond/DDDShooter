@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DddShooter;
 
 
 namespace Geekbrains
@@ -16,10 +17,13 @@ namespace Geekbrains
             ServiceLocator.SetService(new PlayerController(motor));
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
-            ServiceLocator.SetService(new PlayerInteractionController());     // <-------- added
-            ServiceLocator.SetService(new PauseController());                 // <-------- added
-            
-            _executeControllers = new IExecute[5];                            // <-------- changed
+            ServiceLocator.SetService(new PlayerInteractionController());
+            ServiceLocator.SetService(new PauseController());
+            ServiceLocator.SetService(new WeaponController());
+            ServiceLocator.SetService(new Inventory());
+            ServiceLocator.SetService(new PlayerPropertyController());
+
+            _executeControllers = new IExecute[5];
 
             _executeControllers[0] = ServiceLocator.Resolve<TimeRemainingController>();
             
@@ -29,7 +33,7 @@ namespace Geekbrains
 
             _executeControllers[3] = ServiceLocator.Resolve<InputController>();
 
-            _executeControllers[4] = ServiceLocator.Resolve<PlayerInteractionController>();     // <-------- added
+            _executeControllers[4] = ServiceLocator.Resolve<PlayerInteractionController>();
         }
         
         public IExecute this[int index] => _executeControllers[index];
@@ -46,7 +50,10 @@ namespace Geekbrains
             
             ServiceLocator.Resolve<InputController>().On();
             ServiceLocator.Resolve<PlayerController>().On();
-            ServiceLocator.Resolve<PauseController>().On();       // <-------- added
+            ServiceLocator.Resolve<PauseController>().On();
+            ServiceLocator.Resolve<Inventory>().Initialization();
+            ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
+
         }
     }
 }

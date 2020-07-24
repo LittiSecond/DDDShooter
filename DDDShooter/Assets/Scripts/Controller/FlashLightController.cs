@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DddShooter;
+
 
 namespace Geekbrains
 {
@@ -52,30 +53,12 @@ namespace Geekbrains
             }
         }
 
-        public void ReplaceBattery()      //  <----------------- added
+        public void ReplaceBattery(SmallBattery smallBattery)      //  <----------------- added
         {
-            //  По идее, тут надо делать так:
-            //  - проверить, есть ли в инвентаре батарея;
-            //  - если есть, то взять её из инвентаря;
-            //  - вставить батарею в фонарик, при этом получаем из него старую батарею;
-            //  - положить старую батарею в инвентарь. 
-            //  Потом старую батарею можно будет где-нибудь зарядить, выкинуть или разобрать на ресурсы для крафта
-            //
-            //  Но сейчас инвентаря нет.
-            //  
             if (_flashLightModel)
             {
                 Off();
-                SmallBattery battery = _flashLightModel.ReplaceBattery(null); // вынули батарею
-                if (battery != null)
-                {
-                    battery.ChargeCurrent = battery.ChargeMax;                    // как бы зарядили
-                }
-                else
-                {
-                    battery = new SmallBattery();
-                }
-                _flashLightModel.ReplaceBattery(battery);                     // вставили обратно
+                _flashLightModel.ReplaceBattery(smallBattery);                     // вставили обратно
             }
         }
 

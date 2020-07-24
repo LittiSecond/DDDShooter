@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Geekbrains
+using Geekbrains;
+
+
+namespace DddShooter
 {
     public sealed class WorldTextMessageController : MonoBehaviour
     {
