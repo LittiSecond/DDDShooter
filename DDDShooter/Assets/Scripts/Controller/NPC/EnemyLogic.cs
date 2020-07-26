@@ -92,7 +92,7 @@ namespace DddShooter
 
         public void PlayerDetected()
         {
-            CustumDebug.Log("EnemyLogic->PlayerDetected:");
+            //CustumDebug.Log("EnemyLogic->PlayerDetected:");
             if (_state == NpcState.Patrol || _state == NpcState.Inspection)
             {
                 SwithState(NpcState.Pursue);
@@ -101,7 +101,7 @@ namespace DddShooter
 
         public void PlayerLost()
         {
-            CustumDebug.Log("EnemyLogic->PlayerLost:");
+            //CustumDebug.Log("EnemyLogic->PlayerLost:");
             if (_state == NpcState.Pursue)
             {
                 _timeCounter = 0.0f;
@@ -132,8 +132,8 @@ namespace DddShooter
 
         private void SearchTarget()
         {
-            CharacterController controller = ServiceLocatorMonoBehaviour.GetService<CharacterController>();
-            _playerTransform = controller.transform;
+            PlayerBody playerBody = ServiceLocatorMonoBehaviour.GetService<PlayerBody>();
+            _playerTransform = playerBody.BodyCentre;
         }
         
         private void CountTime()

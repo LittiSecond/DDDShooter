@@ -72,7 +72,8 @@ namespace DddShooter
             RaycastHit hit;
             if (Physics.Linecast(_visionTransform.position, _playerTransform.position, out hit))
             {
-                if (hit.transform == _playerTransform) return false;
+                return hit.transform.GetComponent<PlayerBody>() == null;
+                //if (hit.transform == _playerTransform) return false;
             }
             return true;
         }

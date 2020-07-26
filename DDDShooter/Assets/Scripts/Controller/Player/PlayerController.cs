@@ -22,7 +22,7 @@ namespace Geekbrains
 
         public void Initialization()
         {
-            Transform transform = ServiceLocatorMonoBehaviour.GetService<CharacterController>().transform;
+            Transform transform = ServiceLocatorMonoBehaviour.GetService<PlayerBody>().Transform;
             ServiceLocator.Resolve<MiniMapController>().SetPlayer(transform);
         }
     }

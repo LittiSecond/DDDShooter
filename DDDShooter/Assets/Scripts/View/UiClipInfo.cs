@@ -10,7 +10,7 @@ namespace DddShooter
 
         [SerializeField] private Text _caption;
         [SerializeField] private Text _ammoInfo;
-
+        
         #endregion
 
 

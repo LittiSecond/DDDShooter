@@ -26,12 +26,12 @@ namespace DddShooter
             DeterminePath();
 
 #if UNITY_EDITOR_WIN
-            string message = "PatrolPath->Awake: ";
-            foreach (Vector3 v in _path)
-            {
-                message += v.ToString() + "    ";
-            }
-            Debug.Log(message);
+            //string message = "PatrolPath->Awake: ";
+            //foreach (Vector3 v in _path)
+            //{
+            //    message += v.ToString() + "    ";
+            //}
+            //Debug.Log(message);
 #endif
         }
 
