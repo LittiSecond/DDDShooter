@@ -14,6 +14,7 @@ namespace Geekbrains
         {
             IMotor motor = new UnitMotor(ServiceLocatorMonoBehaviour.GetService<CharacterController>());
             ServiceLocator.SetService(new TimeRemainingController());
+            ServiceLocator.SetService(new MiniMapController());
             ServiceLocator.SetService(new PlayerController(motor));
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
@@ -25,19 +26,23 @@ namespace Geekbrains
             ServiceLocator.SetService(new NpcCommander());
 
 
-            _executeControllers = new IExecute[6];
+            _executeControllers = new IExecute[7];
 
             _executeControllers[0] = ServiceLocator.Resolve<TimeRemainingController>();
+
+            _executeControllers[1] = ServiceLocator.Resolve<MiniMapController>();    
             
-            _executeControllers[1] = ServiceLocator.Resolve<PlayerController>();
+            _executeControllers[2] = ServiceLocator.Resolve<PlayerController>();
 
-            _executeControllers[2] = ServiceLocator.Resolve<FlashLightController>();
+            _executeControllers[3] = ServiceLocator.Resolve<FlashLightController>();
 
-            _executeControllers[3] = ServiceLocator.Resolve<InputController>();
+            _executeControllers[4] = ServiceLocator.Resolve<InputController>();
 
-            _executeControllers[4] = ServiceLocator.Resolve<PlayerInteractionController>();
+            _executeControllers[5] = ServiceLocator.Resolve<PlayerInteractionController>();
 
-            _executeControllers[5] = ServiceLocator.Resolve<NpcCommander>();
+            _executeControllers[6] = ServiceLocator.Resolve<NpcCommander>();
+
+
         }
         
         public IExecute this[int index] => _executeControllers[index];
