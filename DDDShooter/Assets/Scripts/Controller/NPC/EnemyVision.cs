@@ -13,11 +13,14 @@ namespace DddShooter
         private Transform _playerTransform;
         private EnemyLogic _enemyLogic;
 
+        private LayerMask _mask;
+
         private float _visionRange;
         private float _visionAngle;
 
         private bool _haveTerget;
         private bool _isPlayerVisible;
+        private bool _isVisionAllAround;
 
         #endregion
 
@@ -41,19 +44,36 @@ namespace DddShooter
 
         public EnemyVision(EnemyLogic logic, EnemyBody body, NpcSettings settings)
         {
-            _enemyLogic = logic;
             _visionTransform = body.GetVisionPoint();
             if (settings != null)
             {
                 _visionRange = settings.VisionRange;
                 _visionAngle = settings.VisionAngle;
             }
+            _enemyLogic = logic;
+            _mask = LayerManager.GetLayerMask(LayerManager.Layer.Default, LayerManager.Layer.Ground, 
+                LayerManager.Layer.MoveableObjects, LayerManager.Layer.Player);
         }
 
         #endregion
 
 
         #region Methods
+        
+        public void ChangeState(NpcState newState)
+        {
+            switch (newState)
+            {
+                case NpcState.Patrol:
+                    _isVisionAllAround = false;
+                    break;
+                case NpcState.Pursue:
+                    _isVisionAllAround = true;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private bool CheckDistance()
         {
@@ -62,15 +82,18 @@ namespace DddShooter
 
         private bool CheckAngle()
         {
+            if (_isVisionAllAround)
+            {
+                return true;
+            }
             float angle = Vector3.Angle(_playerTransform.position - _visionTransform.position, _visionTransform.forward);
             return angle <= _visionAngle;
-
         }
 
         private bool CheckPlayerIsBlocked()
         {
             RaycastHit hit;
-            if (Physics.Linecast(_visionTransform.position, _playerTransform.position, out hit))
+            if (Physics.Linecast(_visionTransform.position, _playerTransform.position, out hit, _mask))
             {
                 return hit.transform.GetComponent<PlayerBody>() == null;
                 //if (hit.transform == _playerTransform) return false;

@@ -150,10 +150,12 @@ namespace DddShooter
             switch (newState)
             {
                 case NpcState.Patrol:
+                    _enemyVision?.ChangeState(newState);
                     _movementPursue?.Off();
                     _movementPatrol?.On();
                     break;
                 case NpcState.Pursue:
+                    _enemyVision?.ChangeState(newState);
                     _movementPatrol?.Off();
                     _movementPursue?.On();
                     break;
