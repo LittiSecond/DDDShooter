@@ -5,11 +5,12 @@ using System;
 namespace DddShooter
 {
     [RequireComponent(typeof(Rigidbody))]
-    public sealed class EnemyPartDamagTranslator : MonoBehaviour, ITakerDamage
+    public sealed class EnemyPartDamagTranslator : MonoBehaviour, ITakerDamage, ITakerHealing
     {
         #region Fields
 
         public event Action<float> OnDamagedEvent;
+        public event Action<float> OnHealingEvent;
 
         //private Rigidbody _rigidbody;
 
@@ -38,6 +39,18 @@ namespace DddShooter
             if (!_isDead)
             {
                 OnDamagedEvent?.Invoke(damag);
+            }
+        }
+
+        #endregion
+
+        #region ITakerHealing
+
+        public void TakeHealing(float healing)
+        {
+            if (!_isDead)
+            {
+                OnHealingEvent?.Invoke(healing);
             }
         }
 

@@ -10,7 +10,7 @@ namespace DddShooter
     {
         #region Fields
 
-        private List<Vector3> _path;// = new List<Vector3>();
+        private List<Vector3> _path = new List<Vector3>();
 #if UNITY_EDITOR_WIN
         private Color _lineColor = Color.red;
 #endif
@@ -22,7 +22,7 @@ namespace DddShooter
 
         private void Awake()
         {
-            _path = new List<Vector3>();
+            //_path = new List<Vector3>();
             DeterminePath();
 
 #if UNITY_EDITOR_WIN
@@ -37,11 +37,11 @@ namespace DddShooter
 
 #if UNITY_EDITOR_WIN
 
-        //private void OnValidate()
-        //{
-        //    DeterminePath();
-        //    Debug.Log("PatrolPath->OnValidate: " + gameObject.name);
-        //}
+        private void OnValidate()
+        {
+            DeterminePath();
+            //Debug.Log("PatrolPath->OnValidate: " + gameObject.name);
+        }
 
         private void OnDrawGizmosSelected()
         {

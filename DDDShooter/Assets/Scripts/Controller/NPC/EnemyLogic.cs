@@ -56,7 +56,7 @@ namespace DddShooter
                 }
 
                 _health = new EnemyHealth(_settings);
-                _body.SubscribeOnDamagedEvent(_health.TakeDamage);
+                _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
                 _health.OnDeathEventHandler += DestroyItSelf;
 
                 SearchTarget();

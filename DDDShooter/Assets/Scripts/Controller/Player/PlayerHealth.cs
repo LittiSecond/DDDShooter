@@ -40,6 +40,23 @@ namespace DddShooter
             _halthIndicator.SetValue(_heath);
         }
 
+        private void TakeHealing(float healing)
+        {
+            if (IsActive)
+            {
+                if (healing > 0)
+                {
+
+                    _heath += healing;
+                    if (_heath > _maxHealth)
+                    {
+                        _heath = _maxHealth;
+                    }
+                    UpdateUi();
+                }
+            }
+        }
+
         #endregion
 
 
@@ -53,6 +70,7 @@ namespace DddShooter
 
             _body = ServiceLocatorMonoBehaviour.GetService<PlayerBody>(false);
             _body.OnDamagedEvent += TakeDamage;
+            _body.OnHealingEvent += TakeHealing;
         }
 
         #endregion
