@@ -2,7 +2,7 @@
 using Geekbrains;
 
 
-namespace DddShooter
+namespace DddShooter.Test
 {
     public sealed class StrangeObjectScene : BaseObjectScene
     {

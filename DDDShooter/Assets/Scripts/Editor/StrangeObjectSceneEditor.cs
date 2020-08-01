@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+using DddShooter.Test;
+
 namespace DddShooter.Editor
 {
     [CustomEditor(typeof(StrangeObjectScene))]

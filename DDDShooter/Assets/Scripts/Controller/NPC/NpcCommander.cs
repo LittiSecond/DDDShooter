@@ -20,6 +20,7 @@ namespace DddShooter
         private void RemoveBot(EnemyLogic logic)
         {
             _botList.Remove(logic);
+            ServiceLocator.Resolve<MiniMapController>().RemoveObject(logic.Transform);
         }
 
         #endregion
@@ -42,12 +43,15 @@ namespace DddShooter
 
         public void Initialization()
         {
+            MiniMapController miniMap = ServiceLocator.Resolve<MiniMapController>();
+
             EnemyBody[] bodies = GameObject.FindObjectsOfType<EnemyBody>();
             foreach (EnemyBody body in bodies)
             {
                 EnemyLogic logic = new EnemyLogic(body);
                 _botList.Add(logic);
                 logic.OnDestroyEventHandler += RemoveBot;
+                miniMap.AddObject(body.Transform);
             }
         }
 

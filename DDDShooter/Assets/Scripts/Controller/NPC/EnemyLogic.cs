@@ -24,9 +24,17 @@ namespace DddShooter
         private float _timeCounter;
         private NpcState _state;
 
+        public event Action<EnemyLogic> OnDestroyEventHandler;
+
+        #endregion
+ 
+
+        #region Properties
+
+        public Transform Transform { get => _body.Transform; }
+
         #endregion
 
-        public event Action<EnemyLogic> OnDestroyEventHandler;
 
         #region ClassLifeCycles
 
