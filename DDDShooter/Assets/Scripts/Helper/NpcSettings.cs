@@ -15,7 +15,7 @@ namespace DddShooter
         [SerializeField] private float _changeStateDelay = 3.0f;
         [SerializeField] private float _visionRange = 20.0f;
         [SerializeField] private float _visionAngle = 80.0f;
-        [SerializeField] private bool _haveRangeAttack = true;
+        [SerializeField] private bool _haveRangeAttack = false;
         [SerializeField] private float _rangeAttackDistance = 50.0f;
 
         #endregion
