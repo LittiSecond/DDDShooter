@@ -25,9 +25,11 @@ namespace Geekbrains
             ServiceLocator.SetService(new Inventory());
             ServiceLocator.SetService(new PlayerPropertyController());
             ServiceLocator.SetService(new NpcCommander());
+            ServiceLocator.SetService(new MainCameraController());
+            ServiceLocator.SetService(new GameOverLogick());
 
 
-            _executeControllers = new IExecute[7];
+            _executeControllers = new IExecute[8];
 
             _executeControllers[0] = ServiceLocator.Resolve<TimeRemainingController>();
 
@@ -43,6 +45,7 @@ namespace Geekbrains
 
             _executeControllers[6] = ServiceLocator.Resolve<NpcCommander>();
 
+            _executeControllers[7] = ServiceLocator.Resolve<MainCameraController>();
 
         }
         
@@ -66,6 +69,7 @@ namespace Geekbrains
             //ServiceLocator.Resolve<PlayerHealth>().On();
             ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
             ServiceLocator.Resolve<NpcCommander>().On();
+            ServiceLocator.Resolve<GameOverLogick>().Initialization();
 
         }
     }

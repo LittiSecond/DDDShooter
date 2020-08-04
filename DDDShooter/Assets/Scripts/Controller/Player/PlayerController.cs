@@ -21,8 +21,10 @@ namespace DddShooter
         private readonly UnitMotor _motor;
 
         private Vector3 _playerRespawnPosition;
+        private Quaternion _playerRespawnRotation;
         private float _cretePlayerCharacterDelay = 0.1f;
         private bool _isPlayerAlive;
+        private bool _haveBodyInstance;
 
         #endregion
 
@@ -50,20 +52,28 @@ namespace DddShooter
 
         #region Methods
 
+        public void SpawnPlayerCharacter()
+        {
+            if (IsActive && !_isPlayerAlive)
+            {
+                CreatePlayerCharacter();
+            }
+        }
+
         private void CreatePlayerCharacter()
         {
             if (!_isPlayerAlive && _playerCharacterPrefab)
             {
-                GameObject go = Object.Instantiate(_playerCharacterPrefab, _playerRespawnPosition, Quaternion.identity);
-                _characterTransform = go.transform;
-
-                _playerBody = _characterTransform.GetComponent<PlayerBody>();                
-                _head = _playerBody.Head;
-                _bodyCentre = _playerBody.BodyCentre;
-                _playerBody.FixCamera(_cameraTransform);
-
-                CharacterController cc = go.GetComponent<CharacterController>();
-                _motor.SetObjectToMotor(cc, _head);
+                if (_haveBodyInstance)
+                {
+                    _characterTransform.position = _playerRespawnPosition;
+                    _characterTransform.rotation = _playerRespawnRotation;
+                    _playerBody.Activate();
+                }
+                else
+                {
+                    InstantiateBody();
+                }
 
                 ServiceLocator.Resolve<MiniMapController>().SetPlayer(_characterTransform);
 
@@ -81,6 +91,7 @@ namespace DddShooter
             if (go)
             {
                 _playerRespawnPosition = go.transform.position;
+                _playerRespawnRotation = go.transform.rotation;
             }
         }
 
@@ -94,14 +105,18 @@ namespace DddShooter
             FlashLightModel model = ServiceLocatorMonoBehaviour.GetService<FlashLightModel>();
             ServiceLocator.Resolve<FlashLightController>().On(model);
 
-            ServiceLocator.Resolve<PlayerHealth>().On(_playerBody);
+            PlayerHealth health = ServiceLocator.Resolve<PlayerHealth>();
+            health.On(_playerBody);
+            health.OnDeathEventHandler += DestroyPlayerCharacter;
 
-            //ServiceLocator.Resolve<PlayerInteractionController>().On(_playerBody);            
             ServiceLocator.Resolve<PlayerInteractionController>().On(_head);
 
             ServiceLocator.Resolve<PlayerPropertyController>().On();
 
             ServiceLocator.Resolve<Inventory>().On(_head);
+
+            ServiceLocator.Resolve<MainCameraController>().Connect(_head);
+
         }
 
         private void SwithPause(bool isPause)
@@ -114,6 +129,39 @@ namespace DddShooter
             {
                 base.On(null);
             }
+        }
+
+        private void DestroyPlayerCharacter()
+        {
+            DeactivateOtherControllers();
+            _isPlayerAlive = false;
+            _playerBody.Deactivate();
+            PlayerManager.PlayerDestroyed();
+        }
+
+        private void DeactivateOtherControllers()
+        {
+            ServiceLocator.Resolve<FlashLightController>().Off();
+            ServiceLocator.Resolve<PlayerHealth>().Off();
+            ServiceLocator.Resolve<PlayerInteractionController>().Off();
+            ServiceLocator.Resolve<PlayerPropertyController>().Off();
+            ServiceLocator.Resolve<Inventory>().Off();
+            ServiceLocator.Resolve<MainCameraController>().Disconnect();
+        }
+
+        private void InstantiateBody()
+        {
+            GameObject go = Object.Instantiate(_playerCharacterPrefab, _playerRespawnPosition, _playerRespawnRotation);
+            _characterTransform = go.transform;
+
+            _playerBody = _characterTransform.GetComponent<PlayerBody>();
+            _head = _playerBody.Head;
+            _bodyCentre = _playerBody.BodyCentre;
+
+            CharacterController cc = go.GetComponent<CharacterController>();
+            _motor.SetObjectToMotor(cc, _head);
+
+            _haveBodyInstance = true;
         }
 
         #endregion
@@ -137,13 +185,10 @@ namespace DddShooter
 
         public void Initialization()
         {
-            //Transform transform = ServiceLocatorMonoBehaviour.GetService<PlayerBody>().Transform;
-            //ServiceLocator.Resolve<MiniMapController>().SetPlayer(transform);
             FindRespawnPosition();
             GetPrefab();
             _timeRemaining = new TimeRemaining(CreatePlayerCharacter, _cretePlayerCharacterDelay);
             _timeRemaining.AddTimeRemaining();
-            //CreatePlayerCharacter();
 
             PauseController controller = ServiceLocator.Resolve<PauseController>();
             controller.SwichPauseEvent += SwithPause;

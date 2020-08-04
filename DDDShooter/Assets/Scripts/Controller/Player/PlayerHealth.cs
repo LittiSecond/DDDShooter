@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Geekbrains;
 
 
@@ -13,6 +14,8 @@ namespace DddShooter
 
         private float _maxHealth = 60.0f;
         private float _heath;
+
+        public event Action OnDeathEventHandler;
 
         #endregion
 
@@ -29,6 +32,8 @@ namespace DddShooter
                     if (_heath <= 0)
                     {
                         _heath = 0;
+                        OnDeathEventHandler?.Invoke();
+                        Off();
                     }
                     UpdateUi();
                 }
@@ -74,10 +79,13 @@ namespace DddShooter
 
         public override void Off()
         {
-            base.Off();
-            _body.OnDamagedEvent -= TakeDamage;
-            _body.OnHealingEvent -= TakeHealing;
-            _body = null;
+            if (IsActive)
+            {
+                base.Off();
+                _body.OnDamagedEvent -= TakeDamage;
+                _body.OnHealingEvent -= TakeHealing;
+                _body = null;
+            }
         }
 
         #endregion

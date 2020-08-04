@@ -136,6 +136,11 @@ namespace Geekbrains
             return TextConstants.GetText(PICK_UP_TEXT_ID);
         }
 
+        public virtual void DisableEndlessAmmunition()
+        {
+
+        }
+
         #endregion
 
 

@@ -14,7 +14,7 @@ namespace DddShooter
         [SerializeField] private Transform _bodyCentre;
         [SerializeField] private Transform _head;
 
-        [SerializeField] private Vector3 _cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
+        //[SerializeField] private Vector3 _cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
 
         private Transform _cameraTransform;
 
@@ -35,12 +35,12 @@ namespace DddShooter
 
         #region Methods
 
-        public void FixCamera(Transform cameraTransform)
-        {
-            _cameraTransform = cameraTransform;
-            _cameraTransform.SetParent(_head);
-            _cameraTransform.localPosition = _cameraOffset;
-        }
+        //public void FixCamera(Transform cameraTransform)
+        //{
+        //    _cameraTransform = cameraTransform;
+        //    _cameraTransform.SetParent(_head);
+        //    _cameraTransform.localPosition = _cameraOffset;
+        //}
 
         public void DropCamera()
         {
@@ -49,6 +49,16 @@ namespace DddShooter
                 _cameraTransform.SetParent(null);
                 _cameraTransform = null;
             }
+        }
+
+        public void Deactivate()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Activate()
+        {
+            gameObject.SetActive(true);
         }
 
         #endregion
