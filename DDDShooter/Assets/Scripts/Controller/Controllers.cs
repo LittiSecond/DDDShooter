@@ -12,10 +12,10 @@ namespace Geekbrains
 
         public Controllers()
         {
-            IMotor motor = new UnitMotor(ServiceLocatorMonoBehaviour.GetService<CharacterController>());
+            //IMotor motor = new UnitMotor(ServiceLocatorMonoBehaviour.GetService<CharacterController>());
             ServiceLocator.SetService(new TimeRemainingController());
             ServiceLocator.SetService(new MiniMapController());
-            ServiceLocator.SetService(new PlayerController(motor));
+            ServiceLocator.SetService(new PlayerController());
             ServiceLocator.SetService(new PlayerHealth());
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
@@ -61,9 +61,9 @@ namespace Geekbrains
             ServiceLocator.Resolve<InputController>().On();
             ServiceLocator.Resolve<PlayerController>().On();
             ServiceLocator.Resolve<PauseController>().On();
-            ServiceLocator.Resolve<Inventory>().Initialization();
+            //ServiceLocator.Resolve<Inventory>().Initialization();
             ServiceLocator.Resolve<PlayerHealth>().Initialization();
-            ServiceLocator.Resolve<PlayerHealth>().On();
+            //ServiceLocator.Resolve<PlayerHealth>().On();
             ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
             ServiceLocator.Resolve<NpcCommander>().On();
 

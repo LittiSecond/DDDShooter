@@ -21,7 +21,6 @@ namespace DddShooter
         private float _interactRange = 3.0f;
         private float _distanceToTarget;
 
-        //private readonly string _message = "Look at: ";
         private const int LOOK_AT_TEXT_ID = 1;
         private const int TOO_FAR_TEXT_ID = 8;
 
@@ -40,16 +39,9 @@ namespace DddShooter
 
 
         #region Methods
-
-        //public override void On()
-        //{
-        //    base.On();
-        //}
-
+        
         public void Interact()
         {
-            //CustumDebug.Log("PlayerInteractionController->Interact: _distanceToTarget = " + 
-            //    _distanceToTarget.ToString());
             if (_interactableObject != null)
             {
                 if (_distanceToTarget <= _interactRange)
@@ -87,6 +79,34 @@ namespace DddShooter
                     _messageUiText.Text = string.Empty;
                 }
             }
+        }
+
+        //public override void On(params BaseObjectScene[] body)
+        //{
+        //    if (IsActive) return;
+        //    if (body == null) return;
+        //    if (body.Length == 0) return;
+        //    PlayerBody pbody = body[0] as PlayerBody;
+        //    if (!pbody) return;
+
+        //    _head = pbody.Head;
+        //    base.On(body);
+        //}
+
+        public void On(Transform head)
+        {
+            if (IsActive) return;
+            if (head)
+            {
+                _head = head;
+                base.On();
+            }
+        }
+
+        public override void Off()
+        {
+            base.Off();
+            _head = null;
         }
 
         #endregion
@@ -152,8 +172,6 @@ namespace DddShooter
 
         public void Initialization()
         {
-            On();
-            _head = Camera.main.transform;
             _inventory = ServiceLocator.Resolve<Inventory>();
             _propertyController = ServiceLocator.Resolve<PlayerPropertyController>();
             _messageUiText = UiInterface.InteractMessageText;

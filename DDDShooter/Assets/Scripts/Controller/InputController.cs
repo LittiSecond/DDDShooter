@@ -20,7 +20,6 @@ namespace DddShooter
         private KeyCode _lastWeapon = KeyCode.Alpha5;
         private KeyCode _dropItem = KeyCode.H;
         private int _mouseButton = (int)MouseButton.LeftButton;
-        private FlashLightModel _flashLightModel;
 
         private readonly string _mouseScrollWhellAxesName = "Mouse ScrollWheel";
         private readonly float _mouseScrollDeadZone = 0.01f;
@@ -28,7 +27,6 @@ namespace DddShooter
         public InputController()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            _flashLightModel = Object.FindObjectOfType<FlashLightModel>();
         }
         
         public void Execute()
@@ -36,7 +34,7 @@ namespace DddShooter
             if (!IsActive) return;
             if (Input.GetKeyDown(_activeFlashLight))
             {
-                ServiceLocator.Resolve<FlashLightController>().Switch(_flashLightModel);
+                ServiceLocator.Resolve<FlashLightController>().SwitchLight();
             }
             
             if (Input.GetKeyDown(_pause))

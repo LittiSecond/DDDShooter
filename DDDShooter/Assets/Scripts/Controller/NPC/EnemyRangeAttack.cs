@@ -27,20 +27,6 @@ namespace DddShooter
         #endregion
 
 
-        #region Properties
-
-        public Transform Target
-        {
-            set
-            {
-                _target = value;
-                _haveTarget = _target != null;
-            }
-        }
-
-        #endregion
-
-
         #region ClassLifeCycles
 
         public EnemyRangeAttack(EnemyBody body, NpcSettings settings)
@@ -104,6 +90,12 @@ namespace DddShooter
                 //Debug.DrawRay(_weaponJoinPoint.position, _weaponJoinPoint.forward * 20.0f, Color.red);
                 //Debug.DrawRay(_weaponFixPoint.position, _weaponFixPoint.forward * 20.0f, Color.blue);
             }
+        }
+
+        public void SetTarget(Transform target)
+        {
+            _target = target;
+            _haveTarget = _target != null;
         }
 
         #endregion

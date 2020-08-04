@@ -13,7 +13,7 @@ namespace DddShooter
         private static Dictionary<PrefabId, GameObject> _prefabs = new Dictionary<PrefabId, GameObject>();
         private static readonly Dictionary<PrefabId, string> _prefabPaths = new Dictionary<PrefabId, string>
             {   
-                { PrefabId.PlayerCharacter, "PlayerCharacter"}
+                { PrefabId.PlayerCharacter, "Prefabs/PlayerCharacter"}
             };
 
         #endregion
@@ -40,7 +40,7 @@ namespace DddShooter
                 CustumDebug.LogError("PrefabManager->GetPrefab: Ошибка - не удалось получить префаб id = " + id.ToString());
             }
 #endif
-            return null;
+            return go;
         }
 
         private static GameObject LoadPrefab(PrefabId id)

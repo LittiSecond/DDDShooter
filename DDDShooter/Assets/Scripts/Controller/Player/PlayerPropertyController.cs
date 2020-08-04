@@ -16,8 +16,6 @@ namespace DddShooter
 
         private int _selectedWeaponIndex = -1;
 
-        //private bool _isClipLoaded = true;
-
         private const int CANNOT_PICK_UP_WEAPON_TEXT_ID = 6;
 
         #endregion
@@ -30,21 +28,17 @@ namespace DddShooter
 
         #region Methods
 
-        public void Initialization()
-        {
-            On();
-            _warningMessageText = UiInterface.WarningMessageText;
-            _weaponController = ServiceLocator.Resolve<WeaponController>();
-            _inventory = ServiceLocator.Resolve<Inventory>();            
-            SelectWeapon(0);
-        }
-
         /// <summary>
         /// -1 - hide weapon
         /// </summary>
         /// <param name="weaponIndex"></param>
         public void SelectWeapon(int weaponIndex)
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             if (weaponIndex != _selectedWeaponIndex)
             {
                 _weaponController.Off();
@@ -62,6 +56,11 @@ namespace DddShooter
 
         public void SelectNextWeapon()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             int nextWeapon = _selectedWeaponIndex + 1;
             if (nextWeapon >= Inventory.WEAPON_SLOTS_QUANTITY)
             {
@@ -72,6 +71,11 @@ namespace DddShooter
 
         public void SelectPreviousWeapon()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             int nextWeapon = _selectedWeaponIndex - 1;
             if (nextWeapon < 0)
             {
@@ -85,6 +89,11 @@ namespace DddShooter
         /// </summary>
         public void Reload()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             if (_weaponController.IsActive)
             {
                 ReloadWeaponClip();
@@ -97,49 +106,37 @@ namespace DddShooter
 
         private void ReloadFlashLight()
         {
-            SmallBattery battery = _inventory.GetSmallBattery();
-            ServiceLocator.Resolve<FlashLightController>().ReplaceBattery(battery);
+            if (IsActive)
+            {
+                SmallBattery battery = _inventory.GetSmallBattery();
+                ServiceLocator.Resolve<FlashLightController>().ReplaceBattery(battery);                
+            }
+
         }
 
         private void ReloadWeaponClip()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             if (_weaponController.IsActive)
             {
-                //if (_isClipLoaded)
-                //{
-                //    _weaponController.ReloadClip(null);
-                //    _isClipLoaded = false;
-                //}
-                //else
-                //{
-                //    _isClipLoaded = true;
                     AmmunitionType type = _weaponController.Type;
                     Clip newClip = _inventory.GetClip(type);
                     _weaponController.ReloadClip(newClip);
-                //}
-            }
-            //if (_selectedWeaponIndex >= 0)
-            //{
-            //    Weapon weapon = _inventory.GetWeapon(_selectedWeaponIndex);
-            //    if (weapon != null)
-            //    {
-            //        AmmunitionType type = weapon.Type;
-            //        if (type != AmmunitionType.None)
-            //        {
-            //            if (weapon is Gun)
-            //            {
-            //                Gun gun = weapon as Gun;
-            //                Clip newClip = _inventory.GetClip(type);
-            //                gun.ReloadClip(newClip);
-            //            }
-            //        }
 
-            //    }
-            //}
+            }
         }
 
         public void DropItem()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             if (_weaponController.IsActive)
             {
                 _weaponController.Off();
@@ -150,11 +147,20 @@ namespace DddShooter
 
         public void PickUpWeapon(Weapon weapon)
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             if (weapon != null)
             {
                 int index = _inventory.PickUpWeapon(weapon);
                 if (index >= 0)
                 {
+                    if (_selectedWeaponIndex == index)
+                    {
+                        _selectedWeaponIndex = -1;
+                    }
                     SelectWeapon(index);
                 }
                 else
@@ -162,6 +168,19 @@ namespace DddShooter
                     _warningMessageText.Show(CANNOT_PICK_UP_WEAPON_TEXT_ID);
                 }
             }
+        }
+
+        #endregion
+
+
+        #region IInitialization
+
+        public void Initialization()
+        {
+            _warningMessageText = UiInterface.WarningMessageText;
+            _weaponController = ServiceLocator.Resolve<WeaponController>();
+            _inventory = ServiceLocator.Resolve<Inventory>();
+            //SelectWeapon(0);
         }
 
         #endregion
