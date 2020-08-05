@@ -13,7 +13,8 @@ namespace DddShooter
             Ground =          10,
             MoveableObjects = 11,
             Player =          12,
-            Interactable =    14
+            Interactable =    14,
+            Enemy =           15
         }
 
         #endregion
@@ -25,7 +26,8 @@ namespace DddShooter
         public const string GROUND_LAYER_NAME = "Ground";
         public const string MOVEABLEOBJECTS_LAYER_NAME = "MoveableObjects";
         public const string PLAYER_LAYER_NAME = "Player";
-        public const string INTERACTABLE_LAYER_NAME = "Interactable";
+        public const string INTERACTABLE_LAYER_NAME = "Interactable"; 
+        public const string ENEMY_LAYER_NAME = "Enemy";
 
         #endregion
 

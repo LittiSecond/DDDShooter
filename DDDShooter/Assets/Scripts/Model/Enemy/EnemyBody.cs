@@ -61,7 +61,7 @@ namespace DddShooter
             }
         }
 
-        public void SubscribeOnDamagedEvent(Action<float> takerDamag)
+        public void SubscribeOnEvents(Action<float> takerDamag, Action<float> takerHealing)
         {
             if (takerDamag != null)
             {
@@ -70,6 +70,7 @@ namespace DddShooter
                     foreach (var t in _damagTranslators)
                     {
                         t.OnDamagedEvent += takerDamag;
+                        t.OnHealingEvent += takerHealing;
                     }
                 }
             }

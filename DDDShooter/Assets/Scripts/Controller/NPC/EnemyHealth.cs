@@ -42,6 +42,18 @@ namespace DddShooter
             }
         }
 
+        public void TakeHealing(float healing)
+        {
+            if (healing > 0 || _heath > 0)
+            {
+                _heath += healing;
+                if (_heath > _maxHealth)
+                {
+                    _heath = _maxHealth;
+                }
+            }
+        }
+
         private void DestroyItself()
         {
                 OnDeathEventHandler?.Invoke();

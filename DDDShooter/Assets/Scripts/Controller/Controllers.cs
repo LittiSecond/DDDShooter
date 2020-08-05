@@ -16,6 +16,7 @@ namespace Geekbrains
             ServiceLocator.SetService(new TimeRemainingController());
             ServiceLocator.SetService(new MiniMapController());
             ServiceLocator.SetService(new PlayerController(motor));
+            ServiceLocator.SetService(new PlayerHealth());
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
             ServiceLocator.SetService(new PlayerInteractionController());
@@ -61,6 +62,8 @@ namespace Geekbrains
             ServiceLocator.Resolve<PlayerController>().On();
             ServiceLocator.Resolve<PauseController>().On();
             ServiceLocator.Resolve<Inventory>().Initialization();
+            ServiceLocator.Resolve<PlayerHealth>().Initialization();
+            ServiceLocator.Resolve<PlayerHealth>().On();
             ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
             ServiceLocator.Resolve<NpcCommander>().On();
 

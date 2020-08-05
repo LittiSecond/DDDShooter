@@ -15,7 +15,7 @@ namespace Geekbrains
         protected virtual void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
-            Transform = GetComponent<Transform>();
+            Transform = transform; //GetComponent<Transform>();
         }
         
         #endregion

@@ -56,7 +56,7 @@ namespace DddShooter
                 }
 
                 _health = new EnemyHealth(_settings);
-                _body.SubscribeOnDamagedEvent(_health.TakeDamage);
+                _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
                 _health.OnDeathEventHandler += DestroyItSelf;
 
                 SearchTarget();
@@ -92,7 +92,7 @@ namespace DddShooter
 
         public void PlayerDetected()
         {
-            CustumDebug.Log("EnemyLogic->PlayerDetected:");
+            //CustumDebug.Log("EnemyLogic->PlayerDetected:");
             if (_state == NpcState.Patrol || _state == NpcState.Inspection)
             {
                 SwithState(NpcState.Pursue);
@@ -101,7 +101,7 @@ namespace DddShooter
 
         public void PlayerLost()
         {
-            CustumDebug.Log("EnemyLogic->PlayerLost:");
+            //CustumDebug.Log("EnemyLogic->PlayerLost:");
             if (_state == NpcState.Pursue)
             {
                 _timeCounter = 0.0f;
@@ -132,8 +132,8 @@ namespace DddShooter
 
         private void SearchTarget()
         {
-            CharacterController controller = ServiceLocatorMonoBehaviour.GetService<CharacterController>();
-            _playerTransform = controller.transform;
+            PlayerBody playerBody = ServiceLocatorMonoBehaviour.GetService<PlayerBody>();
+            _playerTransform = playerBody.BodyCentre;
         }
         
         private void CountTime()
@@ -150,10 +150,12 @@ namespace DddShooter
             switch (newState)
             {
                 case NpcState.Patrol:
+                    _enemyVision?.ChangeState(newState);
                     _movementPursue?.Off();
                     _movementPatrol?.On();
                     break;
                 case NpcState.Pursue:
+                    _enemyVision?.ChangeState(newState);
                     _movementPatrol?.Off();
                     _movementPursue?.On();
                     break;
