@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Geekbrains;
 
 
@@ -13,6 +14,8 @@ namespace DddShooter
 
         private float _maxHealth = 60.0f;
         private float _heath;
+
+        public event Action OnDeathEventHandler;
 
         #endregion
 
@@ -29,6 +32,8 @@ namespace DddShooter
                     if (_heath <= 0)
                     {
                         _heath = 0;
+                        OnDeathEventHandler?.Invoke();
+                        Off();
                     }
                     UpdateUi();
                 }
@@ -57,6 +62,32 @@ namespace DddShooter
             }
         }
 
+        public override void On(params BaseObjectScene[] body)
+        {
+            if (IsActive) return;
+            if (body == null) return;
+            if (body.Length == 0) return;
+            _body = body[0] as PlayerBody;
+            if (!_body) return;
+
+            _heath = _maxHealth;
+            _halthIndicator.SetValue(_heath, _maxHealth);
+            _body.OnDamagedEvent += TakeDamage;
+            _body.OnHealingEvent += TakeHealing;
+            base.On(body);
+        }
+
+        public override void Off()
+        {
+            if (IsActive)
+            {
+                base.Off();
+                _body.OnDamagedEvent -= TakeDamage;
+                _body.OnHealingEvent -= TakeHealing;
+                _body = null;
+            }
+        }
+
         #endregion
 
 
@@ -64,13 +95,7 @@ namespace DddShooter
 
         public void Initialization()
         {
-            _heath = _maxHealth;
             _halthIndicator = ServiceLocatorMonoBehaviour.GetService<UiPlayerHalthIndicator>(false);
-            _halthIndicator.SetValue(_heath, _maxHealth);
-
-            _body = ServiceLocatorMonoBehaviour.GetService<PlayerBody>(false);
-            _body.OnDamagedEvent += TakeDamage;
-            _body.OnHealingEvent += TakeHealing;
         }
 
         #endregion

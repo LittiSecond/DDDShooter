@@ -8,7 +8,7 @@ namespace Geekbrains
     {
         private static Dictionary<object, object> _servicecontainer = null;
 
-        public static T GetService<T>(bool createObjectIfNotFound = true) where T : Object
+        public static T GetService<T>(bool createObjectIfNotFound = false) where T : Object
         {
             if (_servicecontainer == null)
             {
@@ -31,7 +31,7 @@ namespace Geekbrains
 
         }
 
-        private static T FindService<T>(bool createObjectIfNotFound = true) where T : Object
+        private static T FindService<T>(bool createObjectIfNotFound = false) where T : Object
         {
             T type = Object.FindObjectOfType<T>();
             if (type != null)
@@ -43,6 +43,11 @@ namespace Geekbrains
                 var go = new GameObject(typeof(T).Name, typeof(T));
                 _servicecontainer.Add(typeof(T), go.GetComponent<T>());
             }
+            else
+            {
+                return null;
+            }
+
             return (T)_servicecontainer[typeof(T)];
         }
     }

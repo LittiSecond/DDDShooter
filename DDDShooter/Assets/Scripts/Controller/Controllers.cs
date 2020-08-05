@@ -12,10 +12,10 @@ namespace Geekbrains
 
         public Controllers()
         {
-            IMotor motor = new UnitMotor(ServiceLocatorMonoBehaviour.GetService<CharacterController>());
+            //IMotor motor = new UnitMotor(ServiceLocatorMonoBehaviour.GetService<CharacterController>());
             ServiceLocator.SetService(new TimeRemainingController());
             ServiceLocator.SetService(new MiniMapController());
-            ServiceLocator.SetService(new PlayerController(motor));
+            ServiceLocator.SetService(new PlayerController());
             ServiceLocator.SetService(new PlayerHealth());
             ServiceLocator.SetService(new FlashLightController());
             ServiceLocator.SetService(new InputController());
@@ -25,9 +25,11 @@ namespace Geekbrains
             ServiceLocator.SetService(new Inventory());
             ServiceLocator.SetService(new PlayerPropertyController());
             ServiceLocator.SetService(new NpcCommander());
+            ServiceLocator.SetService(new MainCameraController());
+            ServiceLocator.SetService(new GameOverLogick());
 
 
-            _executeControllers = new IExecute[7];
+            _executeControllers = new IExecute[8];
 
             _executeControllers[0] = ServiceLocator.Resolve<TimeRemainingController>();
 
@@ -43,6 +45,7 @@ namespace Geekbrains
 
             _executeControllers[6] = ServiceLocator.Resolve<NpcCommander>();
 
+            _executeControllers[7] = ServiceLocator.Resolve<MainCameraController>();
 
         }
         
@@ -61,11 +64,12 @@ namespace Geekbrains
             ServiceLocator.Resolve<InputController>().On();
             ServiceLocator.Resolve<PlayerController>().On();
             ServiceLocator.Resolve<PauseController>().On();
-            ServiceLocator.Resolve<Inventory>().Initialization();
+            //ServiceLocator.Resolve<Inventory>().Initialization();
             ServiceLocator.Resolve<PlayerHealth>().Initialization();
-            ServiceLocator.Resolve<PlayerHealth>().On();
+            //ServiceLocator.Resolve<PlayerHealth>().On();
             ServiceLocator.Resolve<PlayerPropertyController>().Initialization();
             ServiceLocator.Resolve<NpcCommander>().On();
+            ServiceLocator.Resolve<GameOverLogick>().Initialization();
 
         }
     }

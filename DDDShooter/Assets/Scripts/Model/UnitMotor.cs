@@ -23,23 +23,29 @@ public sealed class UnitMotor : IMotor
 	private Quaternion _characterTargetRot;
 	private Quaternion _cameraTargetRot;
 
-	public UnitMotor(CharacterController instance)
+	public UnitMotor()
 	{
+
+	}
+    
+    public void SetObjectToMotor(CharacterController instance, Transform head)
+    {
 		_instance = instance.transform;
 		_characterController = instance;
-		_head = Camera.main.transform;
+        //_head = Camera.main.transform;
+        _head = head;
 
 		_characterTargetRot = _instance.localRotation;
 		_cameraTargetRot = _head.localRotation;
-	}
+    }
 
 	public void Move()
 	{
-		CharecterMove();
-		GamingGravity();
+        CharecterMove();
+        GamingGravity();
 
-		LookRotation(_instance, _head);
-	}
+        LookRotation(_instance, _head);
+    }
 
 	private void CharecterMove()
 	{

@@ -10,6 +10,7 @@ namespace DddShooter
 
         [SerializeField] private Ammunition _ammunitionPrefab;
         [SerializeField] private float _force = 99.95f;
+        [SerializeField] private bool _endlessAmmunition;     // must used only for enemy
 
         #endregion
 
@@ -25,7 +26,7 @@ namespace DddShooter
 
             if (_clip != null)
             {
-                if (_clip.Extract())
+                if (_endlessAmmunition || _clip.Extract())
                 {
                     var ammunition = CreateAmmunition();
                     ammunition.AddForce(_barrel.forward * _force);
@@ -46,6 +47,11 @@ namespace DddShooter
         private Ammunition CreateAmmunition()
         {
             return Instantiate(_ammunitionPrefab, _barrel.position, _barrel.rotation);
+        }
+
+        public override void DisableEndlessAmmunition()
+        {
+            _endlessAmmunition = false;
         }
 
         #endregion

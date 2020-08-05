@@ -44,7 +44,6 @@ namespace DddShooter
 
         private void PauseOn()
         {
-            ServiceLocator.Resolve<PlayerController>().Off();
             Time.timeScale = 0;
             _pauseMessageUiText.SetActive(true);
             _isPause = true;
@@ -52,7 +51,6 @@ namespace DddShooter
 
         private void PauseOff()
         {
-            ServiceLocator.Resolve<PlayerController>().On();
             Time.timeScale = 1;
             _pauseMessageUiText.SetActive(false);
             _isPause = false;

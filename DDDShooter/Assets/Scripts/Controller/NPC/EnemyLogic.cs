@@ -26,6 +26,8 @@ namespace DddShooter
 
         public event Action<EnemyLogic> OnDestroyEventHandler;
 
+        private bool _haveTarget;
+
         #endregion
  
 
@@ -59,12 +61,10 @@ namespace DddShooter
                 _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
                 _health.OnDeathEventHandler += DestroyItSelf;
 
-                SearchTarget();
 
                 if (_agent)
                 {
                     _movementPursue = new EnemyMovementPursue(_agent, _settings);
-                    _movementPursue.Target = _playerTransform;
 
                     _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
                     _movementPatrol.SetPath(body.GetPath());
@@ -72,17 +72,20 @@ namespace DddShooter
                 }
 
                 _enemyVision = new EnemyVision(this, body, _settings);
-                _enemyVision.Target = _playerTransform;
 
                 if (_settings.HaveRangeAttack)
                 {
                     _rangeAttack = new EnemyRangeAttack(_body, _settings);
-                    _rangeAttack.Target = _playerTransform;
                 }
+
+                //SearchTarget();
 
                 SwithState(NpcState.Patrol);
                 On();
             }
+
+            PlayerManager.OnPlayerSpawnedHandler += SearchTarget;
+            PlayerManager.OnPlayerDeletedHandler += DisconnectPlayerCharacter;
         }
 
         #endregion
@@ -115,6 +118,8 @@ namespace DddShooter
             SwithState(NpcState.Died);
             _body.Die();
             Off();
+            PlayerManager.OnPlayerSpawnedHandler -= SearchTarget;
+            PlayerManager.OnPlayerDeletedHandler -= DisconnectPlayerCharacter;
             OnDestroyEventHandler?.Invoke(this);
         }
 
@@ -122,7 +127,7 @@ namespace DddShooter
         {
             if (_movementPursue != null)
             {
-                _movementPursue.Target = null;
+                _movementPursue.SetTarget(null);
             }
             if (_movementPatrol != null)
             {
@@ -132,8 +137,16 @@ namespace DddShooter
 
         private void SearchTarget()
         {
-            PlayerBody playerBody = ServiceLocatorMonoBehaviour.GetService<PlayerBody>();
-            _playerTransform = playerBody.BodyCentre;
+            _haveTarget = PlayerManager.GetPlayerTransform(out _playerTransform);
+
+            if (_haveTarget)
+            {
+                _movementPursue?.SetTarget(_playerTransform);
+
+                _enemyVision.Target = _playerTransform;
+
+                _rangeAttack?.SetTarget(_playerTransform);
+            }
         }
         
         private void CountTime()
@@ -163,6 +176,15 @@ namespace DddShooter
                     break;
             }
             _state = newState;
+        }
+
+        private void DisconnectPlayerCharacter()
+        {
+            _haveTarget = false;
+            _playerTransform = null;
+            _movementPursue?.SetTarget(null);
+            _enemyVision.Target = null;
+            _rangeAttack?.SetTarget(null);
         }
 
         #endregion

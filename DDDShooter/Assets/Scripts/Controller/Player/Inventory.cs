@@ -4,7 +4,7 @@ using Geekbrains;
 
 namespace DddShooter
 {
-    public sealed class Inventory : IInitialization
+    public sealed class Inventory : BaseController //, IInitialization
     {
         #region Fields
  
@@ -17,23 +17,6 @@ namespace DddShooter
 
 
         #region Methods
-
-        public void Initialization()
-        {
-            Weapon[] weapons = ServiceLocatorMonoBehaviour.GetService<CharacterController>().
-                GetComponentsInChildren<Weapon>();   
-                        // Не нравится мне этот способ, надо бы сделать ... может класс, 
-                        //   который при старте построит и настроит персонажа? ...
-
-            for (int i = 0; i < weapons.Length; i++)
-            {                
-                weapons[i].IsVisible = false;
-                _weapons[i] = weapons[i];
-                weapons[i].DisablePhysics();
-            }
-
-            _head = Camera.main.transform;
-        }
 
         public Weapon GetWeapon(int index)
         {
@@ -119,6 +102,43 @@ namespace DddShooter
             }
         }
 
+        public void On(Transform head)
+        {
+            if (IsActive) return;
+            if (!head) return;
+            
+            _head = head;
+
+            Weapon[] weapons = _head.GetComponentsInChildren<Weapon>();
+            // Не нравится мне этот способ, надо бы сделать ... может класс, 
+            //   который при старте построит и настроит персонажа? ...
+
+            for (int i = 0; i < weapons.Length; i++)
+            {
+                weapons[i].IsVisible = false;
+                _weapons[i] = weapons[i];
+                weapons[i].DisablePhysics();
+            }
+
+            base.On();
+        }
+
+        public override void Off()
+        {                               // подумать, что тут надо делать с оружием
+            base.Off();
+            _head = null;
+        }
+
         #endregion
+
+
+        //#region IInitialization
+
+        //public void Initialization()
+        //{
+
+        //}
+
+        //#endregion
     }
 }

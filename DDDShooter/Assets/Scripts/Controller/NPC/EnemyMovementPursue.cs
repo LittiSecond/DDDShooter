@@ -9,7 +9,7 @@ namespace DddShooter
     public sealed class EnemyMovementPursue : EnemyMovement
     {
         #region Fields
-        
+
         private Transform _bodyTransforn;
         private Transform _target;
         private Vector3 _targetLastPosition;
@@ -22,31 +22,6 @@ namespace DddShooter
         //private float _timeCounter;
         //private readonly float _updateDestinationInterval = 0.25f;
         private const float NO_MOVE_SPEED = 0.001f;
-
-        #endregion
-
-
-        #region Properties
-
-        public Transform Target
-        {
-            set
-            {
-                _target = value;
-                if (_target == null)
-                {
-                    if (_haveTarget)
-                    {
-                        StopPursure();
-                        _haveTarget = false;
-                    }
-                }
-                else
-                {
-                    _haveTarget = true;
-                }
-            }
-        }
 
         #endregion
 
@@ -97,11 +72,28 @@ namespace DddShooter
             targetDir.y = 0;
 
             Vector3 newDir = Vector3.RotateTowards(_bodyTransforn.forward, targetDir,
-                _rotationSpeedRadSec  * Time.deltaTime, 0.0f);
+                _rotationSpeedRadSec * Time.deltaTime, 0.0f);
             _bodyTransforn.rotation = Quaternion.LookRotation(newDir);
 
             //Debug.Log("EnemyMovementPursue->Rotate: targetDir = " + targetDir.ToString());
             //_bodyTransforn.Rotate()
+        }
+
+        public void SetTarget(Transform terget)
+        {
+            _target = terget;
+            if (_target == null)
+            {
+                if (_haveTarget)
+                {
+                    StopPursure();
+                    _haveTarget = false;
+                }
+            }
+            else
+            {
+                _haveTarget = true;
+            }
         }
 
         #endregion

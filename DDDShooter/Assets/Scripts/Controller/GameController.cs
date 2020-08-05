@@ -18,8 +18,7 @@ namespace Geekbrains
                 _controllers[i].Execute();
             }
         }
-
-        //----------------------------   added
+        
         public void ExitProgramm()
         {
 #if UNITY_EDITOR_WIN 
@@ -28,6 +27,5 @@ namespace Geekbrains
             Application.Quit();
 #endif
         }
-        //---------------------------
     }
 }

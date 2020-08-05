@@ -1,18 +1,21 @@
-﻿using DddShooter;
+﻿using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     public sealed class FlashLightController : BaseController, IExecute, IInitialization
     {
-        private FlashLightModel _flashLightModel;
-        private bool _isPauseInGame;                        //<----------- added
+        #region Properties
 
-        public void Initialization()
-        {
-            UiInterface.LightUiText.SetActive(false);
-            ServiceLocator.Resolve<PauseController>().SwichPauseEvent += SwichPause;   //<------- added
-        }
+        private FlashLightModel _flashLightModel;
+
+        private FlashLightActiveType _currentLightState;
+        private bool _isPauseInGame;
+
+        #endregion
+
+
+        #region Methods
 
         public override void On(params BaseObjectScene[] flashLight)
         {
@@ -21,50 +24,115 @@ namespace Geekbrains
             if (_flashLightModel == null) return;
             if (_flashLightModel.BatteryChargeCurrent <= 0) return;
             base.On(_flashLightModel);
-            _flashLightModel.Switch(FlashLightActiveType.On);
-            UiInterface.LightUiText.SetActive(true);
         }
 
         public override void Off()
         {
             if (!IsActive) return;
+            LightOff();
             base.Off();
-            _flashLightModel.Switch(FlashLightActiveType.Off);;
-            UiInterface.LightUiText.SetActive(false);
         }
 
-        public void Execute()
+        public SmallBattery ReplaceBattery(SmallBattery smallBattery)
         {
-            if(!IsActive)
+            SmallBattery oldBattery = null;
+            if (IsActive)
             {
-                return;
-            }
-            if (!_isPauseInGame)              // <---- added  
-            {
-                if (_flashLightModel.EditBatteryCharge())
+                if (_flashLightModel)
                 {
-                    UiInterface.LightUiText.Text = _flashLightModel.BatteryChargeCurrent;
-                    _flashLightModel.Rotation();
-                }
-                else
-                {
-                    Off();
+                    LightOff();
+                    oldBattery = _flashLightModel.ReplaceBattery(smallBattery);   // вставили обратно
                 }
             }
-        }
-
-        public void ReplaceBattery(SmallBattery smallBattery)      //  <----------------- added
-        {
-            if (_flashLightModel)
-            {
-                Off();
-                _flashLightModel.ReplaceBattery(smallBattery);                     // вставили обратно
-            }
+            return oldBattery;
         }
 
         public void SwichPause(bool isPause)
         {
             _isPauseInGame = isPause;
         }
+
+
+        public void SwitchLight()
+        {
+            if (IsActive)
+            {
+                if (_currentLightState == FlashLightActiveType.On)
+                {
+                    LightOff();
+                }
+                else  // _lightActiveType =  .Off или .None
+                {
+                    LightOn();
+                }
+            }
+        }
+
+        public void LightOn()
+        {
+            if (IsActive)
+            {
+                if (_currentLightState != FlashLightActiveType.On)
+                {
+                    _flashLightModel.Switch(FlashLightActiveType.On);
+                    _currentLightState = FlashLightActiveType.On;
+                    UiInterface.LightUiText.SetActive(true);
+                }
+            }
+        }
+
+        public void LightOff()
+        {
+            if (IsActive)
+            {
+                if (_currentLightState != FlashLightActiveType.Off)
+                {
+                    _flashLightModel.Switch(FlashLightActiveType.Off);
+                    _currentLightState = FlashLightActiveType.Off;
+                    UiInterface.LightUiText.SetActive(false);
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region IInitialization
+
+        public void Initialization()
+        {
+            UiInterface.LightUiText.SetActive(false);
+            ServiceLocator.Resolve<PauseController>().SwichPauseEvent += SwichPause;
+        }
+
+        #endregion
+
+
+        #region IExecute
+
+        public void Execute()
+        {
+            if (!IsActive)
+            {
+                return;
+            }
+            if (_currentLightState == FlashLightActiveType.On)
+            {
+                if (!_isPauseInGame)
+                {
+                    if (_flashLightModel.EditBatteryCharge())
+                    {
+                        UiInterface.LightUiText.Text = _flashLightModel.BatteryChargeCurrent;
+                        _flashLightModel.Rotation();
+                    }
+                    else
+                    {
+                        LightOff();
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }
