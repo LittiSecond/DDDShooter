@@ -51,6 +51,10 @@ namespace DddShooter
                         _weaponController.On(weapon);
                     }                    
                 }
+                else
+                {
+                    _weaponController.Off();
+                }
             }
         }
 

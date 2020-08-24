@@ -14,6 +14,7 @@ namespace DddShooter
         private Transform _target;
         private Vector3 _targetLastPosition;
 
+        private float _pursueSpeed;
         private float _stopDistance;
         private float _rotationSpeedRadSec;
 
@@ -32,6 +33,7 @@ namespace DddShooter
         {
             if (settings != null)
             {
+                _pursueSpeed = settings.PursueSpeed;
                 _stopDistance = settings.PursueStopDistance;
             }
             _bodyTransforn = _agent.transform;
@@ -48,6 +50,7 @@ namespace DddShooter
             base.On();
             if (_haveTarget)
             {
+                _agent.speed = _pursueSpeed;
                 _agent.stoppingDistance = _stopDistance;
             }
         }

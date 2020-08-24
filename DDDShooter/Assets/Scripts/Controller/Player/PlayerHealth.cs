@@ -21,7 +21,7 @@ namespace DddShooter
 
 
         #region Methods
-
+        
         private void TakeDamage(float damag)
         {
             if (IsActive)

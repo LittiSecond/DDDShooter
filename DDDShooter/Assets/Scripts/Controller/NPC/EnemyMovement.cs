@@ -14,6 +14,7 @@ namespace DddShooter
         protected NavMeshAgent _agent;
         protected bool _isEnabled;
 
+        public event Action<float> ChangeSpeedHandler;
 
         #endregion
 
@@ -44,8 +45,14 @@ namespace DddShooter
             }
         }
 
+        protected void InvokeChangeSpeedEvent(float speed)
+        {
+            ChangeSpeedHandler?.Invoke(speed);
+            // из-за того, что эвент нельзя вызвать в наследниках, пришлось создать этот метод
+        }
+
         #endregion
-        
+
 
         #region IExecute
 

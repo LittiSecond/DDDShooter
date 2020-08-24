@@ -112,6 +112,7 @@ namespace DddShooter
             ServiceLocator.Resolve<PlayerInteractionController>().On(_head);
 
             ServiceLocator.Resolve<PlayerPropertyController>().On();
+            //ServiceLocator.Resolve<PlayerPropertyController>().SelectNextWeapon();
 
             ServiceLocator.Resolve<Inventory>().On(_head);
 
@@ -144,6 +145,7 @@ namespace DddShooter
             ServiceLocator.Resolve<FlashLightController>().Off();
             ServiceLocator.Resolve<PlayerHealth>().Off();
             ServiceLocator.Resolve<PlayerInteractionController>().Off();
+            ServiceLocator.Resolve<PlayerPropertyController>().SelectWeapon(-1);
             ServiceLocator.Resolve<PlayerPropertyController>().Off();
             ServiceLocator.Resolve<Inventory>().Off();
             ServiceLocator.Resolve<MainCameraController>().Disconnect();

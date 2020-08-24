@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DddShooter
 {
@@ -40,6 +41,7 @@ namespace DddShooter
                     DestroyItself();
                 }
             }
+            Debug.Log($"EnemyHealth->TakeDamage: damag = {damag}; _heath = {_heath}");
         }
 
         public void TakeHealing(float healing)

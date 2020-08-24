@@ -19,6 +19,7 @@ namespace DddShooter
         private EnemyMovementPatrol _movementPatrol;
         private EnemyVision _enemyVision;
         private EnemyRangeAttack _rangeAttack;
+        private EnemyAnimation _animation;
 
         private float _changeStateDelay;
         private float _timeCounter;
@@ -46,7 +47,7 @@ namespace DddShooter
             if (body)
             {
                 _body = body;
-                _agent = body.gameObject.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
+                _agent = body.Transform.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
                 _settings = body.Settings;
                 if (_settings != null)
                 {
@@ -61,14 +62,14 @@ namespace DddShooter
                 _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
                 _health.OnDeathEventHandler += DestroyItSelf;
 
-
+                bool hadMovementScriptsCreated = false;
                 if (_agent)
                 {
                     _movementPursue = new EnemyMovementPursue(_agent, _settings);
 
-                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
+                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings, _body.Transform);
                     _movementPatrol.SetPath(body.GetPath());
-                    //_movementPatrol.On();
+                    hadMovementScriptsCreated = true;
                 }
 
                 _enemyVision = new EnemyVision(this, body, _settings);
@@ -76,6 +77,17 @@ namespace DddShooter
                 if (_settings.HaveRangeAttack)
                 {
                     _rangeAttack = new EnemyRangeAttack(_body, _settings);
+                }
+
+                Animator animator = _body.BodyAnimator;
+                if (animator != null)
+                {
+                    _animation = new EnemyAnimation(animator);
+                    if (hadMovementScriptsCreated)
+                    {
+                        _movementPursue.ChangeSpeedHandler += _animation.ChangeSpeed;
+                        _movementPatrol.ChangeSpeedHandler += _animation.ChangeSpeed;
+                    }
                 }
 
                 //SearchTarget();
@@ -147,8 +159,9 @@ namespace DddShooter
 
                 _rangeAttack?.SetTarget(_playerTransform);
             }
+            //CustumDebug.Log("EnemyLogic->SearchTarget:");
         }
-        
+
         private void CountTime()
         {
             _timeCounter += Time.deltaTime;
@@ -166,16 +179,25 @@ namespace DddShooter
                     _enemyVision?.ChangeState(newState);
                     _movementPursue?.Off();
                     _movementPatrol?.On();
+                    _animation?.ChangeState(NpcAnimationState.Walk);
                     break;
                 case NpcState.Pursue:
                     _enemyVision?.ChangeState(newState);
                     _movementPatrol?.Off();
                     _movementPursue?.On();
+                    _animation?.ChangeState(NpcAnimationState.WalkAim);
+                    break;
+                case NpcState.Died:
+                    _animation?.ChangeState(NpcAnimationState.Died);
+                    break;
+                case NpcState.Inspection:
+                    _animation?.ChangeState(NpcAnimationState.Inspection);
                     break;
                 default:
                     break;
             }
             _state = newState;
+            //CustumDebug.Log("EnemyLogic->SwithState: _state = " + _state.ToString());
         }
 
         private void DisconnectPlayerCharacter()
@@ -185,6 +207,8 @@ namespace DddShooter
             _movementPursue?.SetTarget(null);
             _enemyVision.Target = null;
             _rangeAttack?.SetTarget(null);
+            PlayerLost();
+            //CustumDebug.Log("EnemyLogic->DisconnectPlayerCharacter:");
         }
 
         #endregion
