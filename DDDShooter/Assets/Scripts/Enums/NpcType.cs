@@ -3,8 +3,8 @@
     public enum NpcType
     {
         None                = 0,
-        StandartAggressive  = 1,
-        Passive             = 2,
+        Passive             = 1,
+        RangeAttack         = 2,
         StupidRunner        = 98
     }
 }

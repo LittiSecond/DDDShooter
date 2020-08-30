@@ -10,14 +10,14 @@ namespace DddShooter
     {
         #region Fields
 
-        private List<EnemyLogic> _botList = new List<EnemyLogic>();
+        private List<EnemyBaseLogic> _botList = new List<EnemyBaseLogic>();
 
         #endregion
         
 
         #region Methods
 
-        private void RemoveBot(EnemyLogic logic)
+        private void RemoveBot(EnemyBaseLogic logic)
         {
             _botList.Remove(logic);
             ServiceLocator.Resolve<MiniMapController>().RemoveObject(logic.Transform);
@@ -48,10 +48,21 @@ namespace DddShooter
             EnemyBody[] bodies = GameObject.FindObjectsOfType<EnemyBody>();
             foreach (EnemyBody body in bodies)
             {
-                EnemyLogic logic = new EnemyLogic(body);
-                _botList.Add(logic);
-                logic.OnDestroyEventHandler += RemoveBot;
-                miniMap.AddObject(body.Transform);
+                NpcSettings npcSettings = body.Settings;
+                EnemyBaseLogic logic = null;
+                switch (npcSettings.Type)
+                {
+                    case NpcType.RangeAttack: 
+                        logic = new EnemyLogicRangeAttacker(body);
+                        break; 
+                }
+
+                if (logic != null)
+                {
+                    _botList.Add(logic);
+                    logic.OnDestroyEventHandler += RemoveBot;
+                    miniMap.AddObject(body.Transform);
+                }
             }
         }
 
