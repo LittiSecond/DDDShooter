@@ -17,6 +17,7 @@ namespace DddShooter
         protected EnemyHealth _health;
 
         protected float _changeStateDelay;
+        protected NpcState _state;
 
         protected bool _haveTarget;
 

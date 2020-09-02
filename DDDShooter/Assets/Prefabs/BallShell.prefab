@@ -263,6 +263,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
+  _explosionPrefab: {fileID: 4646522142901446765, guid: e6a4d1efb85e2694fa32a905bf6d72a1,
+    type: 3}
   _timeToDestruct: 8
   _baseDamage: 50
   _damagLosingPerSecond: 3

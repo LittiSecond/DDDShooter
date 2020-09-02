@@ -8,9 +8,23 @@ namespace DddShooter
     {
         #region Fields
 
-        [SerializeField] private Ammunition _ammunitionPrefab;
+        [SerializeField] private Projectile _projectilePrefab;
+        [SerializeField] private ShootFlash _shootFlash;
         [SerializeField] private float _force = 99.95f;
         [SerializeField] private bool _endlessAmmunition;     // must used only for enemy
+
+        private bool _haveShootEffect = false;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        protected override void Start()
+        {
+            base.Start();
+            _haveShootEffect = _shootFlash != null;
+        }
 
         #endregion
 
@@ -28,8 +42,12 @@ namespace DddShooter
             {
                 if (_endlessAmmunition || _clip.Extract())
                 {
-                    var ammunition = CreateAmmunition();
-                    ammunition.AddForce(_barrel.forward * _force);
+                    if (_projectilePrefab)
+                    {
+                        var ammunition = CreateProjectile();
+                        ammunition.AddForce(_barrel.forward * _force);
+                    }
+                    ActivateShootEffect();
                     _isRedy = false;
                     _timeRemaining.AddTimeRemaining();
                 }
@@ -40,18 +58,24 @@ namespace DddShooter
                 return ShotResult.NoAmmo;
             }
             return ShotResult.Done;
-        }
+        } 
 
- 
-
-        private Ammunition CreateAmmunition()
+        private Projectile CreateProjectile()
         {
-            return Instantiate(_ammunitionPrefab, _barrel.position, _barrel.rotation);
+                return Instantiate(_projectilePrefab, _barrel.position, _barrel.rotation);
         }
 
         public override void DisableEndlessAmmunition()
         {
             _endlessAmmunition = false;
+        }
+
+        private void ActivateShootEffect()
+        {
+            if (_haveShootEffect)
+            {
+                _shootFlash.Activate();
+            }
         }
 
         #endregion

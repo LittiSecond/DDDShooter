@@ -12,7 +12,7 @@ namespace DddShooter
     {
         #region Fields
 
-        private Transform _bodyTransform;
+        //private Transform _bodyTransform;
         private List<Vector3> _patrolPath;
 
         private float _patrolSpeed;
@@ -33,7 +33,7 @@ namespace DddShooter
 
         public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings, Transform bodyTransform) : base(agent)
         {
-            _bodyTransform = bodyTransform;
+            //_bodyTransform = bodyTransform;
             _isPhaseMove = false;
             if (settings != null)
             {

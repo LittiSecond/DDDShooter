@@ -59,8 +59,7 @@ namespace Geekbrains
             _collider = GetComponent<Collider>();
         }
 
-
-        private void Start()
+        protected virtual void Start()
         {
             _timeRemaining = new TimeRemaining(ReadyShoot, _rechargeTime);
             _uiClipInfo = ServiceLocatorMonoBehaviour.GetService<UiClipInfo>();

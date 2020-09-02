@@ -16,7 +16,6 @@ namespace DddShooter
         private EnemyAnimation _animation;
 
         private float _timeCounter;
-        private NpcState _state;
 
 
         #endregion

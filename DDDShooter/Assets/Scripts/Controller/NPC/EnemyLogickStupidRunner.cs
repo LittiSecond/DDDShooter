@@ -5,29 +5,29 @@ using Geekbrains;
 
 namespace DddShooter
 {
-    public class EnemyLogickStupidRunner //: EnemyBaseLogic
+    public class EnemyLogickStupidRunner : EnemyBaseLogic
     {
-        /*
+        
         #region Fields
 
 
-        private EnemyAnimation _animation;
+        private NpcAnimationStupidRunner _animation;
 
-        private NpcState _state;
+        
 
         #endregion
 
 
         #region Properties
 
-        public Transform Transform { get => _body.Transform; }
+        
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public EnemyLogickStupidRunner(EnemyBody body)
+        public EnemyLogickStupidRunner(EnemyBody body) : base(body)
         {
 
             if (body)
@@ -51,28 +51,20 @@ namespace DddShooter
                 bool hadMovementScriptsCreated = false;
                 if (_agent)
                 {
-                    _movementPursue = new EnemyMovementPursue(_agent, _settings);
 
-                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings, _body.Transform);
-                    _movementPatrol.SetPath(body.GetPath());
                     hadMovementScriptsCreated = true;
                 }
 
-                _enemyVision = new EnemyVision(this, body, _settings);
 
-                if (_settings.HaveRangeAttack)
-                {
-                    _rangeAttack = new EnemyRangeAttack(_body, _settings);
-                }
+
 
                 Animator animator = _body.BodyAnimator;
                 if (animator != null)
                 {
-                    _animation = new EnemyAnimation(animator);
+                    _animation = new NpcAnimationStupidRunner(animator, _settings);
                     if (hadMovementScriptsCreated)
                     {
-                        _movementPursue.ChangeSpeedHandler += _animation.ChangeSpeed;
-                        _movementPatrol.ChangeSpeedHandler += _animation.ChangeSpeed;
+                
                     }
                 }
 
@@ -92,7 +84,7 @@ namespace DddShooter
 
 
 
-        private void SwithState(NpcState newState)
+        protected override void SwithState(NpcState newState)
         {
             switch (newState)
             {
@@ -108,7 +100,7 @@ namespace DddShooter
         
         #region IExecute
 
-        public void Execute()
+        public override void Execute()
         {
             if (IsActive)
             {
@@ -118,6 +110,6 @@ namespace DddShooter
 
         #endregion
 
-        */
+        
     }
 }
