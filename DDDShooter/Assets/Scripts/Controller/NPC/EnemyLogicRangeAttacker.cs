@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Geekbrains;
+﻿using UnityEngine;
 
 
 namespace DddShooter
@@ -54,7 +52,7 @@ namespace DddShooter
                 {
                     _movementPursue = new EnemyMovementPursue(_agent, _settings);
 
-                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings, _body.Transform);
+                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
                     _movementPatrol.SetPath(body.GetPath());
                     hadMovementScriptsCreated = true;
                 }

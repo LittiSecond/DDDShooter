@@ -12,15 +12,17 @@ namespace DddShooter
 
 
         private NpcAnimationStupidRunner _animation;
+        private EnemyMovementPatrolType2 _movementPatrol;
 
-        
+        private float _timeCounter;
+
 
         #endregion
 
 
         #region Properties
 
-        
+
 
         #endregion
 
@@ -32,31 +34,13 @@ namespace DddShooter
 
             if (body)
             {
-                _body = body;
-                _agent = body.Transform.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-                _settings = body.Settings;
-                if (_settings != null)
-                {
-                    _changeStateDelay = _settings.ChangeStateDelay;
-                }
-                else
-                {
-                    _settings = new NpcSettings();
-                }
-
-                _health = new EnemyHealth(_settings);
-                _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
-                _health.OnDeathEventHandler += DestroyItSelf;
-
                 bool hadMovementScriptsCreated = false;
                 if (_agent)
                 {
-
+                    _movementPatrol = new EnemyMovementPatrolType2(_agent, _settings);
+                    _movementPatrol.SetPath(body.GetPath());
                     hadMovementScriptsCreated = true;
                 }
-
-
-
 
                 Animator animator = _body.BodyAnimator;
                 if (animator != null)
@@ -64,7 +48,7 @@ namespace DddShooter
                     _animation = new NpcAnimationStupidRunner(animator, _settings);
                     if (hadMovementScriptsCreated)
                     {
-                
+                        _movementPatrol.ChangeSpeedHandler += _animation.ChangeSpeed;
                     }
                 }
 
@@ -88,23 +72,52 @@ namespace DddShooter
         {
             switch (newState)
             {
+                case NpcState.Patrol:
+                    _movementPatrol.On();
+                    break;
+                case NpcState.Died:
+                    _movementPatrol.Off();
+                    break;
+                default:
 
-
+                    break;
             }
             _state = newState;
         }
 
+        private void CountTime()
+        {
+            _timeCounter += Time.deltaTime;
+            if (_timeCounter >= _changeStateDelay)
+            {
+                SwithState(NpcState.Patrol);
+            }
+        }
 
         #endregion
 
-        
+
         #region IExecute
 
         public override void Execute()
         {
             if (IsActive)
             {
-
+                switch (_state)
+                {
+                    case NpcState.None:
+                        break;
+                    case NpcState.Patrol:
+                        _movementPatrol?.Execute();
+                        break;
+                    case NpcState.Died:
+                        break;
+                    case NpcState.Inspection:
+                        CountTime();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

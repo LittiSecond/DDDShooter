@@ -54,7 +54,12 @@ namespace DddShooter
                 {
                     case NpcType.RangeAttack: 
                         logic = new EnemyLogicRangeAttacker(body);
-                        break; 
+                        break;
+                    case NpcType.StupidRunner:
+                        logic = new EnemyLogickStupidRunner(body);
+                        break;
+                    default:
+                        break;
                 }
 
                 if (logic != null)
