@@ -135,8 +135,9 @@ MonoBehaviour:
     _quantity: 24
   _offSet: {x: 0.24, y: -0.45, z: 0.27}
   _rotationOffSet: {x: 0, y: -90, z: 0}
-  _ammunitionPrefab: {fileID: 7309381547164742855, guid: 209976f5ec69fe645a0c6f3f764104ef,
+  _projectilePrefab: {fileID: 7309381547164742855, guid: 209976f5ec69fe645a0c6f3f764104ef,
     type: 3}
+  _shootFlash: {fileID: 0}
   _force: 15
   _endlessAmmunition: 0
 --- !u!1 &1597727566180468

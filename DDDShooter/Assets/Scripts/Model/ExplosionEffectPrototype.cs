@@ -5,7 +5,7 @@ using Geekbrains;
 namespace DddShooter
 {
     [RequireComponent(typeof(Light)), RequireComponent(typeof(MeshRenderer))]
-    public class ExplisionEffect : MonoBehaviour
+    public class ExplosionEffectPrototype : MonoBehaviour
     {
 
         #region Fields

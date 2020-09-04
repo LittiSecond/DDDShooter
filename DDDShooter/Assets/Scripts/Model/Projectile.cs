@@ -8,7 +8,8 @@ namespace DddShooter
     {
         #region Fields
 
-        [SerializeField] protected ExplisionEffect _explosionPrefab;
+        //[SerializeField] protected ExplosionEffectPrototype _explosionPrefab;
+        [SerializeField] protected ExplosionEffect _explosionPrefab;
         [SerializeField] protected float _timeToDestruct = 12.0f;
         [SerializeField] protected float _baseDamage = 10.0f;
         
@@ -54,7 +55,8 @@ namespace DddShooter
         {
             if (_haveDestractionEffect)
             {
-                ExplisionEffect effect = Instantiate<ExplisionEffect>(_explosionPrefab, Transform.position, Transform.rotation );
+                //ExplosionEffectPrototype effect = Instantiate<ExplosionEffectPrototype>(_explosionPrefab, Transform.position, Transform.rotation );
+                ExplosionEffect effect = Instantiate<ExplosionEffect>(_explosionPrefab, Transform.position, Transform.rotation );
                 effect.Activate();
             }
         }
