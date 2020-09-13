@@ -16,13 +16,6 @@ namespace DddShooter
 
         private int _selectedWeaponIndex = -1;
 
-        private const int CANNOT_PICK_UP_WEAPON_TEXT_ID = 6;
-
-        #endregion
-
-
-        #region ClassLifeCycles
-
         #endregion
 
 
@@ -169,7 +162,7 @@ namespace DddShooter
                 }
                 else
                 {
-                    _warningMessageText.Show(CANNOT_PICK_UP_WEAPON_TEXT_ID);
+                    _warningMessageText.Show(TextConstants.CANNOT_PICK_UP_WEAPON_TEXT_ID);
                 }
             }
         }

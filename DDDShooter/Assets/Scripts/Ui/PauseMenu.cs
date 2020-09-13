@@ -18,15 +18,18 @@ namespace DddShooter
         {
             Debug.Log("PauseMenu::Start:");
 
-            _continue.GetText.text = LangManager.Instance.Text("MenuItems", "Continue");
+            _continue.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTINUE_TEXT_ID);
             _continue.GetControl.onClick.AddListener(ContinueGame);
 
             //_continue.SetInteractable(false);
 
-            _options.GetText.text = LangManager.Instance.Text("MenuItems", "Options");
+            _options.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
             _options.SetInteractable(false);
 
-            _quit.GetText.text = LangManager.Instance.Text("MenuItems", "Quit");
+            _quit.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
             _quit.GetControl.onClick.AddListener(delegate
             {
                 FinishGame(SceneManagerHelper.Instance.Scenes.MainMenuScene.SceneAsset.name);

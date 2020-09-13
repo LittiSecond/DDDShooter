@@ -24,9 +24,31 @@
   </group>
 
   <group id="Ui">
+    
     <string id="Close">
       <text>Закрыть</text>
     </string>
+
+    <string id="LookAt">
+      <text>Взгляд на: </text>
+    </string>
+
+    <string id="E-PickUp">
+      <text>'e' - подобрать</text>
+    </string>
+
+    <string id="TooFar">
+      <text>Слишком далеко</text>
+    </string>
+
+    <string id="CanNotPickWeapon">
+      <text>Не удалось подобрать оружие</text>
+    </string>
+    
+    <string id="ClipIsEmpty">
+      <text>Обойма пуста. 'r' - перезарядить</text>
+    </string>
+    
   </group>
   
   </Settings>

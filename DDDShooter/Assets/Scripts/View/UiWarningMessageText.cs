@@ -31,9 +31,9 @@ namespace DddShooter
 
         #region Methods
 
-        public void Show(int textId)
+        public void Show(string text)
         {
-            _warningMessage.text = TextConstants.GetText(textId);
+            _warningMessage.text = LangManager.Instance.Text(TextConstants.UI_GROUP_ID, text);
             _warningMessage.enabled = true;
             _timeRemaining.AddTimeRemaining();
         }

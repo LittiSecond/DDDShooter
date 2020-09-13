@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using DddShooter;
+
+
 namespace Geekbrains
 {
 
@@ -15,16 +18,19 @@ namespace Geekbrains
 
         private void Start()
         {
-            _newGame.GetText.text = LangManager.Instance.Text("MenuItems", "NewGame");
+            _newGame.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.NEW_GAME_TEXT_ID);
             _newGame.GetControl.onClick.AddListener(delegate
             {
                 LoadNewGame(SceneManagerHelper.Instance.Scenes.GameScene.SceneAsset.name);
             });
 
-            _options.GetText.text = LangManager.Instance.Text("MenuItems", "Options");
+            _options.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
             _options.SetInteractable(false);
 
-            _quit.GetText.text = LangManager.Instance.Text("MenuItems", "Quit");
+            _quit.GetText.text = LangManager.Instance.Text(
+                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
             _quit.GetControl.onClick.AddListener(delegate
             {
                 UiPanelManager.QuitGame();

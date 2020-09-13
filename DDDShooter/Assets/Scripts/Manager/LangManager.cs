@@ -39,14 +39,16 @@ namespace Geekbrains
         {
             if (_root == null)
             {
-                return "[not init]";
+                //return "[not init]";
+                return id;
             }
             string path = "Settings/group[@id='" + level + "']/string[@id='" + id +
             "']/text";
             XmlNode value = _root.SelectSingleNode(path);
             if (value == null)
             {
-                return "[not found]";
+                //return "[not found]";
+                return id;
             }
             return value.InnerText;
         }

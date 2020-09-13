@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using Geekbrains;
+
 
 namespace DddShooter
 {
@@ -16,6 +18,11 @@ namespace DddShooter
         public string Text
         {
             set => _text.text = value;
+        }
+
+        public void ClearText()
+        {
+            _text.text = string.Empty;
         }
 
     }
