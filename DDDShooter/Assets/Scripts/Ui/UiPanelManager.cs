@@ -49,7 +49,7 @@ namespace Geekbrains
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
- Application.Quit ();
+            Application.Quit ();
 #endif
         }
 
@@ -125,6 +125,7 @@ namespace Geekbrains
         {
             if (!_progressBar) return;
             Destroy(_progressBar.Instance);
+            //_progressBar = null;
         }
         #endregion
 

@@ -16,27 +16,31 @@ namespace Geekbrains
 
         private void Start()
         {
-            _newGame.GetText.text = LangManager.Instance.Text("MainMenuItems", "NewGame");
+            //_newGame.GetText.text = LangManager.Instance.Text("MainMenuItems", "NewGame");
+            _newGame.GetText.text =  "NewGame";
             _newGame.GetControl.onClick.AddListener(delegate
             {
-                LoadNewGame(SceneManagerHelper.Instance.Scenes.Game.SceneAsset.name);
+                LoadNewGame(SceneManagerHelper.Instance.Scenes.GameScene.SceneAsset.name);
             });
 
             _continue.GetText.text = LangManager.Instance.Text("MainMenuItems", "Continue");
+            //_continue.GetText.text =  "Continue";
             _continue.SetInteractable(false);
             _options.GetText.text = LangManager.Instance.Text("MainMenuItems", "Options");
+            //_options.GetText.text = "Options";
             _options.SetInteractable(false);
 
-            _quit.GetText.text = LangManager.Instance.Text("MainMenuItems", "Quit");
+            //_quit.GetText.text = LangManager.Instance.Text("MainMenuItems", "Quit");
+            _quit.GetText.text = "Quit";
             _quit.GetControl.onClick.AddListener(delegate
             {
                 UiPanelManager.QuitGame();
             });
 
-            for (int i = 1; i <= 4; i++)
-            {
-                LangManager.Instance.Text("Dialog", $"{i}");
-            }
+            //for (int i = 1; i <= 4; i++)
+            //{
+            //    LangManager.Instance.Text("Dialog", $"{i}");
+            //}
         }
 
         public override void Hide()
@@ -60,6 +64,7 @@ namespace Geekbrains
 
         private void LoadNewGame(string lvl)
         {
+            Debug.Log("MainMenu::LoadNewGame: lvl = " + lvl);
             SceneManager.sceneLoaded += SceneManagerOnSceneLoaded;
             UiPanelManager.LoadSceneAsync(lvl);
         }

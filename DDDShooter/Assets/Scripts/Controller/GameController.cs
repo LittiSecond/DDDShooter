@@ -9,6 +9,7 @@ namespace Geekbrains
         {
             _controllers = new Controllers();
             _controllers.Initialization();
+            DontDestroyOnLoad(gameObject);
         }
         
         private void Update()
