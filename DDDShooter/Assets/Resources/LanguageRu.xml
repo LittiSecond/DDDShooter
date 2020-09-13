@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <meta>
+    <language>Russian</language>
+  </meta>
+
+  <group id="MainMenuItems">
+    <string id="NewGame">
+      <text>Новая игра</text>
+    </string>
+    
+  <string id="Options">
+      <text>Настройки</text>
+    </string>
+
+    <string id="Quit">
+      <text>Выход</text>
+    </string>
+  </group>
+
+  <group id="Ui">
+    <string id="Close">
+      <text>Закрыть</text>
+    </string>
+  </group>
+  
+  </Settings>
