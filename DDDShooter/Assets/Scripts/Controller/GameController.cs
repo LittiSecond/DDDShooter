@@ -18,7 +18,13 @@ namespace Geekbrains
                 _controllers[i].Execute();
             }
         }
-        
+
+        private void OnDestroy()
+        {
+            ServiceLocator.Clear();
+            ServiceLocatorMonoBehaviour.Clear();
+        }
+
         public void ExitProgramm()
         {
 //#if UNITY_EDITOR_WIN 

@@ -50,5 +50,13 @@ namespace Geekbrains
 
             return (T)_servicecontainer[typeof(T)];
         }
+
+        public static void Clear()
+        {
+            if (_servicecontainer != null)
+            {
+                _servicecontainer.Clear();
+            }
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace DddShooter
             //Debug.Log("GameStarter::Start: ");
             DontDestroyOnLoad(gameObject);
             _sceneManager = GetComponent<SceneManagerHelper>();
-            _sceneManager.LoadSceneAsync("MainMenuScene");
+            _sceneManager.LoadSceneAsync(SceneManagerHelper.Instance.Scenes.MainMenuScene.SceneAsset.name);
         }
 
         #endregion

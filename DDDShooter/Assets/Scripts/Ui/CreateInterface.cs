@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using DddShooter;
+
 
 namespace Geekbrains
 {
@@ -18,6 +20,8 @@ namespace Geekbrains
         public void CreateMenuPause()
         {
             CreateComponent();
+            gameObject.AddComponent<PauseMenu>();
+            gameObject.AddComponent<OptionsMenu>();
             Clear();
         }
 

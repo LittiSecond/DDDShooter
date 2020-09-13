@@ -4,12 +4,17 @@
     <language>Russian</language>
   </meta>
 
-  <group id="MainMenuItems">
+  <group id="MenuItems">
+
     <string id="NewGame">
       <text>Новая игра</text>
+    </string>Options
+
+    <string id="Continue">
+      <text>Продолжить</text>
     </string>
-    
-  <string id="Options">
+
+    <string id="Options">
       <text>Настройки</text>
     </string>
 
