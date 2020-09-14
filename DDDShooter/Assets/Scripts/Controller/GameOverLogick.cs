@@ -9,7 +9,7 @@ namespace DddShooter
     {
         #region Fields
 
-        private TimeRemaining _executeTimer;
+        private TimeRemaining _executeLogickTimer;
         private TimeRemaining _spawnPlayerTimer;
 
         private readonly float _afterGameOverDelay = 0.01f;
@@ -29,7 +29,7 @@ namespace DddShooter
 
         private void StartGameOverLogick()
         {
-            _executeTimer.AddTimeRemaining();
+            _executeLogickTimer.AddTimeRemaining();
         }
 
         private void ExecuteLogick()
@@ -50,7 +50,7 @@ namespace DddShooter
         public void Initialization()
         {
             PlayerManager.OnPlayerDeletedHandler += StartGameOverLogick;
-            _executeTimer = new TimeRemaining(ExecuteLogick, _afterGameOverDelay);
+            _executeLogickTimer = new TimeRemaining(ExecuteLogick, _afterGameOverDelay);
             _spawnPlayerTimer = new TimeRemaining(SpawnPlayer, _respawnPlayerDelay);
         }
 

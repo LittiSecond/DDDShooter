@@ -12,8 +12,10 @@ namespace DddShooter
     {
         #region Fields
 
-        private List<Vector3> _patrolPath;        
+        private Transform _bodyTransform;
+        private List<Vector3> _patrolPath;
 
+        private float _patrolSpeed;
         private float _stopDuration;
         private float _timeCounter;
         private int _pathPointIndex = -1;
@@ -29,11 +31,13 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings) : base(agent)
+        public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings, Transform bodyTransform) : base(agent)
         {
+            _bodyTransform = bodyTransform;
             _isPhaseMove = false;
             if (settings != null)
             {
+                _patrolSpeed = settings.PatrolSpeed;
                 _stopDuration = settings.PatrolStopDuration;
             }      
         }
@@ -56,6 +60,17 @@ namespace DddShooter
                 {
                     _isEnabled = true;
                     _agent.stoppingDistance = 0.0f;
+                    _agent.speed = _patrolSpeed;
+                    _pathPointIndex = FindNearestPathPoint();
+                    _agent.SetDestination(_patrolPath[_pathPointIndex]);
+                    if (_isPhaseMove)
+                    {
+                        InvokeChangeSpeedEvent(_patrolSpeed);
+                    }
+                    else
+                    {
+                        InvokeChangeSpeedEvent(0.0f);
+                    }
                 }
         }
 
@@ -76,6 +91,45 @@ namespace DddShooter
 
         }
 
+        private int FindNearestPathPoint()
+        {
+            int pathIndex = -1;
+            if (_patrolPath.Count > 1)
+            {
+                NavMeshPath path = new NavMeshPath();
+                float leastLength = float.MaxValue;
+
+                for (int i = 0; i < _patrolPath.Count; i++)
+                {
+                    if (_agent.CalculatePath(_patrolPath[i], path))
+                    {
+                        float length = CalculatePathLength(path);
+                        if (length < leastLength )
+                        {
+                            leastLength = length;
+                            pathIndex = i;
+                        }
+                    }
+                }
+            }
+
+            return pathIndex;
+        }
+
+        private float CalculatePathLength(NavMeshPath path)
+        {
+            float length = 0;
+            Vector3 previousCorner = path.corners[0];
+            for (int i = 1; i < path.corners.Length; i++)
+            {
+                Vector3 currentCorner = path.corners[i];
+                length += (currentCorner - previousCorner).magnitude;
+                previousCorner = path.corners[i];
+            }
+
+            return length;
+        }
+
         #endregion
 
 
@@ -90,6 +144,7 @@ namespace DddShooter
                     if (!_agent.hasPath)
                     {
                         _isPhaseMove = false;
+                        InvokeChangeSpeedEvent(0.0f);
                     }
                 }
                 else
@@ -107,6 +162,7 @@ namespace DddShooter
                         Vector3 destination = _patrolPath[_pathPointIndex];
                         _agent.SetDestination(destination);
                         _isPhaseMove = true;
+                        InvokeChangeSpeedEvent(_patrolSpeed);
                     }
                 }
             }

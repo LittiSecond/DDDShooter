@@ -19,7 +19,8 @@ namespace DddShooter
 
         private EnemyPartDamagTranslator[] _damagTranslators;
         private Weapon _weapon;
-
+        private Animator _animator;
+        
         #endregion
 
 
@@ -27,6 +28,8 @@ namespace DddShooter
 
         public NpcSettings Settings { get => _npcSettings; }
         public Transform WeaponJoinPoint { get => _weaponJoinPoint; }
+        public Animator BodyAnimator { get => _animator; }
+
 
         #endregion
 
@@ -38,6 +41,7 @@ namespace DddShooter
             base.Awake();
             _damagTranslators = GetComponentsInChildren<EnemyPartDamagTranslator>();
             _weapon = GetComponentInChildren<Weapon>();
+            _animator = Transform.GetComponentInChildren<Animator>();
         }
 
         #endregion
@@ -58,6 +62,7 @@ namespace DddShooter
             {
                 _weapon.JoinTo(null);
                 _weapon.EnablePhysics();
+                _weapon.DisableEndlessAmmunition();
             }
         }
 
@@ -97,7 +102,7 @@ namespace DddShooter
             else
             {
                 CustumDebug.LogError("EnemyBody->GetVisionPoint: _visionPoint == null");
-                return transform;
+                return Transform;
             }
         }
 
