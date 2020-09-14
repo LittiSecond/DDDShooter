@@ -21,9 +21,6 @@ namespace DddShooter
         private float _interactRange = 3.0f;
         private float _distanceToTarget;
 
-        private const int LOOK_AT_TEXT_ID = 1;
-        private const int TOO_FAR_TEXT_ID = 8;
-
         #endregion
 
 
@@ -61,22 +58,27 @@ namespace DddShooter
                 }
                 else
                 {
-                    _warningMessageText.Show(TOO_FAR_TEXT_ID);
+                    _warningMessageText.Show(TextConstants.TOO_FAR_TEXT_ID);
                 }
             }
         }
 
-        private void SendMessageToUi(string message)
+        private void SendMessageToUi(string message, bool shouldTranlate = true)
         {
             if (_messageUiText)
             {
                 if (message != null)
                 {
+                    if (shouldTranlate)
+                    {
+                        message = LangManager.Instance.Text(
+                            TextConstants.UI_GROUP_ID, message);
+                    }
                     _messageUiText.Text = message;
                 }
                 else
                 {
-                    _messageUiText.Text = string.Empty;
+                    _messageUiText.ClearText();
                 }
             }
         }
@@ -144,7 +146,7 @@ namespace DddShooter
                     }
                     else
                     {
-                        SendMessageToUi(TextConstants.GetText(LOOK_AT_TEXT_ID) + collider.gameObject.name);
+                        SendMessageToUi(TextConstants.LOOK_AT_TEXT_ID + " " + collider.gameObject.name, false);
                     }
                 }
                 _distanceToTarget = hit.distance;

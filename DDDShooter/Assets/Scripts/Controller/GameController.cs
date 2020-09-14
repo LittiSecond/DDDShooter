@@ -18,11 +18,19 @@ namespace Geekbrains
                 _controllers[i].Execute();
             }
         }
-        
+
+        private void OnDestroy()
+        {
+            ServiceLocator.Clear();
+            ServiceLocatorMonoBehaviour.Clear();
+        }
+
         public void ExitProgramm()
         {
-#if UNITY_EDITOR_WIN 
-            CustumDebug.Log("GameController->ExitProgramm: exit programm");
+//#if UNITY_EDITOR_WIN 
+#if UNITY_EDITOR 
+            Debug.Log("GameController->ExitProgramm: exit programm");
+            //UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit();
 #endif

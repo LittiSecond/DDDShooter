@@ -25,9 +25,7 @@ namespace Geekbrains
         protected ITimeRemaining _timeRemaining;
         private Collider _collider;
         protected bool _isRedy = true;
-
-        private const int PICK_UP_TEXT_ID = 7;
-
+        
         #endregion
 
 
@@ -132,7 +130,7 @@ namespace Geekbrains
 
         public string GetMessageIfTarget()
         {
-            return TextConstants.GetText(PICK_UP_TEXT_ID);
+            return TextConstants.PICK_UP_TEXT_ID;
         }
 
         public virtual void DisableEndlessAmmunition()

@@ -39,13 +39,15 @@ namespace DddShooter
         {
             base.On();
             _pauseMessageUiText = UiInterface.PauseUiText;
-            _pauseMessageUiText.SetActive(false);
+            _pauseMessageUiText.SetActive(false);            
         }
 
         private void PauseOn()
         {
             Time.timeScale = 0;
             _pauseMessageUiText.SetActive(true);
+            ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Show();
+            Cursor.lockState = CursorLockMode.None;
             _isPause = true;
         }
 
@@ -53,6 +55,8 @@ namespace DddShooter
         {
             Time.timeScale = 1;
             _pauseMessageUiText.SetActive(false);
+            ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Hide();
+            Cursor.lockState = CursorLockMode.Locked;
             _isPause = false;
         }
 
