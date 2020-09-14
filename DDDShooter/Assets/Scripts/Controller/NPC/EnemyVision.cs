@@ -11,7 +11,7 @@ namespace DddShooter
 
         private Transform _visionTransform;
         private Transform _playerTransform;
-        private EnemyLogic _enemyLogic;
+        private EnemyLogicRangeAttacker _enemyLogic;
 
         private LayerMask _mask;
 
@@ -42,7 +42,7 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyVision(EnemyLogic logic, EnemyBody body, NpcSettings settings)
+        public EnemyVision(EnemyLogicRangeAttacker logic, EnemyBody body, NpcSettings settings)
         {
             _visionTransform = body.GetVisionPoint();
             if (settings != null)

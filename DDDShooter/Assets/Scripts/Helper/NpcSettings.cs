@@ -9,7 +9,7 @@ namespace DddShooter
     {
         #region Fields
 
-        [SerializeField] private NpcType _npcType = NpcType.StandartAggressive;
+        [SerializeField] private NpcType _npcType = NpcType.RangeAttack;
         [SerializeField] private float _maxHealth = 100.0f;
         [SerializeField] private float _patrolSpeed = 3.0f;
         [SerializeField] private float _patrolStopDuration = 3.0f;
@@ -25,6 +25,8 @@ namespace DddShooter
 
 
         #region Properties
+
+        public NpcType Type { get => _npcType; }
 
         public float MaxHealth { get => _maxHealth; }
 

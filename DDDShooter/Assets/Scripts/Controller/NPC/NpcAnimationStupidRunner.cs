@@ -14,6 +14,10 @@ namespace DddShooter
 
         private float _maxSpeed = 1.0f;
 
+
+        private readonly int _deadAimatorParameter = Animator.StringToHash("dead");
+        private readonly int _blendAimatorParameter = Animator.StringToHash("Blend");
+
         #endregion
 
 
@@ -31,6 +35,27 @@ namespace DddShooter
         #endregion
 
 
+        #region Methods
 
+        public void ChangeState(NpcAnimationState newState)
+        {
+            switch (newState)
+            {
+                case NpcAnimationState.Died:
+                    _animator.SetBool(_deadAimatorParameter, true);
+                    break;
+                default:
+                    _animator.SetBool(_deadAimatorParameter, false);
+                    break;
+            }
+        }
+
+        public void ChangeSpeed(float newSpeed)
+        {
+            float blend = newSpeed / _maxSpeed;
+            _animator.SetFloat(_blendAimatorParameter, blend);
+        }
+
+        #endregion
     }
 }

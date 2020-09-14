@@ -1,49 +1,34 @@
-﻿using System;
-using UnityEngine;
-using Geekbrains;
+﻿using UnityEngine;
 
 
 namespace DddShooter
 {
-    public class EnemyLogic : BaseController, IExecute
+    public class EnemyLogicRangeAttacker : EnemyBaseLogic
     {
         #region Fields
 
-        private EnemyBody _body;
-        private UnityEngine.AI.NavMeshAgent _agent;
-        private Transform _playerTransform;
-
-        private NpcSettings _settings;
-        private EnemyHealth _health;
         private EnemyMovementPursue _movementPursue;
         private EnemyMovementPatrol _movementPatrol;
         private EnemyVision _enemyVision;
         private EnemyRangeAttack _rangeAttack;
         private EnemyAnimation _animation;
 
-        private float _changeStateDelay;
         private float _timeCounter;
-        private NpcState _state;
 
-        public event Action<EnemyLogic> OnDestroyEventHandler;
-
-        private bool _haveTarget;
 
         #endregion
- 
+
 
         #region Properties
-
-        public Transform Transform { get => _body.Transform; }
 
         #endregion
 
 
         #region ClassLifeCycles
 
-        public EnemyLogic(EnemyBody body)
+        public EnemyLogicRangeAttacker(EnemyBody body) : base(body)
         {
-
+            
             if (body)
             {
                 _body = body;
@@ -67,7 +52,7 @@ namespace DddShooter
                 {
                     _movementPursue = new EnemyMovementPursue(_agent, _settings);
 
-                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings, _body.Transform);
+                    _movementPatrol = new EnemyMovementPatrol(_agent, _settings);
                     _movementPatrol.SetPath(body.GetPath());
                     hadMovementScriptsCreated = true;
                 }
@@ -107,7 +92,7 @@ namespace DddShooter
 
         public void PlayerDetected()
         {
-            //CustumDebug.Log("EnemyLogic->PlayerDetected:");
+            //CustumDebug.Log("EnemyBaseLogic->PlayerDetected:");
             if (_state == NpcState.Patrol || _state == NpcState.Inspection)
             {
                 SwithState(NpcState.Pursue);
@@ -116,7 +101,7 @@ namespace DddShooter
 
         public void PlayerLost()
         {
-            //CustumDebug.Log("EnemyLogic->PlayerLost:");
+            //CustumDebug.Log("EnemyBaseLogic->PlayerLost:");
             if (_state == NpcState.Pursue)
             {
                 _timeCounter = 0.0f;
@@ -124,18 +109,18 @@ namespace DddShooter
             }
         }
 
-        private void DestroyItSelf()
-        {
-            StopLogic();
-            SwithState(NpcState.Died);
-            _body.Die();
-            Off();
-            PlayerManager.OnPlayerSpawnedHandler -= SearchTarget;
-            PlayerManager.OnPlayerDeletedHandler -= DisconnectPlayerCharacter;
-            OnDestroyEventHandler?.Invoke(this);
-        }
+        //protected void DestroyItSelf()
+        //{
+        //    StopLogic();
+        //    SwithState(NpcState.Died);
+        //    _body.Die();
+        //    Off();
+        //    PlayerManager.OnPlayerSpawnedHandler -= SearchTarget;
+        //    PlayerManager.OnPlayerDeletedHandler -= DisconnectPlayerCharacter;
+        //    InvokeOnDestroyEventHandler();
+        //}
 
-        private void StopLogic()
+        protected override void StopLogic()
         {
             if (_movementPursue != null)
             {
@@ -147,7 +132,7 @@ namespace DddShooter
             }
         }
 
-        private void SearchTarget()
+        protected override void SearchTarget()
         {
             _haveTarget = PlayerManager.GetPlayerTransform(out _playerTransform);
 
@@ -159,7 +144,7 @@ namespace DddShooter
 
                 _rangeAttack?.SetTarget(_playerTransform);
             }
-            //CustumDebug.Log("EnemyLogic->SearchTarget:");
+            //CustumDebug.Log("EnemyBaseLogic->SearchTarget:");
         }
 
         private void CountTime()
@@ -170,8 +155,8 @@ namespace DddShooter
                 SwithState(NpcState.Patrol);
             }
         }
-        
-        private void SwithState(NpcState newState )
+
+        protected override void SwithState(NpcState newState)
         {
             switch (newState)
             {
@@ -197,10 +182,10 @@ namespace DddShooter
                     break;
             }
             _state = newState;
-            //CustumDebug.Log("EnemyLogic->SwithState: _state = " + _state.ToString());
+            //CustumDebug.Log("EnemyBaseLogic->SwithState: _state = " + _state.ToString());
         }
 
-        private void DisconnectPlayerCharacter()
+        protected override void DisconnectPlayerCharacter()
         {
             _haveTarget = false;
             _playerTransform = null;
@@ -208,7 +193,7 @@ namespace DddShooter
             _enemyVision.Target = null;
             _rangeAttack?.SetTarget(null);
             PlayerLost();
-            //CustumDebug.Log("EnemyLogic->DisconnectPlayerCharacter:");
+            //CustumDebug.Log("EnemyBaseLogic->DisconnectPlayerCharacter:");
         }
 
         #endregion
@@ -216,7 +201,7 @@ namespace DddShooter
 
         #region IExecute
 
-        public void Execute()
+        public override void Execute()
         {
             if (IsActive)
             {
@@ -246,6 +231,5 @@ namespace DddShooter
         }
 
         #endregion
-
     }
 }

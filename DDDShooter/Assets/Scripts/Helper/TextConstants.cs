@@ -25,7 +25,7 @@ namespace DddShooter
         //    { TextId.None, "Ошибка, несуществующий textId" },
         //    { TextId.LookAt, "Взгляд на: "},
         //    { TextId.Pause, "Пауза" },
-        //    { TextId.Ammunition, "Патроны" },
+        //    { TextId.Projectile, "Патроны" },
         //    { TextId.ClipEmpty, "Обойма пуста. 'r' - перезарядить" }
         //};
 

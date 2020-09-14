@@ -3,7 +3,7 @@
 
 namespace DddShooter
 {
-    public sealed class Bullet : Ammunition
+    public sealed class Bullet : Projectile
     {
         #region Fields
 

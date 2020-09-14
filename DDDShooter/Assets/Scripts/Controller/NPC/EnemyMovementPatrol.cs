@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-using Geekbrains;
 
 
 namespace DddShooter
@@ -12,7 +9,7 @@ namespace DddShooter
     {
         #region Fields
 
-        private Transform _bodyTransform;
+        //private Transform _bodyTransform;
         private List<Vector3> _patrolPath;
 
         private float _patrolSpeed;
@@ -24,16 +21,11 @@ namespace DddShooter
         #endregion
 
 
-        #region Properties
-
-        #endregion
-
-
         #region ClassLifeCycles
 
-        public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings, Transform bodyTransform) : base(agent)
+        public EnemyMovementPatrol(NavMeshAgent agent, NpcSettings settings) : base(agent)
         {
-            _bodyTransform = bodyTransform;
+            //_bodyTransform = bodyTransform;
             _isPhaseMove = false;
             if (settings != null)
             {
