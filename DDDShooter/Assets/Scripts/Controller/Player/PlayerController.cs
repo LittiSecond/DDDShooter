@@ -99,7 +99,7 @@ namespace DddShooter
 
         private void GetPrefab()
         {
-            _playerCharacterPrefab = PrefabManager.GetPrefab(PrefabId.PlayerCharacter);
+            _playerCharacterPrefab = ResourcesManager.GetPrefab(PrefabId.PlayerCharacter);
         }
 
         private void ActivateOtherControllers()

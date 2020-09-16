@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 using DddShooter;
 
@@ -20,7 +21,7 @@ namespace Geekbrains
         private OptionsMenu _optionsMenu;
         //private VideoOptions _videoOptions;
         //private GameOptions _gameOptions;
-        //private AudioOptions _audioOptions;
+        private SoundOptionsPanel _audioOptions;
         private PauseMenu _pauseMenu;
         //private OptionsPauseMenu _optionsPauseMenu;
         #endregion
@@ -31,7 +32,7 @@ namespace Geekbrains
             _optionsMenu = GetComponent<OptionsMenu>();
             //_videoOptions = GetComponent<VideoOptions>();
             //_gameOptions = GetComponent<GameOptions>();
-            //_audioOptions = GetComponent<AudioOptions>();
+            _audioOptions = GetComponent<SoundOptionsPanel>();
             _pauseMenu = GetComponent<PauseMenu>();
             //_optionsPauseMenu = GetComponent<OptionsPauseMenu>();
 
@@ -67,11 +68,11 @@ namespace Geekbrains
                 // _currentMenu = _videoOptions;
                 // _currentMenu.Show();
                 // break;
-                //case UiPanelType.AudioOptions:
-                // if (_currentMenu != null) _currentMenu.Hide();
-                // _currentMenu = _audioOptions;
-                // _currentMenu.Show();
-                // break;
+                case UiPanelType.AudioOptions:
+                    if (_currentMenu != null) _currentMenu.Hide();
+                    _currentMenu = _audioOptions;
+                    _currentMenu.Show();
+                    break;
                 //case UiPanelType.GameOptions:
                 // if (_currentMenu != null) _currentMenu.Hide();
                 // _currentMenu = _gameOptions;

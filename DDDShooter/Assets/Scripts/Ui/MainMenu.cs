@@ -27,7 +27,7 @@ namespace Geekbrains
 
             _options.GetText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
-            _options.SetInteractable(false);
+            _options.GetControl.onClick.AddListener(ShowOptions);
 
             _quit.GetText.text = LangManager.Instance.Text(
                  TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);

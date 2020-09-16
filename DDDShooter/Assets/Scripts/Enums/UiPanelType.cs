@@ -10,6 +10,7 @@
         GameOptions      = 4,
         AudioOptions     = 5,
         MenuPause        = 6,
-        OptionsPauseMenu = 7
+        OptionsPauseMenu = 7,
+        LanguageOptions  = 8,
     }
 }

@@ -23,9 +23,18 @@ namespace DddShooter
             public const string OPTIONS_TEXT_ID = "Options";
             public const string QUIT_TEXT_ID = "Quit";
             public const string NEW_GAME_TEXT_ID = "NewGame";
+            public const string SOUND_OPTIONS_TEXT_ID = "SoundOptions";
+            public const string LANGUAGE_TEXT_ID = "Language";
+            public const string SOUND_OPTIONS_CAPTION_TEXT_ID = "SoundOptionsCaption";
+            public const string GENERAL_VOLUME_TEXT_ID = "GeneralVolume";
+            public const string BG_MUSIC_VOLUME_TEXT_ID = "BGMusicVolume";
+            public const string SOUNDS_VOLUME_TEXT_ID = "SoundsVolume";
 
 
 
+        //public const string AUDIO_MIXER_GENERAL_VOLUME = "GeneralVolume";
+        //public const string AUDIO_MIXER_BG_MUSIC_VOLUME = "BGMusicVolume";
+        //public const string AUDIO_MIXER_SOUNDS_VOLUME = "SoundsVolume";
 
 
         #endregion

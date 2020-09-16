@@ -84,6 +84,10 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: d4cbe64e7a5235b4ababf6a719e941a4
     name: BGMusicVolume
+  - guid: 67a26593b516b2d4193224b91ede5f8b
+    name: GeneralVolume
+  - guid: b1d1c28832f4eae408847b9c7542ca44
+    name: SoundsVolume
   m_AudioMixerGroupViews:
   - guids:
     - 5a3fc1a92e0bf2f4ea10cb3ebc18a856
@@ -137,9 +141,10 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 52a138373de698f45842f8cbe3429227
   m_FloatValues:
-    67a26593b516b2d4193224b91ede5f8b: 0
+    67a26593b516b2d4193224b91ede5f8b: 0.04171297
     8e2c25c640d10d14d975eaa4467043ed: 1
-    d4cbe64e7a5235b4ababf6a719e941a4: -10.345207
+    b1d1c28832f4eae408847b9c7542ca44: 6.648677
+    d4cbe64e7a5235b4ababf6a719e941a4: -7.5501633
   m_TransitionOverrides: {}
 --- !u!244 &8829010043431979336
 AudioMixerEffectController:

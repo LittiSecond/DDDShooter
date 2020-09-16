@@ -21,6 +21,35 @@
     <string id="Quit">
       <text>Выход</text>
     </string>
+
+    <string id="SoundOptions">
+      <text>Звук</text>
+    </string>
+
+    <string id="Close">
+      <text>Закрыть</text>
+    </string>
+
+    <string id="Language">
+      <text>Язык</text>
+    </string>
+
+    <string id="SoundOptionsCaption">
+      <text>Настройки громкости звука</text>
+    </string>
+
+    <string id="GeneralVolume">
+      <text>Общая громкость</text>
+    </string>
+
+    <string id="BGMusicVolume">
+      <text>Музыка</text>
+    </string>
+
+    <string id="SoundsVolume">
+      <text>Звуки</text>
+    </string>
+
   </group>
 
   <group id="Ui">
