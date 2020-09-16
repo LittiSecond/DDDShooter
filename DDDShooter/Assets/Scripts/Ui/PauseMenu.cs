@@ -14,9 +14,9 @@ namespace DddShooter
         [SerializeField] private ButtonUi _options;
         [SerializeField] private ButtonUi _quit;
 
-        private void Start()
+        protected virtual void Start()
         {
-            Debug.Log("PauseMenu::Start:");
+            //Debug.Log("PauseMenu::Start:");
 
             _continue.GetText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTINUE_TEXT_ID);
@@ -41,7 +41,7 @@ namespace DddShooter
 
         public override void Hide()
         {
-            Debug.Log("PauseMenu::Hide: IsShow = " + IsShow.ToString());
+            //Debug.Log("PauseMenu::Hide: IsShow = " + IsShow.ToString());
             if (!IsShow) return;
             _menuPanel.gameObject.SetActive(false);
             IsShow = false;
@@ -49,7 +49,7 @@ namespace DddShooter
 
         public override void Show()
         {
-            Debug.Log("PauseMenu::Show: IsShow = " + IsShow.ToString());
+            //Debug.Log("PauseMenu::Show: IsShow = " + IsShow.ToString());
             if (IsShow) return;
             _menuPanel.gameObject.SetActive(true);
             IsShow = true;

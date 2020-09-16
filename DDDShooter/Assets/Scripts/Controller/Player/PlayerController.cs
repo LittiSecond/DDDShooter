@@ -11,11 +11,13 @@ namespace DddShooter
         #region Fields
 
         private GameObject _playerCharacterPrefab;
-        private Transform _cameraTransform;
+        //private Transform _cameraTransform;
         private Transform _head;
         private Transform _characterTransform;
         private Transform _bodyCentre;
         private PlayerBody _playerBody;
+        private CharacterController _characterController;
+
         private TimeRemaining _timeRemaining;
 
         private readonly UnitMotor _motor;
@@ -44,7 +46,7 @@ namespace DddShooter
         public PlayerController()
         {
             _motor = new UnitMotor();
-            _cameraTransform = Camera.main.transform;
+            //_cameraTransform = Camera.main.transform;
         }
 
         #endregion
@@ -114,6 +116,8 @@ namespace DddShooter
             ServiceLocator.Resolve<PlayerPropertyController>().On();
             //ServiceLocator.Resolve<PlayerPropertyController>().SelectNextWeapon();
 
+            ServiceLocator.Resolve<PlayerSounds>().On(_playerBody);
+
             ServiceLocator.Resolve<Inventory>().On(_head);
 
             ServiceLocator.Resolve<MainCameraController>().Connect(_head);
@@ -149,6 +153,7 @@ namespace DddShooter
             ServiceLocator.Resolve<PlayerPropertyController>().Off();
             ServiceLocator.Resolve<Inventory>().Off();
             ServiceLocator.Resolve<MainCameraController>().Disconnect();
+            ServiceLocator.Resolve<PlayerSounds>().Off();
         }
 
         private void InstantiateBody()
@@ -159,9 +164,9 @@ namespace DddShooter
             _playerBody = _characterTransform.GetComponent<PlayerBody>();
             _head = _playerBody.Head;
             _bodyCentre = _playerBody.BodyCentre;
+            _characterController = _playerBody.CharacterController;
 
-            CharacterController cc = go.GetComponent<CharacterController>();
-            _motor.SetObjectToMotor(cc, _head);
+            _motor.SetObjectToMotor(_characterController, _head);
 
             _haveBodyInstance = true;
         }
