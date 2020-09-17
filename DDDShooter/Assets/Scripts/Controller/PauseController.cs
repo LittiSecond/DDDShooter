@@ -26,10 +26,14 @@ namespace DddShooter
             if (_isPause)
             {
                 PauseOff();
+                //ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Hide();
+                ServiceLocatorMonoBehaviour.GetService<UiPanelManager>().Execute(UiPanelType.None);
             }
             else
             {
                 PauseOn();
+                //ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Show();
+                ServiceLocatorMonoBehaviour.GetService<UiPanelManager>().Execute(UiPanelType.MenuPause);
             }
 
             SwichPauseEvent?.Invoke(_isPause);
@@ -46,7 +50,6 @@ namespace DddShooter
         {
             Time.timeScale = 0;
             _pauseMessageUiText.SetActive(true);
-            ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Show();
             Cursor.lockState = CursorLockMode.None;
             _isPause = true;
         }
@@ -55,7 +58,6 @@ namespace DddShooter
         {
             Time.timeScale = 1;
             _pauseMessageUiText.SetActive(false);
-            ServiceLocatorMonoBehaviour.GetService<PauseMenu>().Hide();
             Cursor.lockState = CursorLockMode.Locked;
             _isPause = false;
         }

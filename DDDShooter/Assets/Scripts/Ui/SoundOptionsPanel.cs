@@ -92,7 +92,7 @@ namespace DddShooter
             _audioMixer.GetFloat(AUDIO_MIXER_BG_MUSIC_VOLUME, out bgMusic);
             _audioMixer.GetFloat(AUDIO_MIXER_SOUNDS_VOLUME, out sounds);
 
-            CustumDebug.Log($"SoundOptionsPanel->LoadSettings: {general}, {bgMusic}, {sounds} ");
+            //Debug.Log($"SoundOptionsPanel->LoadSettings: {general}, {bgMusic}, {sounds} ");
 
             //                  TODO: add recalculation sound volume diapasons [-80, 20] -> [0, 1]
             _generalSlider.GetControl.value = general;
@@ -118,7 +118,7 @@ namespace DddShooter
 
         private void Close()
         {
-            UiPanelManager.Execute(UiPanelType.OptionsMenu);
+            UiPanelManager.ReturnToPrevious();
         }
 
         #endregion

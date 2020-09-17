@@ -25,6 +25,7 @@ namespace DddShooter
         {
             _soundOptions.GetControl.onClick.AddListener(LoadSoundOptions);
             _languageOptions.GetControl.onClick.AddListener(LoadLanguageOptions);
+            _languageOptions.SetInteractable(false);
             _close.GetControl.onClick.AddListener(Back);
             
             IsShow = true;
@@ -50,7 +51,7 @@ namespace DddShooter
 
         private void Back()
         {
-            UiPanelManager.Execute(UiPanelType.MainMenu);
+            UiPanelManager.ReturnToPrevious();
         }
 
         public override void Hide()
