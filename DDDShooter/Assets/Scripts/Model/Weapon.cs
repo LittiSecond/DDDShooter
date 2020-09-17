@@ -130,7 +130,7 @@ namespace Geekbrains
 
         public string GetMessageIfTarget()
         {
-            return TextConstants.PICK_UP_TEXT_ID;
+            return LangManager.Instance.Text(TextConstants.UI_GROUP_ID, TextConstants.PICK_UP_TEXT_ID);
         }
 
         public virtual void DisableEndlessAmmunition()

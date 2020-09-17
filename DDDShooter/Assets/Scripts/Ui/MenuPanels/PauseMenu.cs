@@ -61,7 +61,7 @@ namespace DddShooter
         {
             ServiceLocator.Resolve<PauseController>().SwithPause();
             Cursor.lockState = CursorLockMode.None;
-            Debug.Log("PauseMenu::FinishGame: lvl = " + lvl);
+            //Debug.Log("PauseMenu::FinishGame: lvl = " + lvl);
             SceneManager.sceneLoaded += SceneManagerOnSceneLoaded;
             SceneManagerHelper.Instance.LoadSceneAsync(lvl);
         }
@@ -71,7 +71,7 @@ namespace DddShooter
             SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
         }
 
-        private void TranslateTexts()
+        protected override void TranslateTexts()
         {
             _continue.GetText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTINUE_TEXT_ID);

@@ -70,7 +70,7 @@ namespace DddShooter
             IsShow = true;
         }
 
-        private void TranslateTexts()
+        protected override void TranslateTexts()
         {
             _panelCaption.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.SOUND_OPTIONS_CAPTION_TEXT_ID);
@@ -80,6 +80,8 @@ namespace DddShooter
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.BG_MUSIC_VOLUME_TEXT_ID);
             _soundsText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.SOUNDS_VOLUME_TEXT_ID);
+            _close.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.BACK_TEXT_ID);
         }
 
         private void LoadSettings()

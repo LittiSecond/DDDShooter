@@ -11,10 +11,12 @@ namespace DddShooter
         public const string UI_GROUP_ID = "Ui";
             public const string LOOK_AT_TEXT_ID = "LookAt";
             public const string PICK_UP_TEXT_ID = "E-PickUp";
+            public const string E_INTERACT_TEXT_ID = "E-Interact";
             public const string TOO_FAR_TEXT_ID = "TooFar";
             public const string CANNOT_PICK_UP_WEAPON_TEXT_ID = "CanNotPickWeapon";
             public const string CLIP_IS_EMTY_TEXT_ID = "ClipIsEmpty";
             public const string CLOSE_TEXT_ID = "Close";
+            public const string PAUSE_TEXT_ID = "pause";
             public const string RESERV_TEXT_ID = "reserv";
 
 
@@ -29,7 +31,14 @@ namespace DddShooter
             public const string GENERAL_VOLUME_TEXT_ID = "GeneralVolume";
             public const string BG_MUSIC_VOLUME_TEXT_ID = "BGMusicVolume";
             public const string SOUNDS_VOLUME_TEXT_ID = "SoundsVolume";
+            public const string DONE_TEXT_ID = "Done";
+            public const string BACK_TEXT_ID = "Back";
 
+        public const string ENGLISH_TEXT = "English";
+        public const string RUSSIAN_TEXT = "Русский";
+
+        public const string LANGUAGE_CODE_EN = "En";
+        public const string LANGUAGE_CODE_RU = "Ru";
 
 
         //public const string AUDIO_MIXER_GENERAL_VOLUME = "GeneralVolume";

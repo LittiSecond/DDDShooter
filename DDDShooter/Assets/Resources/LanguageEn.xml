@@ -21,8 +21,45 @@
     <string id="Quit">
       <text>Quit</text>
     </string>
-  </group>
 
+    <string id="SoundOptions">
+      <text>Sound options</text>
+    </string>
+
+    <string id="Close">
+      <text>Close</text>
+    </string>
+
+    <string id="Language">
+      <text>Language</text>
+    </string>
+
+    <string id="SoundOptionsCaption">
+      <text>Sound volume options</text>
+    </string>
+
+    <string id="GeneralVolume">
+      <text>General volume</text>
+    </string>
+
+    <string id="BGMusicVolume">
+      <text>Music</text>
+    </string>
+
+    <string id="SoundsVolume">
+      <text>Sounds</text>
+    </string>
+
+    <string id="Done">
+      <text>Done</text>
+    </string>
+
+    <string id="Back">
+      <text>Back</text>
+    </string>
+
+  </group>
+  
   <group id="Ui">
 
     <string id="Close">
@@ -37,6 +74,10 @@
       <text>'e' - pick up</text>
     </string>
 
+    <string id="E-Interact">
+      <text>'e' - interact</text>
+    </string>
+
     <string id="TooFar">
       <text>Too far</text>
     </string>
@@ -49,6 +90,10 @@
       <text>Clip is emty. 'r' - reload</text>
     </string>
 
+    <string id="pause">
+      <text>pause</text>
+    </string>
+    
   </group>
-
+  
 </Settings>

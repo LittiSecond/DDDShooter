@@ -64,7 +64,7 @@ namespace Geekbrains
             SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
         }
 
-        private void TranslateTexts()
+        protected override void TranslateTexts()
         {
             _newGame.GetText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.NEW_GAME_TEXT_ID);

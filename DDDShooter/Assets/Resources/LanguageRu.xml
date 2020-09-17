@@ -50,6 +50,14 @@
       <text>Звуки</text>
     </string>
 
+    <string id="Done">
+      <text>Готово</text>
+    </string>
+
+    <string id="Back">
+      <text>Назад</text>
+    </string>
+    
   </group>
 
   <group id="Ui">
@@ -66,6 +74,10 @@
       <text>'e' - подобрать</text>
     </string>
 
+    <string id="E-Interact">
+      <text>'e' - взаимодействовать</text>
+    </string>
+
     <string id="TooFar">
       <text>Слишком далеко</text>
     </string>
@@ -76,6 +88,10 @@
     
     <string id="ClipIsEmpty">
       <text>Обойма пуста. 'r' - перезарядить</text>
+    </string>
+
+    <string id="pause">
+      <text>пауза</text>
     </string>
     
   </group>

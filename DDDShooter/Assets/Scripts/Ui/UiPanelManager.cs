@@ -15,6 +15,7 @@ namespace DddShooter
         private OptionsMenu _optionsMenu;
         private SoundOptionsPanel _audioOptions;
         private PauseMenu _pauseMenu;
+        private LanguageOptionsMenu _languageOptions;
 
         private BaseMenu _currentMenu;
 
@@ -31,6 +32,7 @@ namespace DddShooter
             _optionsMenu = GetComponent<OptionsMenu>();
             _audioOptions = GetComponent<SoundOptionsPanel>();
             _pauseMenu = GetComponent<PauseMenu>();
+            _languageOptions = GetComponent<LanguageOptionsMenu>();
 
             if (_mainMenu)
             {
@@ -45,11 +47,16 @@ namespace DddShooter
 
         public void QuitGame()  // TODO  выкинуть это отсюда, например в GameStarter
         {
+            if (_mainMenu)
+            {
+                Destroy(gameObject);
+            
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit ();
 #endif
+            }
         }
 
         public void Execute(UiPanelType menuItem)
@@ -88,6 +95,9 @@ namespace DddShooter
                     break;
                 case UiPanelType.MenuPause:
                     menu = _pauseMenu;
+                    break;
+                case UiPanelType.LanguageOptions:
+                    menu = _languageOptions;
                     break;
                 default:
                     break;

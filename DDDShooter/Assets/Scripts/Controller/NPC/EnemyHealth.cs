@@ -41,7 +41,7 @@ namespace DddShooter
                     DestroyItself();
                 }
             }
-            Debug.Log($"EnemyHealth->TakeDamage: damag = {damag}; _heath = {_heath}");
+            //Debug.Log($"EnemyHealth->TakeDamage: damag = {damag}; _heath = {_heath}");
         }
 
         public void TakeHealing(float healing)

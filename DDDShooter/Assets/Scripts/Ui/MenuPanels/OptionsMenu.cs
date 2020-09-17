@@ -25,7 +25,7 @@ namespace DddShooter
         {
             _soundOptions.GetControl.onClick.AddListener(LoadSoundOptions);
             _languageOptions.GetControl.onClick.AddListener(LoadLanguageOptions);
-            _languageOptions.SetInteractable(false);
+            //_languageOptions.SetInteractable(false);
             _close.GetControl.onClick.AddListener(Back);
             
             IsShow = true;
@@ -68,7 +68,7 @@ namespace DddShooter
             IsShow = true;
         }
 
-        private void TranslateTexts()
+        protected override void TranslateTexts()
         {
             _caption.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
