@@ -27,10 +27,12 @@ namespace Geekbrains
 
         private void OnDisable()
         {
-            LangManager.Instance.OnLanguageChange -= TranslateTexts;
-        }
-
-       
+            LangManager instance =  LangManager.Instance;
+            if (instance)
+            {
+                instance.OnLanguageChange -= TranslateTexts;
+            }
+        }       
 
         public abstract void Hide();
         public abstract void Show();
