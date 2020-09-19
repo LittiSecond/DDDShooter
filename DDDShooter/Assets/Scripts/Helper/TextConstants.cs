@@ -28,11 +28,17 @@ namespace DddShooter
             public const string SOUND_OPTIONS_TEXT_ID = "SoundOptions";
             public const string LANGUAGE_TEXT_ID = "Language";
             public const string SOUND_OPTIONS_CAPTION_TEXT_ID = "SoundOptionsCaption";
-            public const string GENERAL_VOLUME_TEXT_ID = "GeneralVolume";
+            public const string CONTROLL_OPTIONS_CAPTION_TEXT_ID = "ControllOptionsCaption";
+        public const string GENERAL_VOLUME_TEXT_ID = "GeneralVolume";
             public const string BG_MUSIC_VOLUME_TEXT_ID = "BGMusicVolume";
             public const string SOUNDS_VOLUME_TEXT_ID = "SoundsVolume";
             public const string DONE_TEXT_ID = "Done";
             public const string BACK_TEXT_ID = "Back";
+
+        public const string BIG_TEXT_GROUP_ID = "BigText";
+            public const string CONTROLL_DESCRIPTION_TEXT_ID = "ControllDescription";
+
+
 
         public const string ENGLISH_TEXT = "English";
         public const string RUSSIAN_TEXT = "Русский";

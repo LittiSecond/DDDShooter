@@ -58,6 +58,10 @@
       <text>Back</text>
     </string>
 
+    <string id="ControllOptionsCaption">
+      <text>Controll</text>
+    </string>
+
   </group>
   
   <group id="Ui">
@@ -95,5 +99,24 @@
     </string>
     
   </group>
-  
+
+  <group id="BigText">
+
+    <string id="ControllDescription">
+      <text>
+        wasd - movement,
+        mouse - turn,
+        LCM - fire
+        r - reload clip
+        h - throw out weapon
+        e - interaction
+        1, 2, mousw well - change weapon
+        f - on/off light
+        r without weapon - reload light
+        tab - pause, menu
+      </text>
+    </string>
+
+  </group>
+
 </Settings>

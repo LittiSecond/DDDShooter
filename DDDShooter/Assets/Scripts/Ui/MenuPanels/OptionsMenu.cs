@@ -12,6 +12,7 @@ namespace DddShooter
 
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private Text _caption;
+        [SerializeField] private ButtonUi _controllOptions;
         [SerializeField] private ButtonUi _soundOptions;
         [SerializeField] private ButtonUi _languageOptions;
         [SerializeField] private ButtonUi _close;
@@ -23,6 +24,7 @@ namespace DddShooter
 
         private void Start()
         {
+            _controllOptions.GetControl.onClick.AddListener(LoadControllOptions);
             _soundOptions.GetControl.onClick.AddListener(LoadSoundOptions);
             _languageOptions.GetControl.onClick.AddListener(LoadLanguageOptions);
             //_languageOptions.SetInteractable(false);
@@ -38,6 +40,11 @@ namespace DddShooter
 
 
         #region Methods
+
+        private void LoadControllOptions()
+        {
+            UiPanelManager.Execute(UiPanelType.ControllOptions);
+        }
 
         private void LoadSoundOptions()
         {
@@ -72,6 +79,8 @@ namespace DddShooter
         {
             _caption.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
+            _controllOptions.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTROLL_OPTIONS_CAPTION_TEXT_ID);
             _soundOptions.GetText.text = LangManager.Instance.Text(
                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.SOUND_OPTIONS_TEXT_ID);
             _languageOptions.GetText.text = LangManager.Instance.Text(

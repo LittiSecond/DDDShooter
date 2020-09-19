@@ -12,6 +12,7 @@ namespace DddShooter
         #region Fields
 
         private MainMenu _mainMenu;
+        private ControllSettings _controllOptions;
         private OptionsMenu _optionsMenu;
         private SoundOptionsPanel _audioOptions;
         private PauseMenu _pauseMenu;
@@ -29,6 +30,7 @@ namespace DddShooter
         private void Start()
         {
             _mainMenu = GetComponent<MainMenu>();
+            _controllOptions = GetComponent<ControllSettings>();
             _optionsMenu = GetComponent<OptionsMenu>();
             _audioOptions = GetComponent<SoundOptionsPanel>();
             _pauseMenu = GetComponent<PauseMenu>();
@@ -86,6 +88,9 @@ namespace DddShooter
             {
                 case UiPanelType.MainMenu:
                     menu = _mainMenu;
+                    break;
+                case UiPanelType.ControllOptions:
+                    menu = _controllOptions;
                     break;
                 case UiPanelType.OptionsMenu:
                     menu = _optionsMenu;

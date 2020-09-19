@@ -57,7 +57,11 @@
     <string id="Back">
       <text>Назад</text>
     </string>
-    
+
+    <string id="ControllOptionsCaption">
+      <text>Управление</text>
+    </string>
+
   </group>
 
   <group id="Ui">
@@ -95,5 +99,24 @@
     </string>
     
   </group>
+  
+  <group id="BigText">
+  
+  <string id="ControllDescription">    
+    <text>
+      wasd - движение,
+      mouse - поворот,
+      ЛКМ - стрельба
+      r - перезарядить обойму
+      h - выбросить оружие
+      e - взаимодействие
+      1, 2, колесо  мыши - смена оружия
+      f - включить/выключить фанарик
+      r без оружия - перезарядить фонарик
+      tab - пауза, меню
+    </text>    
+  </string>    
+    
+  </group>  
   
   </Settings>
