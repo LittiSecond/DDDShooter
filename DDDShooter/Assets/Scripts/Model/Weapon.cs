@@ -109,7 +109,15 @@ namespace Geekbrains
             }
             else
             {
+                //Debug.Log("Weapon->JoinTo: position = " + transform.position.ToString());
+
+                //Vector3 pos = Transform.position;
+                //Quaternion rot = Transform.rotation;
                 Transform.SetParent(null);
+                //Transform.position = pos;
+                //Transform.rotation = rot;
+                //Debug.Log("Weapon->JoinTo: position = " + transform.position.ToString());
+
             }
         }
 
@@ -152,11 +160,27 @@ namespace Geekbrains
 
         public void EnablePhysics()
         {
+            //Debug.Log("Weapon->EnablePhysics: position = " + transform.position.ToString());
             Rigidbody.isKinematic = false;
             Rigidbody.useGravity = true;
+            Rigidbody.velocity = Vector3.zero;
             _collider.enabled = true;
+            //Debug.Log("Weapon->EnablePhysics: position = " + transform.position.ToString());
+            //_is_debug_search_error_ = true;
         }
 
         #endregion
+
+        //private bool _is_debug_search_error_ = false;
+        //private int _debug_counter_ = 0;
+
+        //private void Update()
+        //{
+        //    if (_is_debug_search_error_ && _debug_counter_++ < 100)
+        //    {
+        //        Debug.Log("Weapon->EnablePhysics: position = " + transform.position.ToString());
+        //    }
+        //}
+
     }
 }

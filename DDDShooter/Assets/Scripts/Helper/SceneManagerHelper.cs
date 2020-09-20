@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     internal class SceneManagerHelper : Singleton<SceneManagerHelper>
     {
@@ -11,7 +12,17 @@ namespace Geekbrains
 
         public Scenes Scenes;
 
+        private UiProgressBar _progressBar;
+        private bool _haveProgressBar;
+
         #endregion
+
+
+        //private void Start()
+        //{
+        //    InterfaceResources ifr = FindObjectOfType<InterfaceResources>();
+        //    _progressBar = ifr.GetComponent<SliderUI>();
+        //}
 
 
         #region LoadScene
@@ -55,17 +66,36 @@ namespace Geekbrains
 
         private void ProgressBarEnabled()
         {
+            _haveProgressBar = false;
+            InterfaceResources ifr = FindObjectOfType<InterfaceResources>();
+            if (ifr)
+            {
+                _progressBar = ifr.ProgressBar;
+                _haveProgressBar = _progressBar != null;
+            }
 
+            if (_haveProgressBar)
+            {
+                _progressBar.SetActive(true);
+                ProgressBarSetValue(0.0f);
+            }
         }
 
         private void ProgressBarSetValue(float value)
         {
-
+            if (_haveProgressBar)
+            {
+                _progressBar.GetControl.value = value;
+                _progressBar.GetText.text = string.Format("{0}%", System.Math.Truncate(value * 100));
+            }
         }
 
         private void ProgressBarDisable()
         {
-
+            if (_haveProgressBar)
+            {
+                _progressBar.SetActive(false);
+            }    
         }
 
         #endregion

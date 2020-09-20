@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 52133849626463340}
   - component: {fileID: 9153705315991092627}
   - component: {fileID: 8032153628879327901}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Frontloader Toon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8427005498255459719}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,6 +285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShootFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 656579006601067194, guid: 3ea52873bbf5e894891c095e0558cf4a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 656579006601067195, guid: 3ea52873bbf5e894891c095e0558cf4a,
         type: 3}

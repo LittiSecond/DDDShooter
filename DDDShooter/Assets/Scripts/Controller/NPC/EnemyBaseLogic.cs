@@ -76,6 +76,7 @@ namespace DddShooter
             PlayerManager.OnPlayerSpawnedHandler -= SearchTarget;
             PlayerManager.OnPlayerDeletedHandler -= DisconnectPlayerCharacter;
             OnDestroyEventHandler?.Invoke(this);
+            _agent.enabled = false;
         }
 
         protected virtual void StopLogic()

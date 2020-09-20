@@ -4,5 +4,6 @@
     {
         None = 0,
         PlayerCharacter = 1,
+        ProgressBar     = 2,
     }
 }

@@ -15,6 +15,7 @@ namespace DddShooter
         private static readonly Dictionary<PrefabId, string> _prefabPaths = new Dictionary<PrefabId, string>
             {   
                 { PrefabId.PlayerCharacter, "Prefabs/PlayerCharacter"},
+                { PrefabId.ProgressBar, "Prefabs/UiProgressbar"},
             };
 
         private static AudioMixer _audioMixer = null;

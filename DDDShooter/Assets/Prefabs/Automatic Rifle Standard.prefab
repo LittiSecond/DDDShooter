@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2306323837042457540}
   - component: {fileID: 6864545130631679132}
   - component: {fileID: 5893593240598148744}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Automatic Rifle Standard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411343595964416}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
