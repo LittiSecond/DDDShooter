@@ -1,13 +1,75 @@
 ﻿using UnityEngine;
 using Geekbrains;
-
+using DddShooter.Test;
 
 namespace DddShooter
 {
     // объект для экспериментов. Не останется в релизе.
     public sealed class StrangeOrbModel : BaseObjectScene, IInteractable, IPickUpTool
     {
-        private const string MESSAGE = "I am strange Orb.";
+        #region Fields
+
+        [SerializeField] private OrbSettings _settingsScriptableObject;
+
+        private string _message = "No message";
+        private MeshRenderer _meshRenderer;
+
+        #endregion
+
+
+        #region Properties
+
+        private Material ThisMaterial
+        {
+            set
+            {
+                if (_meshRenderer)
+                {
+                    _meshRenderer.material = value;
+                }
+            }
+            get
+            {
+                if (_meshRenderer)
+                {
+                    return _meshRenderer.material;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
+        {
+            _meshRenderer = GetComponent<MeshRenderer>();
+            OnValidate();
+        }
+
+
+        private void OnValidate()
+        {
+            if (_settingsScriptableObject)
+            {
+                ThisMaterial = _settingsScriptableObject.Material;
+                _message = _settingsScriptableObject.Message;
+            }
+        }
+        #endregion
+
+
+        #region Methods
+
+
+
+        #endregion
+
 
         #region IInteractable
 
@@ -19,10 +81,9 @@ namespace DddShooter
             }
         }
 
- 
         public string GetMessageIfTarget()
         {
-            return MESSAGE;
+            return _message;
         }
 
         public void Interact()
