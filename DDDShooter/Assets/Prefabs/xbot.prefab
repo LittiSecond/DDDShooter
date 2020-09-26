@@ -456,18 +456,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 0}
   _visionPoint: {fileID: 1160231491}
   _weaponJoinPoint: {fileID: 934808627}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 3.5
-    _patrolStopDuration: 3
-    _pursueSpeed: 4
-    _pursueStopDistance: 10
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 1
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &1950540234
 NavMeshAgent:
   m_ObjectHideFlags: 0

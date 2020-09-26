@@ -10,9 +10,9 @@ namespace DddShooter
         
         #region Fields
 
-
         private NpcAnimationStupidRunner _animation;
         private EnemyMovementPatrolType2 _movementPatrol;
+        private NpcStupidRunner _settings;
 
         private float _timeCounter;
 
@@ -34,6 +34,7 @@ namespace DddShooter
 
             if (body)
             {
+                _settings = body.Settings as NpcStupidRunner;
                 bool hadMovementScriptsCreated = false;
                 if (_agent)
                 {

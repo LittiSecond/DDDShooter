@@ -13,7 +13,6 @@ namespace DddShooter
         protected UnityEngine.AI.NavMeshAgent _agent;
         protected Transform _playerTransform;
 
-        protected NpcSettings _settings;
         protected EnemyHealth _health;
 
         protected float _changeStateDelay;
@@ -42,17 +41,13 @@ namespace DddShooter
             {
                 _body = body;
                 _agent = body.Transform.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-                _settings = body.Settings;
-                if (_settings != null)
+                NpcSettings settings = body.Settings;
+                if (settings != null)
                 {
-                    _changeStateDelay = _settings.ChangeStateDelay;
-                }
-                else
-                {
-                    _settings = new NpcSettings();
+                    _changeStateDelay = settings.ChangeStateDelay;
                 }
 
-                _health = new EnemyHealth(_settings);
+                _health = new EnemyHealth(settings);
                 _body.SubscribeOnEvents(_health.TakeDamage, _health.TakeHealing);
                 _health.OnDeathEventHandler += DestroyItSelf;
  

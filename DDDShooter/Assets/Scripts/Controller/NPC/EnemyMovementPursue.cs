@@ -29,7 +29,7 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyMovementPursue(NavMeshAgent agent, NpcSettings settings) : base(agent)
+        public EnemyMovementPursue(NavMeshAgent agent, NpcRangeAttacker settings) : base(agent)
         {
             if (settings != null)
             {

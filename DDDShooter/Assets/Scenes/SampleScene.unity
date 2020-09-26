@@ -1471,18 +1471,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 247749321}
   _visionPoint: {fileID: 1423625803}
   _weaponJoinPoint: {fileID: 0}
-  _npcSettings:
-    _npcType: 98
-    _maxHealth: 100
-    _patrolSpeed: 7
-    _patrolStopDuration: 3
-    _pursueSpeed: 5
-    _pursueStopDistance: 2
-    _changeStateDelay: 3
-    _visionRange: 2
-    _visionAngle: 80
-    _haveRangeAttack: 0
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 649f306638fba8b4a9cca3d298478d6f, type: 2}
 --- !u!195 &237639920
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2056,18 +2045,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 1201204244}
   _visionPoint: {fileID: 2043394801}
   _weaponJoinPoint: {fileID: 0}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 80
-    _patrolSpeed: 3
-    _patrolStopDuration: 0.1
-    _pursueSpeed: 3
-    _pursueStopDistance: 2.5
-    _changeStateDelay: 0.5
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 0
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &290955588
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3018,18 +2996,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 37288381}
   _visionPoint: {fileID: 2060332766}
   _weaponJoinPoint: {fileID: 0}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 5
-    _patrolStopDuration: 0
-    _pursueSpeed: 3
-    _pursueStopDistance: 2.5
-    _changeStateDelay: 3
-    _visionRange: 10
-    _visionAngle: 80
-    _haveRangeAttack: 0
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &481064422
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4037,18 +4004,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 0}
   _visionPoint: {fileID: 0}
   _weaponJoinPoint: {fileID: 0}
-  _npcSettings:
-    _npcType: 1
-    _maxHealth: 100
-    _patrolSpeed: 3
-    _patrolStopDuration: 3
-    _pursueSpeed: 5
-    _pursueStopDistance: 2
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 0
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!1 &680938447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7283,18 +7239,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 247749321}
   _visionPoint: {fileID: 1554418050}
   _weaponJoinPoint: {fileID: 1310994929}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 3
-    _patrolStopDuration: 3.2
-    _pursueSpeed: 5.3
-    _pursueStopDistance: 10
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 1
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &1153265181
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -9529,18 +9474,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 649352061}
   _visionPoint: {fileID: 1915724691}
   _weaponJoinPoint: {fileID: 128305175}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 4
-    _patrolStopDuration: 0.5
-    _pursueSpeed: 5.5
-    _pursueStopDistance: 10
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 1
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &1544052584
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11381,18 +11315,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 247749321}
   _visionPoint: {fileID: 680938448}
   _weaponJoinPoint: {fileID: 1849894872}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 3
-    _patrolStopDuration: 3.2
-    _pursueSpeed: 5.3
-    _pursueStopDistance: 10
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 1
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!195 &1892420564
 NavMeshAgent:
   m_ObjectHideFlags: 0

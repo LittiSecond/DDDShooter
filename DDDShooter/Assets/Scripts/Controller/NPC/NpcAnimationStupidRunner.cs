@@ -28,7 +28,7 @@ namespace DddShooter
             _animator = animator;
             if (settings != null)
             {
-                _maxSpeed = settings.PatrolSpeed;
+                _maxSpeed = settings.Speed;
             }
         }
 

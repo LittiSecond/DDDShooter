@@ -29,7 +29,7 @@ namespace DddShooter
             _isPhaseMove = false;
             if (settings != null)
             {
-                _patrolSpeed = settings.PatrolSpeed;
+                _patrolSpeed = settings.Speed;
                 _stopDuration = settings.PatrolStopDuration;
             }      
         }

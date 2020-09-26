@@ -2006,18 +2006,7 @@ MonoBehaviour:
   _patrolPath: {fileID: 0}
   _visionPoint: {fileID: 3316337836260871971}
   _weaponJoinPoint: {fileID: 3316337835701518565}
-  _npcSettings:
-    _npcType: 2
-    _maxHealth: 100
-    _patrolSpeed: 3.5
-    _patrolStopDuration: 3
-    _pursueSpeed: 4
-    _pursueStopDistance: 10
-    _changeStateDelay: 3
-    _visionRange: 20
-    _visionAngle: 80
-    _haveRangeAttack: 0
-    _rangeAttackDistance: 50
+  _npcSettings: {fileID: 11400000, guid: 0b3d5d7fcd19ea7448443cf0c04fc6de, type: 2}
 --- !u!1 &6809151567521889705
 GameObject:
   m_ObjectHideFlags: 0
