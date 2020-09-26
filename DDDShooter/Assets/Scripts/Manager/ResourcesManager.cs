@@ -3,18 +3,21 @@ using UnityEngine;
 using System.Collections.Generic;
 
 using Geekbrains;
+using UnityEngine.Audio;
 
 namespace DddShooter
 {
-    public static class PrefabManager
+    public static class ResourcesManager
     {
         #region Fields
 
         private static Dictionary<PrefabId, GameObject> _prefabs = new Dictionary<PrefabId, GameObject>();
         private static readonly Dictionary<PrefabId, string> _prefabPaths = new Dictionary<PrefabId, string>
             {   
-                { PrefabId.PlayerCharacter, "Prefabs/PlayerCharacter"}
+                { PrefabId.PlayerCharacter, "Prefabs/PlayerCharacter"},
             };
+
+        private static AudioMixer _audioMixer = null;
 
         #endregion
 
@@ -37,10 +40,19 @@ namespace DddShooter
 #if UNITY_EDITOR_WIN
             if (go == null)
             {
-                CustumDebug.LogError("PrefabManager->GetPrefab: Ошибка - не удалось получить префаб id = " + id.ToString());
+                CustumDebug.LogError("ResourcesManager->GetPrefab: Ошибка - не удалось получить префаб id = " + id.ToString());
             }
 #endif
             return go;
+        }
+
+        public static AudioMixer GetAudioMixer()
+        {
+            if (!_audioMixer)
+            {
+                _audioMixer = Resources.Load<AudioMixer>("MainAudioMixer");
+            }
+            return _audioMixer;
         }
 
         private static GameObject LoadPrefab(PrefabId id)

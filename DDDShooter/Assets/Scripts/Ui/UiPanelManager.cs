@@ -1,40 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-using DddShooter;
+using Geekbrains;
 
 
-namespace Geekbrains
+namespace DddShooter
 {
     // Interface
     public sealed class UiPanelManager : MonoBehaviour
     {
-        public InterfaceResources InterfaceResources { get; private set; }
+        #region Fields
 
-        private SliderUI _progressBar;
-        private BaseMenu _currentMenu;
-
-        //private readonly Stack<UiPanelType> _panelsStack = new Stack<UiPanelType>(); // TODO
-
-        #region Object
         private MainMenu _mainMenu;
         private OptionsMenu _optionsMenu;
-        //private VideoOptions _videoOptions;
-        //private GameOptions _gameOptions;
-        //private AudioOptions _audioOptions;
+        private SoundOptionsPanel _audioOptions;
         private PauseMenu _pauseMenu;
-        //private OptionsPauseMenu _optionsPauseMenu;
+
+        private BaseMenu _currentMenu;
+
+        private readonly Stack<UiPanelType> _panelsStack = new Stack<UiPanelType>(); 
+
         #endregion
+
+
+        #region UnityMethods
+
         private void Start()
         {
-            InterfaceResources = GetComponent<InterfaceResources>();
             _mainMenu = GetComponent<MainMenu>();
             _optionsMenu = GetComponent<OptionsMenu>();
-            //_videoOptions = GetComponent<VideoOptions>();
-            //_gameOptions = GetComponent<GameOptions>();
-            //_audioOptions = GetComponent<AudioOptions>();
+            _audioOptions = GetComponent<SoundOptionsPanel>();
             _pauseMenu = GetComponent<PauseMenu>();
-            //_optionsPauseMenu = GetComponent<OptionsPauseMenu>();
-
 
             if (_mainMenu)
             {
@@ -42,7 +38,12 @@ namespace Geekbrains
             }
         }
 
-        public void QuitGame()
+        #endregion
+
+
+        #region Methods
+
+        public void QuitGame()  // TODO  выкинуть это отсюда, например в GameStarter
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -51,50 +52,65 @@ namespace Geekbrains
 #endif
         }
 
-        public void Execute(UiPanelType menuItem) // добавить отмену
+        public void Execute(UiPanelType menuItem)
         {
             if (_currentMenu != null) _currentMenu.Hide();
+
+            if (menuItem == UiPanelType.None)
+            {
+                _panelsStack.Clear();
+                _currentMenu = null;
+            }
+            else
+            {
+                _currentMenu = SelectMenu(menuItem);
+                if (_currentMenu != null)
+                {
+                    _currentMenu.Show();
+                    _panelsStack.Push(menuItem);
+                }
+            }
+        }
+
+        private BaseMenu SelectMenu(UiPanelType menuItem)
+        {
+            BaseMenu menu = null;
             switch (menuItem)
             {
                 case UiPanelType.MainMenu:
-                    _currentMenu = _mainMenu;
+                    menu = _mainMenu;
                     break;
                 case UiPanelType.OptionsMenu:
-                    _currentMenu = _optionsMenu;
+                    menu = _optionsMenu;
                     break;
-                //case UiPanelType.VideoOptions:
-                // if (_currentMenu != null) _currentMenu.Hide();
-                // _currentMenu = _videoOptions;
-                // _currentMenu.Show();
-                // break;
-                //case UiPanelType.AudioOptions:
-                // if (_currentMenu != null) _currentMenu.Hide();
-                // _currentMenu = _audioOptions;
-                // _currentMenu.Show();
-                // break;
-                //case UiPanelType.GameOptions:
-                // if (_currentMenu != null) _currentMenu.Hide();
-                // _currentMenu = _gameOptions;
-                // _currentMenu.Show();
-                // break;
+                case UiPanelType.AudioOptions:
+                    menu = _audioOptions;
+                    break;
                 case UiPanelType.MenuPause:
-                    if (_currentMenu != null) _currentMenu.Hide();
-                    _currentMenu = _pauseMenu;
-                    _currentMenu.Show();
+                    menu = _pauseMenu;
                     break;
-                //case UiPanelType.OptionsPauseMenu:
-                // if (_currentMenu != null) _currentMenu.Hide();
-                // _currentMenu = _optionsPauseMenu;
-                // _currentMenu.Show();
-                // break;
                 default:
                     break;
             }
+            return menu;
+        }
 
+        public void ReturnToPrevious()
+        {
             if (_currentMenu != null)
+            { 
+                _currentMenu.Hide(); 
+                _panelsStack.Pop();
+            }
+
+            if (_panelsStack.Count > 0)
             {
-                _currentMenu.Show();
-                //_panelsStack.Push(menuItem);
+                UiPanelType type = _panelsStack.Peek();
+                _currentMenu = SelectMenu(type);
+                if (_currentMenu != null)
+                {
+                    _currentMenu.Show();
+                }
             }
         }
 
@@ -126,6 +142,7 @@ namespace Geekbrains
         //    //_progressBar = null;
         //}
         //#endregion
-        
+
+        #endregion
     }
 }

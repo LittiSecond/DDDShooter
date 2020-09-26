@@ -3,7 +3,6 @@
     public enum PrefabId
     {
         None = 0,
-        PlayerCharacter = 1
-
+        PlayerCharacter = 1,
     }
 }

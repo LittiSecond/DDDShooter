@@ -1,39 +1,85 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-namespace Geekbrains
+using Geekbrains;
+
+
+namespace DddShooter
 {
-
     public class OptionsMenu : BaseMenu
     {
-        private void LoadVideoOptions()
-        {
-            UiPanelManager.Execute(UiPanelType.VideoOptions);
+        #region Fields
 
+        [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private Text _caption;
+        [SerializeField] private ButtonUi _soundOptions;
+        [SerializeField] private ButtonUi _languageOptions;
+        [SerializeField] private ButtonUi _close;
+
+        #endregion
+
+
+        #region UnityMethods
+
+        private void Start()
+        {
+            _soundOptions.GetControl.onClick.AddListener(LoadSoundOptions);
+            _languageOptions.GetControl.onClick.AddListener(LoadLanguageOptions);
+            _languageOptions.SetInteractable(false);
+            _close.GetControl.onClick.AddListener(Back);
+            
+            IsShow = true;
+            Hide();
+
+            TranslateTexts();
         }
+
+        #endregion
+
+
+        #region Methods
+
         private void LoadSoundOptions()
         {
             UiPanelManager.Execute(UiPanelType.AudioOptions);
         }
-        private void LoadGameOptions()
+
+        private void LoadLanguageOptions()
         {
-            UiPanelManager.Execute(UiPanelType.GameOptions);
+            UiPanelManager.Execute(UiPanelType.LanguageOptions);
         }
+
         private void Back()
         {
-            UiPanelManager.Execute(UiPanelType.MainMenu);
+            UiPanelManager.ReturnToPrevious();
         }
+
         public override void Hide()
         {
             if (!IsShow) return;
+            _mainPanel.gameObject.SetActive(false);
             IsShow = false;
         }
+
         public override void Show()
         {
             if (IsShow) return;
+            _mainPanel.gameObject.SetActive(true);
             IsShow = true;
         }
+
+        private void TranslateTexts()
+        {
+            _caption.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
+            _soundOptions.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.SOUND_OPTIONS_TEXT_ID);
+            _languageOptions.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.LANGUAGE_TEXT_ID);
+            _close.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CLOSE_TEXT_ID);
+        }
+
+        #endregion
     }
 }

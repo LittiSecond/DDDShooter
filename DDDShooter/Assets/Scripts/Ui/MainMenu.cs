@@ -18,28 +18,17 @@ namespace Geekbrains
 
         private void Start()
         {
-            _newGame.GetText.text = LangManager.Instance.Text(
-                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.NEW_GAME_TEXT_ID);
             _newGame.GetControl.onClick.AddListener(delegate
             {
                 LoadNewGame(SceneManagerHelper.Instance.Scenes.GameScene.SceneAsset.name);
             });
-
-            _options.GetText.text = LangManager.Instance.Text(
-                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
-            _options.SetInteractable(false);
-
-            _quit.GetText.text = LangManager.Instance.Text(
-                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
+            _options.GetControl.onClick.AddListener(ShowOptions);
             _quit.GetControl.onClick.AddListener(delegate
             {
                 UiPanelManager.QuitGame();
             });
 
-            //for (int i = 1; i <= 4; i++)
-            //{
-            //    LangManager.Instance.Text("Dialog", $"{i}");
-            //}
+            TranslateTexts();
         }
 
         public override void Hide()
@@ -73,6 +62,16 @@ namespace Geekbrains
             // init game не требуется
 
             SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
+        }
+
+        private void TranslateTexts()
+        {
+            _newGame.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.NEW_GAME_TEXT_ID);
+            _options.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
+            _quit.GetText.text = LangManager.Instance.Text(
+                 TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
         }
     }
 }

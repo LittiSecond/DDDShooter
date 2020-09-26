@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+  <meta>
+    <language>English</language>
+  </meta>
+
+  <group id="MenuItems">
+
+    <string id="NewGame">
+      <text>New game</text>
+    </string>Options
+
+    <string id="Continue">
+      <text>Continue</text>
+    </string>
+
+    <string id="Options">
+      <text>Options</text>
+    </string>
+
+    <string id="Quit">
+      <text>Quit</text>
+    </string>
+  </group>
+
+  <group id="Ui">
+
+    <string id="Close">
+      <text>Close</text>
+    </string>
+
+    <string id="LookAt">
+      <text>Look at: </text>
+    </string>
+
+    <string id="E-PickUp">
+      <text>'e' - pick up</text>
+    </string>
+
+    <string id="TooFar">
+      <text>Too far</text>
+    </string>
+
+    <string id="CanNotPickWeapon">
+      <text>Can'n pick weapon</text>
+    </string>
+
+    <string id="ClipIsEmpty">
+      <text>Clip is emty. 'r' - reload</text>
+    </string>
+
+  </group>
+
+</Settings>

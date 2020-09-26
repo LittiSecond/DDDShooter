@@ -14,22 +14,11 @@ namespace DddShooter
         [SerializeField] private ButtonUi _options;
         [SerializeField] private ButtonUi _quit;
 
-        private void Start()
+        protected virtual void Start()
         {
-            Debug.Log("PauseMenu::Start:");
-
-            _continue.GetText.text = LangManager.Instance.Text(
-                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTINUE_TEXT_ID);
             _continue.GetControl.onClick.AddListener(ContinueGame);
-
             //_continue.SetInteractable(false);
-
-            _options.GetText.text = LangManager.Instance.Text(
-                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
-            _options.SetInteractable(false);
-
-            _quit.GetText.text = LangManager.Instance.Text(
-                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
+            _options.GetControl.onClick.AddListener(ShowOptions);
             _quit.GetControl.onClick.AddListener(delegate
             {
                 FinishGame(SceneManagerHelper.Instance.Scenes.MainMenuScene.SceneAsset.name);
@@ -37,11 +26,12 @@ namespace DddShooter
 
             IsShow = true;
             Hide();
+            TranslateTexts();
         }
 
         public override void Hide()
         {
-            Debug.Log("PauseMenu::Hide: IsShow = " + IsShow.ToString());
+            //Debug.Log("PauseMenu::Hide: IsShow = " + IsShow.ToString());
             if (!IsShow) return;
             _menuPanel.gameObject.SetActive(false);
             IsShow = false;
@@ -49,7 +39,7 @@ namespace DddShooter
 
         public override void Show()
         {
-            Debug.Log("PauseMenu::Show: IsShow = " + IsShow.ToString());
+            //Debug.Log("PauseMenu::Show: IsShow = " + IsShow.ToString());
             if (IsShow) return;
             _menuPanel.gameObject.SetActive(true);
             IsShow = true;
@@ -79,6 +69,16 @@ namespace DddShooter
         private void SceneManagerOnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
             SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
+        }
+
+        private void TranslateTexts()
+        {
+            _continue.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.CONTINUE_TEXT_ID);
+            _options.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.OPTIONS_TEXT_ID);
+            _quit.GetText.text = LangManager.Instance.Text(
+                TextConstants.MENU_ITEMS_GROUP_ID, TextConstants.QUIT_TEXT_ID);
         }
 
     }

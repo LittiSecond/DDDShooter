@@ -13,6 +13,10 @@ namespace DddShooter
 
         [SerializeField] private Transform _bodyCentre;
         [SerializeField] private Transform _head;
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private CharacterController _characterController;
+
+        [SerializeField] private PlayerSoundContainer _soundContainer;
 
         //[SerializeField] private Vector3 _cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -24,11 +28,43 @@ namespace DddShooter
         #endregion
 
 
+        #region UnityMethods
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if (!_bodyCentre)
+            {
+                _bodyCentre = Transform;
+            }
+            if (!_head)
+            {
+                _head = Transform;
+            }
+            if (!_audioSource)
+            {
+                _audioSource = Transform.GetComponent<AudioSource>();
+            }
+            if (!_characterController)
+            {
+                _characterController = Transform.GetComponent<CharacterController>();
+            }
+        }
+
+        #endregion
+
+
         #region Properties
 
         public Transform BodyCentre { get => _bodyCentre; }
 
         public Transform Head { get => _head; }
+
+        public PlayerSoundContainer SoundContainer { get => _soundContainer; }
+
+        public AudioSource AudioSource { get => _audioSource; }
+
+        public CharacterController CharacterController { get => _characterController; }
 
         #endregion
 
