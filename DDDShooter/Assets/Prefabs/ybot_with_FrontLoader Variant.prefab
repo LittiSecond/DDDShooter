@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: _endlessAmmunition
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3175859441623705597, guid: c2f14b638b3f8f8409dc1d950b065b8f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c2f14b638b3f8f8409dc1d950b065b8f, type: 3}
       propertyPath: m_Name
       value: Frontloader Toon
@@ -92,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 6711509851531910448, guid: c6ba693af40f7014591bdda2ca90ce3e,
         type: 3}
       propertyPath: m_Name
-      value: ybot_with_FrontLoader
+      value: ybot_with_FrontLoader Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7745992890526920483, guid: c6ba693af40f7014591bdda2ca90ce3e,
         type: 3}

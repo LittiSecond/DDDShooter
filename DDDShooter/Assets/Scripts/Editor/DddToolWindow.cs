@@ -77,6 +77,7 @@ namespace DddShooter.Editor
         [MenuItem("DddTools/Инструмент размещения объектов")]
         public static void ShowToolWidow()
         {
+            //EditorUtility.DisplayDialog("MyTool", "Do It in C# !", "OK", "");
             EditorWindow.GetWindow(typeof(DddToolWindow));
         }
 

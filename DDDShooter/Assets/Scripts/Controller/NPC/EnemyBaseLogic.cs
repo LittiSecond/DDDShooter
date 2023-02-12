@@ -72,6 +72,17 @@ namespace DddShooter
             PlayerManager.OnPlayerDeletedHandler -= DisconnectPlayerCharacter;
             OnDestroyEventHandler?.Invoke(this);
             _agent.enabled = false;
+            //Collider collider = _body.GetComponent<Collider>();
+            //if (collider)
+            //{
+            //    collider.enabled = false;
+            //}
+            //Rigidbody rigidbody = _body.GetComponent<Rigidbody>();
+            //if (rigidbody)
+            //{
+            //    rigidbody.isKinematic = true;
+            //    rigidbody.freezeRotation = false;
+            //}
         }
 
         protected virtual void StopLogic()
