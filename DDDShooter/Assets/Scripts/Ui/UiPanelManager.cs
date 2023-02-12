@@ -12,9 +12,11 @@ namespace DddShooter
         #region Fields
 
         private MainMenu _mainMenu;
+        private ControllSettings _controllOptions;
         private OptionsMenu _optionsMenu;
         private SoundOptionsPanel _audioOptions;
         private PauseMenu _pauseMenu;
+        private LanguageOptionsMenu _languageOptions;
 
         private BaseMenu _currentMenu;
 
@@ -28,9 +30,11 @@ namespace DddShooter
         private void Start()
         {
             _mainMenu = GetComponent<MainMenu>();
+            _controllOptions = GetComponent<ControllSettings>();
             _optionsMenu = GetComponent<OptionsMenu>();
             _audioOptions = GetComponent<SoundOptionsPanel>();
             _pauseMenu = GetComponent<PauseMenu>();
+            _languageOptions = GetComponent<LanguageOptionsMenu>();
 
             if (_mainMenu)
             {
@@ -45,11 +49,16 @@ namespace DddShooter
 
         public void QuitGame()  // TODO  выкинуть это отсюда, например в GameStarter
         {
+            if (_mainMenu)
+            {
+                Destroy(gameObject);
+            
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
             Application.Quit ();
 #endif
+            }
         }
 
         public void Execute(UiPanelType menuItem)
@@ -80,6 +89,9 @@ namespace DddShooter
                 case UiPanelType.MainMenu:
                     menu = _mainMenu;
                     break;
+                case UiPanelType.ControllOptions:
+                    menu = _controllOptions;
+                    break;
                 case UiPanelType.OptionsMenu:
                     menu = _optionsMenu;
                     break;
@@ -88,6 +100,9 @@ namespace DddShooter
                     break;
                 case UiPanelType.MenuPause:
                     menu = _pauseMenu;
+                    break;
+                case UiPanelType.LanguageOptions:
+                    menu = _languageOptions;
                     break;
                 default:
                     break;

@@ -29,7 +29,7 @@ namespace DddShooter
 
         #region ClassLifeCycles
 
-        public EnemyRangeAttack(EnemyBody body, NpcSettings settings)
+        public EnemyRangeAttack(EnemyBody body, NpcRangeAttacker settings)
         {
             _weaponJoinPoint = body.WeaponJoinPoint;
             if (_weaponJoinPoint)

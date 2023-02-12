@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scenes:
     GameScene:
-      sceneAsset: {fileID: 102900000, guid: 3ac9411e290bf3b4f94e4e4865e90652, type: 3}
+      sceneAsset: {fileID: 102900000, guid: 688a2f7b364236b4192cf01e2b02007f, type: 3}
     MainMenuScene:
       sceneAsset: {fileID: 102900000, guid: 9b47073f87d843b46a2d4b93365b99e0, type: 3}
 --- !u!1 &716810268

@@ -1,5 +1,8 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 using UnityEngine;
+
+using DddShooter;
 
 
 namespace Geekbrains
@@ -8,12 +11,23 @@ namespace Geekbrains
     {
         private XmlDocument _root;
 
+        public event Action OnLanguageChange = delegate { };
+
         private void Awake()
         {
-            Init("Language");
+            Init("Language"); //, TextConstants.LANGUAGE_CODE_EN);
         }
 
         public string LanguageCode { get; private set; }
+
+        public void SwitchLanguage(string languageCode)
+        {
+            if (LanguageCode != languageCode)
+            {
+                Init("Language", languageCode);
+                OnLanguageChange();
+            }
+        }
 
         public void Init(string file, string languageCode = "")
         {
@@ -23,12 +37,16 @@ namespace Geekbrains
                 switch (Application.systemLanguage)
                 {
                     case SystemLanguage.Russian:
-                        LanguageCode = "Ru";
+                        LanguageCode = TextConstants.LANGUAGE_CODE_RU;
                         break;
                     default:
-                        LanguageCode = "En";
+                        LanguageCode = TextConstants.LANGUAGE_CODE_EN;
                         break;
                 }
+            }
+            else
+            {
+                LanguageCode = languageCode;
             }
             var config = LoadResource(file);
             if (!config) return;
@@ -39,16 +57,16 @@ namespace Geekbrains
         {
             if (_root == null)
             {
-                //return "[not init]";
-                return id;
+                return "[not init]";
+                //return id;
             }
             string path = "Settings/group[@id='" + level + "']/string[@id='" + id +
             "']/text";
             XmlNode value = _root.SelectSingleNode(path);
             if (value == null)
             {
-                //return "[not found]";
-                return id;
+                return "[not found]";
+                //return id;
             }
             return value.InnerText;
         }

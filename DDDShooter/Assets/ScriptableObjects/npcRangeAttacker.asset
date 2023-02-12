@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7ea33b211fc6542bcae8f48d60dff0, type: 3}
+  m_Name: npcRangeAttacker
+  m_EditorClassIdentifier: 
+  MaxHealth: 100
+  PatrolStopDuration: 3
+  Speed: 4
+  VisionRange: 20
+  VisionAngle: 80
+  ChangeStateDelay: 3
+  PursueSpeed: 5
+  PursueStopDistance: 10
+  RangeAttackDistance: 50

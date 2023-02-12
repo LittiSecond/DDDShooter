@@ -12,7 +12,7 @@ namespace DddShooter
         private UiPlayerHalthIndicator _halthIndicator;
         private PlayerBody _body;
 
-        private float _maxHealth = 60.0f;
+        private float _maxHealth = 600.0f;
         private float _heath;
 
         public event Action OnDeathEventHandler;

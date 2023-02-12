@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Geekbrains;
-
+using System.CodeDom;
 
 namespace DddShooter
 {
@@ -50,12 +50,13 @@ namespace DddShooter
             {
                 NpcSettings npcSettings = body.Settings;
                 EnemyBaseLogic logic = null;
-                switch (npcSettings.Type)
+
+                switch (npcSettings.GetType().Name)
                 {
-                    case NpcType.RangeAttack: 
+                    case nameof(NpcRangeAttacker): 
                         logic = new EnemyLogicRangeAttacker(body);
                         break;
-                    case NpcType.StupidRunner:
+                    case  nameof(NpcStupidRunner):
                         logic = new EnemyLogickStupidRunner(body);
                         break;
                     default:

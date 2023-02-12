@@ -15,7 +15,7 @@ namespace DddShooter
         [SerializeField] private Transform _visionPoint;
         [SerializeField] private Transform _weaponJoinPoint;
 
-        [SerializeField] private NpcSettings _npcSettings = new NpcSettings();
+        [SerializeField] private NpcSettings _npcSettings;
 
         private EnemyPartDamagTranslator[] _damagTranslators;
         private Weapon _weapon;

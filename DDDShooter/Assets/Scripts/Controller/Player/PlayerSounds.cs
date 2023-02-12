@@ -21,6 +21,7 @@ namespace DddShooter
         private float _stepSoundInterval = 0.5f;
 
         private readonly float _notMoveLimitSqrMagnitude = 0.01f;
+        private readonly float _verticalVelocityLimit = 5.0f;
 
         private bool _isGrounded;
 
@@ -111,6 +112,18 @@ namespace DddShooter
             return isDataCorrect;
         }
 
+        private bool CheckFallForce()
+        {
+            Vector3 velocity = _characterController.velocity;
+            return  velocity.y < -_verticalVelocityLimit;
+        }
+
+        private bool CheckJumpForce()
+        {
+            Vector3 velocity = _characterController.velocity;
+            return velocity.y > _verticalVelocityLimit;
+        }
+
         #endregion
 
 
@@ -130,7 +143,10 @@ namespace DddShooter
                 {
                     if (!_isGrounded)
                     {
-                        PlayLandingSound();
+                        if (CheckFallForce())
+                        {
+                            PlayLandingSound();
+                        }
                     }
                     if (horizontalMovementSqrMagnitude > _notMoveLimitSqrMagnitude)
                     {
@@ -141,7 +157,10 @@ namespace DddShooter
                 {
                     if (_isGrounded)
                     {
-                        PlayJumpSound();
+                        if (CheckJumpForce())
+                        {
+                            PlayJumpSound();
+                        }
                     }
                 }
 

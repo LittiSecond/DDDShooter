@@ -23,14 +23,14 @@ TagManager:
   - Interactable
   - Enemy
   - 
+  - Weapon
   - 
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
+  - Postprocessing
   - 
   - 
   - 

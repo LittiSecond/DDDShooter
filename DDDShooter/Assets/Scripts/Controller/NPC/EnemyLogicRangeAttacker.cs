@@ -13,8 +13,10 @@ namespace DddShooter
         private EnemyRangeAttack _rangeAttack;
         private EnemyAnimation _animation;
 
-        private float _timeCounter;
+        private NpcRangeAttacker _settings;
 
+        private float _timeCounter;
+        //private float _changeStateDelay;
 
         #endregion
 
@@ -33,14 +35,14 @@ namespace DddShooter
             {
                 _body = body;
                 _agent = body.Transform.GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-                _settings = body.Settings;
+                _settings = body.Settings as NpcRangeAttacker;
                 if (_settings != null)
                 {
-                    _changeStateDelay = _settings.ChangeStateDelay;
+                    //_changeStateDelay = _settings.ChangeStateDelay;
                 }
                 else
                 {
-                    _settings = new NpcSettings();
+                    _settings = new NpcRangeAttacker();
                 }
 
                 _health = new EnemyHealth(_settings);
@@ -59,7 +61,7 @@ namespace DddShooter
 
                 _enemyVision = new EnemyVision(this, body, _settings);
 
-                if (_settings.HaveRangeAttack)
+                if (_settings != null)
                 {
                     _rangeAttack = new EnemyRangeAttack(_body, _settings);
                 }

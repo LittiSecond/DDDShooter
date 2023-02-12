@@ -13,7 +13,9 @@ namespace DddShooter
         [SerializeField] private float _force = 99.95f;
         [SerializeField] private bool _endlessAmmunition;     // must used only for enemy
 
+        private AudioSource _audioSource;
         private bool _haveShootEffect = false;
+        private bool _haveAudioSourse;
 
         #endregion
 
@@ -24,6 +26,8 @@ namespace DddShooter
         {
             base.Start();
             _haveShootEffect = _shootFlash != null;
+            _audioSource = GetComponent<AudioSource>();
+            _haveAudioSourse = _audioSource != null;
         }
 
         #endregion
@@ -44,10 +48,11 @@ namespace DddShooter
                 {
                     if (_projectilePrefab)
                     {
-                        var ammunition = CreateProjectile();
-                        ammunition.AddForce(_barrel.forward * _force);
+                        var projectile = CreateProjectile();
+                        projectile.AddForce(_barrel.forward * _force);
                     }
                     ActivateShootEffect();
+                    PlayShotSound();
                     _isRedy = false;
                     _timeRemaining.AddTimeRemaining();
                 }
@@ -75,6 +80,14 @@ namespace DddShooter
             if (_haveShootEffect)
             {
                 _shootFlash.Activate();
+            }
+        }
+
+        private void PlayShotSound()
+        {
+            if (_haveAudioSourse)
+            {
+                _audioSource.Play();
             }
         }
 

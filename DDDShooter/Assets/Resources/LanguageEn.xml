@@ -21,8 +21,49 @@
     <string id="Quit">
       <text>Quit</text>
     </string>
-  </group>
 
+    <string id="SoundOptions">
+      <text>Sound options</text>
+    </string>
+
+    <string id="Close">
+      <text>Close</text>
+    </string>
+
+    <string id="Language">
+      <text>Language</text>
+    </string>
+
+    <string id="SoundOptionsCaption">
+      <text>Sound volume options</text>
+    </string>
+
+    <string id="GeneralVolume">
+      <text>General volume</text>
+    </string>
+
+    <string id="BGMusicVolume">
+      <text>Music</text>
+    </string>
+
+    <string id="SoundsVolume">
+      <text>Sounds</text>
+    </string>
+
+    <string id="Done">
+      <text>Done</text>
+    </string>
+
+    <string id="Back">
+      <text>Back</text>
+    </string>
+
+    <string id="ControllOptionsCaption">
+      <text>Controll</text>
+    </string>
+
+  </group>
+  
   <group id="Ui">
 
     <string id="Close">
@@ -37,6 +78,10 @@
       <text>'e' - pick up</text>
     </string>
 
+    <string id="E-Interact">
+      <text>'e' - interact</text>
+    </string>
+
     <string id="TooFar">
       <text>Too far</text>
     </string>
@@ -47,6 +92,29 @@
 
     <string id="ClipIsEmpty">
       <text>Clip is emty. 'r' - reload</text>
+    </string>
+
+    <string id="pause">
+      <text>pause</text>
+    </string>
+    
+  </group>
+
+  <group id="BigText">
+
+    <string id="ControllDescription">
+      <text>
+        wasd - movement,
+        mouse - turn,
+        LCM - fire
+        r - reload clip
+        h - throw out weapon
+        e - interaction
+        1, 2, mousw well - change weapon
+        f - on/off light
+        r without weapon - reload light
+        tab - pause, menu
+      </text>
     </string>
 
   </group>

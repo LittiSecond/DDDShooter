@@ -78,7 +78,7 @@ namespace DddShooter
 
         public string GetMessageIfTarget()
         {
-            return _messageIfTarget;
+            return LangManager.Instance.Text(TextConstants.UI_GROUP_ID,  _messageIfTarget);
         }
 
         public void Interact()

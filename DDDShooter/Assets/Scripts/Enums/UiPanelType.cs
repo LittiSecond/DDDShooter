@@ -12,5 +12,6 @@
         MenuPause        = 6,
         OptionsPauseMenu = 7,
         LanguageOptions  = 8,
+        ControllOptions  = 9,
     }
 }

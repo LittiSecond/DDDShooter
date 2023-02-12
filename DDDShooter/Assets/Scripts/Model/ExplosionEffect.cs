@@ -14,6 +14,7 @@ namespace DddShooter
         [SerializeField] private float _multiplier = 1;
 
         private Light _light;
+        private AudioSource _audioSource;
         private ParticleSystem[] _systems;
         private TimeRemaining _timer;
 
@@ -30,6 +31,8 @@ namespace DddShooter
             _light = GetComponent<Light>();
             _light.enabled = false;
             _timer = new TimeRemaining(DestroyItself, _duration);
+
+            _audioSource = GetComponent<AudioSource>();
 
             _systems = GetComponentsInChildren<ParticleSystem>();
             if (_systems != null)
@@ -58,6 +61,7 @@ namespace DddShooter
             if (!_isActive)
             {
                 ActivateAll();
+                _audioSource.Play();
                 _light.enabled = true;
                 _timer.AddTimeRemaining();
                 _isActive = true;

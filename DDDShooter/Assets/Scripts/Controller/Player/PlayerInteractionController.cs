@@ -52,7 +52,7 @@ namespace DddShooter
                             _propertyController.PickUpWeapon(_interactableObject as Weapon);
                             break;
                         default:
-                            CustumDebug.Log("PlayerInteractionController->Interact: not realized interaction.");
+                            Debug.Log("PlayerInteractionController->Interact: not realized interaction.");
                             break;
                     }
                 }
@@ -63,13 +63,13 @@ namespace DddShooter
             }
         }
 
-        private void SendMessageToUi(string message, bool shouldTranlate = true)
+        private void SendMessageToUi(string message, bool shouldTranslate = true)
         {
             if (_messageUiText)
             {
                 if (message != null)
                 {
-                    if (shouldTranlate)
+                    if (shouldTranslate)
                     {
                         message = LangManager.Instance.Text(
                             TextConstants.UI_GROUP_ID, message);
@@ -142,11 +142,12 @@ namespace DddShooter
                     {
                         _interactableObject = target;
                         _interactableObject.IsTarget = true;
-                        SendMessageToUi(_interactableObject.GetMessageIfTarget());
+                        SendMessageToUi(_interactableObject.GetMessageIfTarget(), false);
                     }
                     else
                     {
-                        SendMessageToUi(TextConstants.LOOK_AT_TEXT_ID + " " + collider.gameObject.name, false);
+                        string message = LangManager.Instance.Text(TextConstants.UI_GROUP_ID, TextConstants.LOOK_AT_TEXT_ID);
+                        SendMessageToUi(message + " " + collider.gameObject.name, false);
                     }
                 }
                 _distanceToTarget = hit.distance;

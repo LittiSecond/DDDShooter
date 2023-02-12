@@ -1,18 +1,48 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-namespace Geekbrains
+
+namespace DddShooter
 {
     public class InterfaceResources : MonoBehaviour
     {
-        //public ButtonUi ButtonPrefab { get; private set; }
+
+        #region Fields
+
+        private UiProgressBar _uiProgressBar;
+
+        #endregion
+
+
+        #region Properties
+
         public Canvas MainCanvas { get; private set; }
-        public SliderUI ProgressbarPrefab { get; private set; }
+
+        public UiProgressBar ProgressBar 
+        {
+            get
+            {
+                if (!_uiProgressBar)
+                {
+                    GameObject go = ResourcesManager.GetPrefab(PrefabId.ProgressBar);
+                    GameObject goInstance = Instantiate(go, MainCanvas.transform);
+                    _uiProgressBar = goInstance.GetComponent<UiProgressBar>();
+                    _uiProgressBar.SetActive(false);
+                }
+                return _uiProgressBar;
+            }
+        }
+
+        #endregion
+
+
+        #region UnityMethods
+
         private void Awake()
         {
-            //ButtonPrefab = Resources.Load<ButtonUi>("Button");
             MainCanvas = FindObjectOfType<Canvas>();
-            ProgressbarPrefab = Resources.Load<SliderUI>("Progressbar");
         }
+
+        #endregion
+
     }
 }

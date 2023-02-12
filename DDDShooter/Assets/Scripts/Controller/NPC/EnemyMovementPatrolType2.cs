@@ -20,8 +20,6 @@ namespace DddShooter
 
         private readonly int _speedStepQuantity = 4;
 
-        //public event Action<float> ChangeSpeedHandler;
-
         #endregion
 
 
@@ -31,7 +29,7 @@ namespace DddShooter
         {
             if (settings != null)
             {
-                _maxSpeed = settings.PatrolSpeed;
+                _maxSpeed = settings.Speed;
                 _currentSpeed = 0;
                 _patrol = new EnemyMovementPatrol(agent, settings);
                 _patrol.ChangeSpeedHandler += ChangeSpeed;
@@ -48,7 +46,10 @@ namespace DddShooter
 
         public void SetPath(List<Vector3> newPath)
         {
-            _patrol.SetPath(newPath);
+            if (_patrol != null)
+            {
+                _patrol.SetPath(newPath);
+            }
         }
 
         public override void On()
